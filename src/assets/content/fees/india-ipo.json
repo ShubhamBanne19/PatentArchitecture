@@ -1,0 +1,140 @@
+{
+  "jurisdiction": "India IPO",
+  "jurisdictionCode": "IN",
+  "currency": "INR",
+  "lastUpdated": "2026-06-01",
+  "effectiveDate": "2026-04-01",
+  "sourceUrl": "https://ipindia.gov.in/fees.htm",
+  "mustVerify": true,
+  "verifyNote": "MUST VERIFY all amounts against the current First Schedule to the Patent Rules 2003 (as amended) at ipindia.gov.in before advising clients. Fee revisions are notified via official Patent Office gazette notifications.",
+  "categories": [
+    {
+      "category": "Filing Fees",
+      "fees": [
+        {
+          "feeId": "IN-F-01",
+          "label": "Filing - Natural Person (e-filing)",
+          "description": "Patent application filing fee for individual natural persons (e-filing). DPIIT-recognized startups may qualify for the same rate — verify against the current Patent Rules notification.",
+          "amount": 1600,
+          "unit": "per application"
+        },
+        {
+          "feeId": "IN-F-02",
+          "label": "Filing - Small Entity (e-filing)",
+          "description": "Filing fee for MSMED-recognized small entities",
+          "amount": 4000,
+          "unit": "per application"
+        },
+        {
+          "feeId": "IN-F-03",
+          "label": "Filing - Others / Large Entity (e-filing)",
+          "description": "Filing fee for companies and other applicants",
+          "amount": 8000,
+          "unit": "per application"
+        },
+        {
+          "feeId": "IN-F-04",
+          "label": "Additional Claim Fee (beyond 10 claims)",
+          "amount": 800,
+          "amountSmallEntity": 320,
+          "unit": "per additional claim"
+        },
+        {
+          "feeId": "IN-F-05",
+          "label": "Additional Page Fee (beyond 30 pages)",
+          "amount": 400,
+          "amountSmallEntity": 160,
+          "unit": "per additional page"
+        }
+      ]
+    },
+    {
+      "category": "Examination Fees",
+      "fees": [
+        {
+          "feeId": "IN-E-01",
+          "label": "Request for Examination - Natural Person (e-filing)",
+          "amount": 4000,
+          "unit": "per request"
+        },
+        {
+          "feeId": "IN-E-02",
+          "label": "Request for Examination - Small Entity",
+          "amount": 10000,
+          "unit": "per request"
+        },
+        {
+          "feeId": "IN-E-03",
+          "label": "Request for Examination - Others",
+          "amount": 20000,
+          "unit": "per request"
+        },
+        {
+          "feeId": "IN-E-04",
+          "label": "Expedited Examination (Startup / Natural Person)",
+          "amount": 8000,
+          "unit": "per request"
+        },
+        {
+          "feeId": "IN-E-05",
+          "label": "Expedited Examination - Others",
+          "amount": 60000,
+          "unit": "per request"
+        }
+      ]
+    },
+    {
+      "category": "Renewal / Annuity Fees",
+      "fees": [
+        {
+          "feeId": "IN-R-01",
+          "label": "Annual Renewal (Year 3) - Natural Person",
+          "amount": 800,
+          "unit": "per year"
+        },
+        {
+          "feeId": "IN-R-02",
+          "label": "Annual Renewal (Year 3) - Others",
+          "amount": 4000,
+          "unit": "per year"
+        },
+        {
+          "feeId": "IN-R-03",
+          "label": "Annual Renewal (Year 11–15) - Natural Person",
+          "amount": 1600,
+          "unit": "per year"
+        },
+        {
+          "feeId": "IN-R-04",
+          "label": "Annual Renewal (Year 11–15) - Others",
+          "amount": 8000,
+          "unit": "per year"
+        }
+      ]
+    },
+    {
+      "category": "Post-Grant / Miscellaneous",
+      "fees": [
+        {
+          "feeId": "IN-M-01",
+          "label": "Post-Grant Opposition",
+          "amount": 3200,
+          "unit": "per opposition"
+        },
+        {
+          "feeId": "IN-M-02",
+          "label": "Amendment to Complete Specification",
+          "amount": 800,
+          "amountSmallEntity": 320,
+          "unit": "per amendment"
+        },
+        {
+          "feeId": "IN-M-03",
+          "label": "Certified Copy of Document",
+          "amount": 400,
+          "unit": "per document"
+        }
+      ]
+    }
+  ]
+}

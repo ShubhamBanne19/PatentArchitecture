@@ -1,0 +1,127 @@
+{
+  "jurisdiction": "USPTO",
+  "jurisdictionCode": "US",
+  "currency": "USD",
+  "lastUpdated": "2026-06-01",
+  "effectiveDate": "2026-01-19",
+  "sourceUrl": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+  "mustVerify": true,
+  "verifyNote": "MUST VERIFY all amounts against the current USPTO Fee Schedule at uspto.gov. Confirm the exact effective date of the most recent adjustment against the Federal Register notice. Small entity and micro entity eligibility rules also require verification.",
+  "categories": [
+    {
+      "category": "Utility Patent Filing",
+      "fees": [
+        {
+          "feeId": "US-F-01",
+          "label": "Basic Filing Fee (Large Entity)",
+          "amount": 320,
+          "amountSmallEntity": 160,
+          "amountMicro": 80,
+          "unit": "per application"
+        },
+        {
+          "feeId": "US-F-02",
+          "label": "Search Fee (Large Entity)",
+          "amount": 700,
+          "amountSmallEntity": 350,
+          "amountMicro": 175,
+          "unit": "per application"
+        },
+        {
+          "feeId": "US-F-03",
+          "label": "Examination Fee (Large Entity)",
+          "amount": 800,
+          "amountSmallEntity": 400,
+          "amountMicro": 200,
+          "unit": "per application"
+        },
+        {
+          "feeId": "US-F-04",
+          "label": "Excess Claims (> 20 total, per claim)",
+          "amount": 100,
+          "amountSmallEntity": 50,
+          "amountMicro": 25,
+          "unit": "per excess claim"
+        },
+        {
+          "feeId": "US-F-05",
+          "label": "Excess Independent Claims (> 3, per claim)",
+          "amount": 480,
+          "amountSmallEntity": 240,
+          "amountMicro": 120,
+          "unit": "per independent claim"
+        }
+      ]
+    },
+    {
+      "category": "Issue & Publication Fees",
+      "fees": [
+        {
+          "feeId": "US-I-01",
+          "label": "Issue Fee (Large Entity)",
+          "amount": 1200,
+          "amountSmallEntity": 600,
+          "amountMicro": 300,
+          "unit": "per patent"
+        },
+        {
+          "feeId": "US-I-02",
+          "label": "Publication Fee",
+          "amount": 0,
+          "notes": "No separate publication fee is charged for utility patent applications published under 35 U.S.C. § 122(b). MUST VERIFY this remains current — USPTO fee structures have changed in recent revision cycles.",
+          "unit": "per application"
+        }
+      ]
+    },
+    {
+      "category": "Maintenance Fees",
+      "fees": [
+        {
+          "feeId": "US-M-01",
+          "label": "3.5 Year Maintenance (Large Entity)",
+          "amount": 2000,
+          "amountSmallEntity": 1000,
+          "amountMicro": 500,
+          "unit": "due at 3.5 years"
+        },
+        {
+          "feeId": "US-M-02",
+          "label": "7.5 Year Maintenance (Large Entity)",
+          "amount": 3760,
+          "amountSmallEntity": 1880,
+          "amountMicro": 940,
+          "unit": "due at 7.5 years"
+        },
+        {
+          "feeId": "US-M-03",
+          "label": "11.5 Year Maintenance (Large Entity)",
+          "amount": 7700,
+          "amountSmallEntity": 3850,
+          "amountMicro": 1925,
+          "unit": "due at 11.5 years"
+        }
+      ]
+    },
+    {
+      "category": "Appeal & Review",
+      "fees": [
+        {
+          "feeId": "US-A-01",
+          "label": "Notice of Appeal (Large Entity)",
+          "amount": 870,
+          "amountSmallEntity": 435,
+          "amountMicro": 218,
+          "unit": "per appeal"
+        },
+        {
+          "feeId": "US-A-02",
+          "label": "Appeal Brief (Large Entity)",
+          "amount": 2200,
+          "amountSmallEntity": 1100,
+          "amountMicro": 550,
+          "unit": "per appeal"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1193 @@
+[
+  {
+    "promptId": "prompt-drafting-01",
+    "title": "Independent Claim Skeleton Generator",
+    "description": "Generates a structured first draft of an independent claim from an invention disclosure summary.",
+    "category": "drafting",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-05",
+      "chapter-06",
+      "chapter-15"
+    ],
+    "tags": [
+      "claims",
+      "drafting",
+      "independent claim",
+      "first draft"
+    ],
+    "promptText": "You are a senior patent attorney with 20 years of drafting experience. I will provide you with an invention disclosure. Your task is to draft one broad independent claim (in apparatus form and method form) that captures the inventive concept at the highest appropriate level of generality.\n\nInvention disclosure:\n[INSERT INVENTION DISCLOSURE HERE]\n\nRequirements:\n1. Each claim must begin with \"A [noun phrase]\" (apparatus) or \"A method of [gerund phrase]\" (method)\n2. Use open-ended transitional phrases (\"comprising\")\n3. Recite only the minimum structural/functional elements necessary to distinguish over the prior art\n4. Every element in the claim must be referenced in the specification\n5. Avoid functional language except for the last element if unavoidable\n\nOutput:\n- Apparatus claim (independent)\n- Method claim (independent)\n- 3 brief drafting notes explaining your structural choices",
+    "variables": [
+      {
+        "name": "INVENTION DISCLOSURE",
+        "description": "Paste or summarize the invention disclosure document here",
+        "example": "A system and method for detecting anomalies in industrial sensor data using transformer-based neural networks trained on normal operating patterns..."
+      }
+    ],
+    "modelNotes": "Works well with Claude 3.5 Sonnet or GPT-4o. Specify the technical field in the disclosure for better claim vocabulary.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": true
+  },
+  {
+    "promptId": "prompt-drafting-02",
+    "title": "Dependent Claim Cascade Builder",
+    "description": "Takes an independent claim and generates a structured set of dependent claims covering preferred embodiments, variations, and fallback positions.",
+    "category": "drafting",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-05",
+      "chapter-15"
+    ],
+    "tags": [
+      "claims",
+      "dependent claims",
+      "claim hierarchy",
+      "fallback"
+    ],
+    "promptText": "You are a patent claims drafter. Given the following independent claim, generate 10–15 dependent claims that:\n1. Add specific technical features/sub-features of preferred embodiments\n2. Provide multiple layers of fallback protection (narrow to narrow-narrower)\n3. Include claims directed to materials, dimensions, configurations, and methods of use where appropriate\n4. Cover both the main inventive concept and secondary inventive aspects\n\nIndependent Claim:\n[INSERT INDEPENDENT CLAIM HERE]\n\nInvention context (for understanding embodiments):\n[BRIEF DESCRIPTION OF PREFERRED EMBODIMENTS]\n\nFor each dependent claim, add a one-line note on its strategic purpose (e.g., 'limits to preferred material', 'covers the workaround', 'adds commercially critical feature').",
+    "variables": [
+      {
+        "name": "INDEPENDENT CLAIM",
+        "description": "The independent claim to build from",
+        "example": "A sensor network comprising: a plurality of edge nodes configured to collect time-series data; and a central processor configured to apply an anomaly detection model..."
+      },
+      {
+        "name": "BRIEF DESCRIPTION OF PREFERRED EMBODIMENTS",
+        "description": "Key details about how the invention works in practice",
+        "example": "The preferred embodiment uses LSTM networks, operates on 100ms windows, and includes a confidence threshold of 0.85..."
+      }
+    ],
+    "modelNotes": "Provide specific technical details in the embodiment description for highest-quality dependent claims.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": true
+  },
+  {
+    "promptId": "prompt-drafting-03",
+    "title": "Abstract Drafting Prompt",
+    "description": "Drafts a concise, compliant patent abstract from the specification summary.",
+    "category": "drafting",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-04",
+      "chapter-15"
+    ],
+    "tags": [
+      "abstract",
+      "drafting",
+      "specification"
+    ],
+    "promptText": "Draft a patent abstract of exactly 150 words or fewer based on the following summary of an invention. The abstract must:\n1. Begin with a statement of the field\n2. Briefly describe the problem being solved\n3. Summarize the inventive solution in functional terms\n4. Reference one preferred embodiment briefly\n5. NOT include legal conclusions or claims language\n6. NOT begin with phrases like 'This invention relates to' or 'The present invention'\n\nInvention summary:\n[INVENTION SUMMARY HERE]\n\nWord count the output and confirm it is ≤150 words.",
+    "variables": [
+      {
+        "name": "INVENTION SUMMARY",
+        "description": "A paragraph summary of what the invention does",
+        "example": "A machine-learning-based system for predictive maintenance of industrial equipment by analyzing vibration patterns..."
+      }
+    ],
+    "modelNotes": "Strict about the 150-word limit. Ask the model to count words explicitly.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-drafting-04",
+    "title": "Detailed Description Expander",
+    "description": "Expands a bare claim set and invention summary into a full detailed description of embodiments.",
+    "category": "drafting",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-06",
+      "chapter-07",
+      "chapter-15"
+    ],
+    "tags": [
+      "specification",
+      "detailed description",
+      "embodiments"
+    ],
+    "promptText": "You are drafting the 'Detailed Description of Embodiments' section of a patent application. Using the claim set and invention summary below, write a full detailed description that:\n\n1. Describes the preferred embodiment with reference to a figure (Figure 1)\n2. Describes at least two alternative embodiments\n3. Explains how each claim element is implemented in the preferred embodiment\n4. Includes at least one working example (may be prophetic)\n5. Uses permissive language ('in some embodiments', 'in one aspect', 'the invention includes')\n6. Does NOT limit the invention to the described embodiments\n\nClaim set:\n[CLAIMS HERE]\n\nInvention summary:\n[SUMMARY HERE]\n\nWrite approximately 1500–2000 words.",
+    "variables": [
+      {
+        "name": "CLAIMS HERE",
+        "description": "The full claim set",
+        "example": "Claim 1. A method of..."
+      },
+      {
+        "name": "SUMMARY HERE",
+        "description": "Brief summary of the invention",
+        "example": "The invention provides a predictive maintenance system..."
+      }
+    ],
+    "modelNotes": "For complex technologies, provide a technical background note to help the model generate accurate implementation details.",
+    "dateAdded": "2026-01-15",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-drafting-05",
+    "title": "Invention Disclosure Interview Guide",
+    "description": "Structured questions to ask an inventor during a disclosure meeting to capture all patentable aspects.",
+    "category": "drafting",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-06",
+      "chapter-15"
+    ],
+    "tags": [
+      "invention disclosure",
+      "interview",
+      "prior art",
+      "claim mapping"
+    ],
+    "promptText": "I am a patent attorney preparing to interview an inventor about the following technology for patent purposes:\n[TECHNOLOGY DESCRIPTION]\n\nGenerate a structured interview guide with 20 targeted questions to:\n1. Understand the core inventive concept (5 questions)\n2. Identify all novel aspects and variations (5 questions)\n3. Understand the prior art background (3 questions)\n4. Identify the problem being solved and the advantages (4 questions)\n5. Identify commercial embodiments and preferred implementations (3 questions)\n\nFor each question, add a one-line note on what information it is designed to surface.",
+    "variables": [
+      {
+        "name": "TECHNOLOGY DESCRIPTION",
+        "description": "Brief description of the technology area and what the inventor built",
+        "example": "A novel battery management system for electric vehicles that uses AI to predict cell degradation..."
+      }
+    ],
+    "modelNotes": "Customize the technology description for best results. Works well as preparation material before the actual inventor meeting.",
+    "dateAdded": "2026-02-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-drafting-06",
+    "title": "Section 3 Compliance Checker (India)",
+    "description": "Reviews a proposed claim set against Indian Patent Act Section 3 excluded subject matter and flags risks.",
+    "category": "drafting",
+    "jurisdiction": [
+      "IN"
+    ],
+    "chapterIds": [
+      "chapter-03",
+      "chapter-09",
+      "chapter-15"
+    ],
+    "tags": [
+      "India",
+      "Section 3",
+      "subject matter eligibility",
+      "compliance"
+    ],
+    "promptText": "You are an Indian patent law specialist. Review the following claims against each sub-section of Section 3 of the Indian Patents Act 1970 and identify any eligibility risks.\n\nFor each applicable sub-section (3(b), 3(c), 3(d), 3(e), 3(f), 3(i), 3(j), 3(k), 3(l), 3(m)), state:\n1. Whether the claims trigger that sub-section: YES / NO / RISK\n2. If RISK or YES: explain the specific concern\n3. Suggested claim amendment to mitigate the risk\n\nClaims to review:\n[CLAIMS HERE]\n\nTechnology area: [TECHNOLOGY AREA]\n\nAlso check compliance with Section 10(4) (sufficiency of disclosure) and Section 10(5) (claims must be supported by description).",
+    "variables": [
+      {
+        "name": "CLAIMS HERE",
+        "description": "The claims to audit",
+        "example": "Claim 1. A method of treating cancer comprising administering compound X..."
+      },
+      {
+        "name": "TECHNOLOGY AREA",
+        "description": "The technical field",
+        "example": "Pharmaceutical / Software / Biotechnology"
+      }
+    ],
+    "modelNotes": "Always verify AI output against the actual statutory text and current IPO examination guidelines. AI cannot replace legal judgment.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": true
+  },
+  {
+    "promptId": "prompt-drafting-07",
+    "title": "Alice/Mayo Eligibility Analysis (USPTO)",
+    "description": "Analyses claims under the Alice/Mayo framework and the USPTO's 2019 Revised Guidance.",
+    "category": "drafting",
+    "jurisdiction": [
+      "US"
+    ],
+    "chapterIds": [
+      "chapter-03",
+      "chapter-10",
+      "chapter-14",
+      "chapter-15"
+    ],
+    "tags": [
+      "USPTO",
+      "Alice",
+      "Mayo",
+      "Section 101",
+      "eligibility"
+    ],
+    "promptText": "Apply the USPTO's Alice/Mayo two-step framework (as refined by the 2019 Revised Guidance) to analyze the following claims for patent eligibility under 35 U.S.C. § 101.\n\nStep 1: Are the claims directed to a process, machine, manufacture, or composition of matter?\nStep 2A, Prong 1: Do the claims recite a judicial exception (abstract idea, law of nature, natural phenomenon)? If yes, identify specifically.\nStep 2A, Prong 2: Do the additional claim elements integrate the judicial exception into a practical application? Explain.\nStep 2B: Do the additional elements provide an inventive concept beyond the exception itself?\n\nFor each step, give: Analysis / Conclusion / Risk Level (Low/Medium/High) / Suggested Claim Amendment.\n\nClaims:\n[CLAIMS HERE]",
+    "variables": [
+      {
+        "name": "CLAIMS HERE",
+        "description": "The claims to analyze",
+        "example": "Claim 1. A computer-implemented method comprising: receiving data; applying an algorithm; outputting a result..."
+      }
+    ],
+    "modelNotes": "Combine this with the Section 3(k) India checker for dual-jurisdiction software patent strategy.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": true
+  },
+  {
+    "promptId": "prompt-claims-01",
+    "title": "Prior Art Distinguishing Argument Generator",
+    "description": "Generates structured prosecution arguments to distinguish a claim from a cited prior art reference.",
+    "category": "claims-analysis",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-02",
+      "chapter-13",
+      "chapter-15"
+    ],
+    "tags": [
+      "prosecution",
+      "prior art",
+      "arguments",
+      "office action response"
+    ],
+    "promptText": "You are a patent attorney drafting a response to an office action. The examiner has rejected Claim [CLAIM NUMBER] under [REJECTION BASIS] based on reference [REFERENCE NAME].\n\nClaim:\n[CLAIM TEXT]\n\nExaminer's rejection summary:\n[EXAMINER REJECTION SUMMARY]\n\nReference abstract/relevant passage:\n[REFERENCE PASSAGE]\n\nDraft 3 alternative lines of argument to distinguish the claim from the reference:\n1. A structural distinction argument (identifying a specific missing element)\n2. A functional distinction argument (different result or purpose)\n3. A combination/motivation argument (why the skilled person would not combine)\n\nFor each argument: state the argument, identify supporting specification passages to cite, and assess the argument's strength (Weak/Moderate/Strong) with reasoning.",
+    "variables": [
+      {
+        "name": "CLAIM NUMBER",
+        "description": "Which claim is being rejected",
+        "example": "1"
+      },
+      {
+        "name": "REJECTION BASIS",
+        "description": "The statutory basis (e.g., 35 USC 102, 35 USC 103, Section 2(1)(b))",
+        "example": "35 U.S.C. § 103"
+      },
+      {
+        "name": "REFERENCE NAME",
+        "description": "Name/number of the prior art reference",
+        "example": "Smith et al. (US 10,000,000)"
+      },
+      {
+        "name": "CLAIM TEXT",
+        "description": "The full text of the claim being rejected",
+        "example": "A method comprising: receiving sensor data; applying a neural network..."
+      },
+      {
+        "name": "EXAMINER REJECTION SUMMARY",
+        "description": "What the examiner said in the office action",
+        "example": "Smith discloses a method of processing sensor data using machine learning..."
+      },
+      {
+        "name": "REFERENCE PASSAGE",
+        "description": "The most relevant passage from the reference",
+        "example": "Abstract: A method of anomaly detection using deep learning networks trained on IoT sensor data..."
+      }
+    ],
+    "modelNotes": "Always review AI-generated arguments critically. Check that cited specification passages actually appear in the application.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": true
+  },
+  {
+    "promptId": "prompt-claims-02",
+    "title": "Claim Scope Broadening Analysis",
+    "description": "Analyses a narrow claim and suggests ways to broaden it while maintaining validity.",
+    "category": "claims-analysis",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-05",
+      "chapter-15"
+    ],
+    "tags": [
+      "claims",
+      "broadening",
+      "scope",
+      "claim drafting"
+    ],
+    "promptText": "Analyze the following claim for opportunities to broaden its scope without losing validity. For each limitation in the claim:\n1. Identify if it can be stated more broadly using functional language\n2. Identify if it can be omitted as non-essential\n3. Identify if the specific term can be replaced with a genus\n4. Flag any limitations that appear to be inadvertently limiting (added detail that isn't necessary to distinguish prior art)\n\nClaim:\n[CLAIM TEXT]\n\nKnown prior art context:\n[PRIOR ART SUMMARY]\n\nOutput: The original claim, then a table of each limitation with broadening options, then a redrawn broader version of the claim.",
+    "variables": [
+      {
+        "name": "CLAIM TEXT",
+        "description": "The claim to analyze",
+        "example": "Claim 1. A method comprising: receiving, at a server, data from a temperature sensor at 100ms intervals..."
+      },
+      {
+        "name": "PRIOR ART SUMMARY",
+        "description": "What the prior art teaches (so the AI knows what needs to be distinguished)",
+        "example": "Prior art shows generic data collection from sensors but does not teach [specific novel aspect]..."
+      }
+    ],
+    "modelNotes": "Use with caution - broadened claims need spec support. Verify each broadened limitation is supported in the description.",
+    "dateAdded": "2026-01-15",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-claims-03",
+    "title": "Claim 1 Stress Test (Anticipation Check)",
+    "description": "Attempts to find hypothetical prior art scenarios that would anticipate Claim 1 - a pre-filing self-critique.",
+    "category": "claims-analysis",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-05",
+      "chapter-08",
+      "chapter-15"
+    ],
+    "tags": [
+      "claims",
+      "prior art",
+      "stress test",
+      "self-critique"
+    ],
+    "promptText": "Act as a hostile patent examiner attempting to reject the following claim under §102 (anticipation). Your goal is to identify specific weaknesses.\n\nFor the claim below:\n1. Identify the 5 most vulnerable limitations (those most likely to be found in prior art)\n2. For each, describe the type of prior art that could anticipate it\n3. For each, suggest a claim amendment that would strengthen the limitation without unnecessarily narrowing scope\n4. Identify the 1-2 limitations you believe are most likely novel - these are the core of the claim\n\nClaim:\n[CLAIM TEXT]\n\nTechnology field:\n[FIELD]",
+    "variables": [
+      {
+        "name": "CLAIM TEXT",
+        "description": "Claim to stress-test",
+        "example": "Claim 1. A system for predictive maintenance comprising..."
+      },
+      {
+        "name": "FIELD",
+        "description": "Technical field for context",
+        "example": "Industrial IoT / Machine Learning"
+      }
+    ],
+    "modelNotes": "This is a drafting quality tool, not a legal search. Always conduct a proper prior-art search before filing.",
+    "dateAdded": "2026-02-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-claims-04",
+    "title": "Claim Mapping to Specification",
+    "description": "Maps each element of a claim to supporting passages in the specification - critical for written description compliance.",
+    "category": "claims-analysis",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-04",
+      "chapter-07",
+      "chapter-15"
+    ],
+    "tags": [
+      "claims",
+      "specification",
+      "written description",
+      "support"
+    ],
+    "promptText": "Perform a claim-to-specification mapping exercise. For each element of the claim below, identify the specific passage(s) in the specification that provide written description support.\n\nFor each element:\n1. Quote the claim element\n2. Quote the supporting specification passage(s)\n3. Assess support strength: STRONG / ADEQUATE / WEAK / MISSING\n4. If WEAK or MISSING: flag for attorney attention before filing\n\nClaim:\n[CLAIM TEXT]\n\nSpecification (or relevant excerpts):\n[SPECIFICATION TEXT]",
+    "variables": [
+      {
+        "name": "CLAIM TEXT",
+        "description": "The claim to map",
+        "example": "Claim 1. A neural network-based system comprising a first layer configured to..."
+      },
+      {
+        "name": "SPECIFICATION TEXT",
+        "description": "The specification or relevant sections",
+        "example": "The present invention includes a deep learning architecture..."
+      }
+    ],
+    "modelNotes": "Essential pre-filing quality check. Particularly important for continuation applications where claims are broader than original description.",
+    "dateAdded": "2026-02-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-prosecution-01",
+    "title": "Indian First Examination Report (FER) Response Framework",
+    "description": "Structures a response to an Indian Patent Office First Examination Report.",
+    "category": "prosecution",
+    "jurisdiction": [
+      "IN"
+    ],
+    "chapterIds": [
+      "chapter-09",
+      "chapter-13",
+      "chapter-15"
+    ],
+    "tags": [
+      "India",
+      "FER",
+      "prosecution",
+      "office action",
+      "IPO"
+    ],
+    "promptText": "You are a registered Indian patent agent preparing a response to the following First Examination Report (FER) from the Indian Patent Office. Draft a structured response following formal Indian Patent Office requirements.\n\nFER Contents:\n[FER OBJECTIONS HERE]\n\nCurrent claims:\n[CURRENT CLAIMS]\n\nSpecification summary:\n[SPECIFICATION SUMMARY]\n\nDraft the response in the following structure:\n1. Preamble (standard formal opening)\n2. General remarks (addressing overall examination approach)\n3. Objection-by-objection response (numbered to match FER)\n   - For each objection: Statement of objection / Applicant's response / Amendment (if any)\n4. Amended claims (if amended)\n5. Formal closing\n\nFocus on clarity, professional tone, and substantive engagement with each objection.",
+    "variables": [
+      {
+        "name": "FER OBJECTIONS HERE",
+        "description": "Paste or summarize the IPO examination report objections",
+        "example": "1. Claims 1-5 lack novelty under Section 2(1)(l) in view of D1 (IN XXXXX)..."
+      },
+      {
+        "name": "CURRENT CLAIMS",
+        "description": "The current claim set",
+        "example": "Claim 1. A method of..."
+      },
+      {
+        "name": "SPECIFICATION SUMMARY",
+        "description": "Brief summary of the specification",
+        "example": "The invention relates to..."
+      }
+    ],
+    "modelNotes": "Always have a qualified registered Indian patent agent review and sign the final response. AI drafts are starting points only.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": true
+  },
+  {
+    "promptId": "prompt-prosecution-02",
+    "title": "USPTO Office Action Response: §103 Obviousness",
+    "description": "Drafts structured arguments against a §103 obviousness rejection in a USPTO office action response.",
+    "category": "office-action",
+    "jurisdiction": [
+      "US"
+    ],
+    "chapterIds": [
+      "chapter-10",
+      "chapter-13",
+      "chapter-15"
+    ],
+    "tags": [
+      "USPTO",
+      "103",
+      "obviousness",
+      "KSR",
+      "prosecution"
+    ],
+    "promptText": "Draft arguments against the following §103 obviousness rejection in a USPTO Office Action response.\n\nRejection:\n[REJECTION SUMMARY]\n\nPrimary Reference: [PRIMARY REF]\nSecondary Reference (if applicable): [SECONDARY REF]\n\nClaim being rejected:\n[CLAIM TEXT]\n\nDraft arguments addressing:\n1. Teaching-away from the combination (if the references teach away)\n2. Lack of motivation to combine (under KSR/TSM)\n3. Specific missing element not taught by the combination\n4. Unexpected results or surprising synergy (if applicable)\n5. Secondary considerations (long-felt need, commercial success, failure of others)\n\nFor each argument, cite the relevant legal standard and draft 1-2 paragraphs of substantive argument.",
+    "variables": [
+      {
+        "name": "REJECTION SUMMARY",
+        "description": "Summary of the examiner's §103 rejection",
+        "example": "Examiner rejects claims 1-5 under 35 USC 103 as obvious over Smith in view of Jones..."
+      },
+      {
+        "name": "PRIMARY REF",
+        "description": "The primary reference",
+        "example": "Smith (US 10,000,000)"
+      },
+      {
+        "name": "SECONDARY REF",
+        "description": "Secondary reference if a combination rejection",
+        "example": "Jones (US 2022/0123456)"
+      },
+      {
+        "name": "CLAIM TEXT",
+        "description": "The claim being rejected",
+        "example": "Claim 1. A method comprising..."
+      }
+    ],
+    "modelNotes": "KSR International Co. v. Teleflex Inc., 550 U.S. 398 (2007) is the controlling precedent. Reference the specific Graham v. John Deere factors.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": true
+  },
+  {
+    "promptId": "prompt-prosecution-03",
+    "title": "EPO Examination Response: Inventive Step (Article 56 EPC)",
+    "description": "Drafts a structured inventive step argument using the EPO problem-solution approach.",
+    "category": "prosecution",
+    "jurisdiction": [
+      "EP"
+    ],
+    "chapterIds": [
+      "chapter-02",
+      "chapter-12",
+      "chapter-13",
+      "chapter-15"
+    ],
+    "tags": [
+      "EPO",
+      "inventive step",
+      "problem-solution",
+      "Article 56"
+    ],
+    "promptText": "Draft an inventive step argument for an EPO examination response using the EPO's mandatory problem-solution approach.\n\nClosest Prior Art: [CLOSEST PRIOR ART]\nDifference between claim and closest prior art: [DIFFERENCE]\nTechnical effect of the difference: [TECHNICAL EFFECT]\n\nUsing the problem-solution approach:\n1. Identify the 'objective technical problem' (formulated in terms of the technical effect without mentioning the solution)\n2. Argue that the solution is not obvious to the skilled person starting from the closest prior art\n3. Address any secondary references cited by the examiner\n4. If reformulation of the problem is needed, explain why\n\nClaim: [CLAIM TEXT]",
+    "variables": [
+      {
+        "name": "CLOSEST PRIOR ART",
+        "description": "The closest prior art document",
+        "example": "D1: EP 1234567 - discloses a sensor network for industrial monitoring"
+      },
+      {
+        "name": "DIFFERENCE",
+        "description": "What the claim has that the closest prior art does not",
+        "example": "The claim adds a transformer-based anomaly detection module trained on normal operating patterns"
+      },
+      {
+        "name": "TECHNICAL EFFECT",
+        "description": "The technical effect achieved by the difference",
+        "example": "95% reduction in false-positive alarms compared to threshold-based systems"
+      },
+      {
+        "name": "CLAIM TEXT",
+        "description": "The claim",
+        "example": "Claim 1. A sensor network comprising..."
+      }
+    ],
+    "modelNotes": "The EPO problem-solution approach is mandatory. The 'could-would' distinction is critical: could the skilled person have arrived at the solution, or would they have done so?",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-prior-art-01",
+    "title": "Prior Art Search Strategy Generator",
+    "description": "Generates a structured prior-art search strategy with Boolean queries for multiple databases.",
+    "category": "prior-art",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-02",
+      "chapter-15"
+    ],
+    "tags": [
+      "prior art",
+      "search strategy",
+      "Boolean",
+      "classification codes"
+    ],
+    "promptText": "Generate a structured prior-art search strategy for the following invention. Provide:\n\n1. Core inventive concept breakdown (identify the 3-5 key technical features to search)\n2. Keyword clusters (synonyms and related terms for each feature)\n3. Boolean search queries for:\n   a. USPTO Patent Full-Text (using field codes: TTL, ABST, SPEC, CLM)\n   b. EPO Espacenet (using CQL syntax)\n   c. Google Patents\n   d. Lens.org\n4. Recommended CPC/IPC classification codes to search\n5. Non-patent literature sources to check (journals, standards, technical reports)\n6. Suggested search scope: time period, jurisdictions\n\nInvention:\n[INVENTION DESCRIPTION]",
+    "variables": [
+      {
+        "name": "INVENTION DESCRIPTION",
+        "description": "Detailed description of the invention",
+        "example": "A method for real-time anomaly detection in industrial IoT networks using federated learning across edge devices without sharing raw sensor data..."
+      }
+    ],
+    "modelNotes": "Use this as a starting framework. A professional patent search requires human review of results and judgment about relevance. AI cannot conduct the actual search.",
+    "dateAdded": "2026-01-15",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-office-action-01",
+    "title": "Office Action Summary and Response Plan",
+    "description": "Summarizes an office action and generates a structured response plan with recommended strategies.",
+    "category": "office-action",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-08",
+      "chapter-13",
+      "chapter-15"
+    ],
+    "tags": [
+      "office action",
+      "response planning",
+      "prosecution strategy"
+    ],
+    "promptText": "Analyze the following patent office action and generate:\n\n1. SUMMARY: A bullet-point summary of every rejection/objection raised\n2. CLASSIFICATION: For each objection, classify as: (a) Substantive rejection, (b) Formal objection, (c) Unity of invention\n3. RESPONSE STRATEGY: For each rejection, recommend: Amend / Argue / Amend + Argue / Request Interview\n4. PRIORITY ORDER: Rank objections by importance and recommended response order\n5. CLAIM AMENDMENTS NEEDED: Flag specific claims needing amendment\n6. RISK ASSESSMENT: Rate overall prosecution risk: Green / Amber / Red with brief rationale\n7. RESPONSE TIMELINE: Calculate deadline from date of mailing\n\nOffice Action:\n[OFFICE ACTION TEXT OR SUMMARY]\n\nDate of Mailing: [DATE]\nJurisdiction: [JURISDICTION]",
+    "variables": [
+      {
+        "name": "OFFICE ACTION TEXT OR SUMMARY",
+        "description": "Full text or summary of the office action",
+        "example": "The examiner rejects claims 1-10 under 35 USC 102..."
+      },
+      {
+        "name": "DATE",
+        "description": "Date of mailing of the office action",
+        "example": "June 1, 2026"
+      },
+      {
+        "name": "JURISDICTION",
+        "description": "Jurisdiction",
+        "example": "USPTO / India IPO / EPO"
+      }
+    ],
+    "modelNotes": "Confirm all deadlines independently - always verify against the official office action date. Do not rely on AI for deadline calculations in actual practice.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-office-action-02",
+    "title": "Indian Hearing Preparation Memo",
+    "description": "Prepares a memo for an Indian Patent Office hearing, including arguments, precedents, and talking points.",
+    "category": "office-action",
+    "jurisdiction": [
+      "IN"
+    ],
+    "chapterIds": [
+      "chapter-09",
+      "chapter-15"
+    ],
+    "tags": [
+      "India",
+      "hearing",
+      "IPO",
+      "prosecution"
+    ],
+    "promptText": "Prepare a hearing memo for an upcoming Indian Patent Office hearing. The hearing is to address the following outstanding objections.\n\nOutstanding Objections:\n[OBJECTIONS LIST]\n\nApplicant's previous responses:\n[PREVIOUS RESPONSE SUMMARY]\n\nGenerate:\n1. Opening statement (2-3 sentences to begin the hearing)\n2. For each objection: key argument points (3 bullet points maximum)\n3. Relevant Indian case law to cite (identify applicable High Court / Supreme Court / IPAB precedents if applicable)\n4. Proposed amendments to tables (if any)\n5. Fallback positions (if primary argument fails, what to concede vs hold firm on)\n6. Closing request (specific grant request)\n\nFormat for use as a quick-reference card during the hearing.",
+    "variables": [
+      {
+        "name": "OBJECTIONS LIST",
+        "description": "The remaining objections from the last examination report",
+        "example": "1. Claims 1-3: Section 3(k) objection for software patent..."
+      },
+      {
+        "name": "PREVIOUS RESPONSE SUMMARY",
+        "description": "Summary of arguments already made",
+        "example": "In our FER response dated X, we argued..."
+      }
+    ],
+    "modelNotes": "Indian Patent Office hearings follow a quasi-judicial format. Prepare for questions on technical merit and claim clarity in addition to legal arguments.",
+    "dateAdded": "2026-02-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-office-action-03",
+    "title": "Claim Amendment Tracker",
+    "description": "Creates a detailed claim amendment history showing original claims vs current claims for prosecution history purposes.",
+    "category": "office-action",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-13",
+      "chapter-15"
+    ],
+    "tags": [
+      "prosecution",
+      "claim amendments",
+      "prosecution history",
+      "estoppel"
+    ],
+    "promptText": "Create a claim amendment tracking table for prosecution history purposes.\n\nFor each amended claim, show:\n1. Original claim text (pre-amendment)\n2. Current claim text (post-amendment)\n3. Red-line markup showing changes (use [added text] and ~~deleted text~~ notation)\n4. Reason for amendment as stated in the response\n5. Potential prosecution history estoppel created by the amendment\n\nOriginal claims: [ORIGINAL CLAIMS]\nAmended claims: [AMENDED CLAIMS]\nReason for amendment: [REASONS STATED]\n\nAlso provide: a one-paragraph prosecution estoppel risk assessment for each independent claim amendment.",
+    "variables": [
+      {
+        "name": "ORIGINAL CLAIMS",
+        "description": "Claims as originally filed",
+        "example": "Claim 1. A method comprising: receiving data..."
+      },
+      {
+        "name": "AMENDED CLAIMS",
+        "description": "Claims after amendment",
+        "example": "Claim 1. A computer-implemented method comprising: receiving, by a processor, sensor data..."
+      },
+      {
+        "name": "REASONS STATED",
+        "description": "Reasons given for the amendment in the response",
+        "example": "Amended to clarify that the method is computer-implemented and to distinguish from Smith..."
+      }
+    ],
+    "modelNotes": "Prosecution history estoppel under Festo and Ballard Medical is a critical consideration. Always review amendments for unnecessary scope surrenders.",
+    "dateAdded": "2026-02-15",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-office-action-04",
+    "title": "§112(b) Indefiniteness Response",
+    "description": "Drafts arguments against a §112(b) indefiniteness rejection.",
+    "category": "office-action",
+    "jurisdiction": [
+      "US"
+    ],
+    "chapterIds": [
+      "chapter-10",
+      "chapter-13",
+      "chapter-15"
+    ],
+    "tags": [
+      "USPTO",
+      "112b",
+      "indefiniteness",
+      "Nautilus",
+      "prosecution"
+    ],
+    "promptText": "Draft a response to a §112(b) indefiniteness rejection under the Nautilus standard.\n\nThe examiner contends the following term/phrase is indefinite: [DISPUTED TERM]\nin Claim [CLAIM NUMBER].\n\nFull claim: [CLAIM TEXT]\nRelevant specification passage(s): [SPEC PASSAGE]\n\nDraft arguments addressing:\n1. The claim term/phrase as understood by a skilled person at time of filing (POSITA standard)\n2. Intrinsic evidence supporting definiteness (claim language, specification definition, drawings)\n3. If applicable: extrinsic evidence (technical standards, dictionaries, expert usage)\n4. If amendment is preferred: proposed amendment to definitize the term\n\nApply the Nautilus standard: the claim must inform those skilled in the art of the scope with reasonable certainty.",
+    "variables": [
+      {
+        "name": "DISPUTED TERM",
+        "description": "The term or phrase the examiner claims is indefinite",
+        "example": "substantially uniform temperature distribution"
+      },
+      {
+        "name": "CLAIM NUMBER",
+        "description": "Which claim",
+        "example": "1"
+      },
+      {
+        "name": "CLAIM TEXT",
+        "description": "Full claim text",
+        "example": "A method comprising: maintaining a substantially uniform temperature distribution..."
+      },
+      {
+        "name": "SPEC PASSAGE",
+        "description": "Specification passages that define or contextualize the term",
+        "example": "As used herein, 'substantially uniform' means a variation of less than 5%..."
+      }
+    ],
+    "modelNotes": "Nautilus, Inc. v. Biosig Instruments, Inc., 572 U.S. 898 (2014) is controlling. If the specification expressly defines the term, cite the definition explicitly.",
+    "dateAdded": "2026-02-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-office-action-05",
+    "title": "Continuation Strategy Analyzer",
+    "description": "Analyzes whether to file a continuation, CIP, or divisional, and what claims to pursue.",
+    "category": "prosecution",
+    "jurisdiction": [
+      "US"
+    ],
+    "chapterIds": [
+      "chapter-10",
+      "chapter-15",
+      "chapter-16"
+    ],
+    "tags": [
+      "continuation",
+      "CIP",
+      "divisional",
+      "patent family",
+      "strategy"
+    ],
+    "promptText": "Analyze the current prosecution history and recommend a continuation strategy.\n\nAllowed claims: [ALLOWED CLAIMS]\nAbandoned/withdrawn claims: [ABANDONED CLAIMS]\nCommercial products/features to protect: [COMMERCIAL INTEREST]\nCompetitor activity: [COMPETITOR CONTEXT]\n\nProvide:\n1. CONTINUATION RECOMMENDATION: Should we file a continuation? (Yes/No/Conditional)\n   Reason: ______\n2. CONTINUATION CLAIM STRATEGY: What new claims should the continuation pursue?\n   - Broader independent claims not yet pursued\n   - Different claiming formats (method vs system vs CRM)\n   - Claims directed to specific competitor products\n3. CIP ANALYSIS: Is there new matter to support a CIP? What new matter?\n4. DIVISIONAL: Are there elected/non-elected species that warrant a divisional?\n5. TIMING: When should the continuation be filed before the parent issues?\n6. PRIORITY: What is the impact on priority date for each filing type?",
+    "variables": [
+      {
+        "name": "ALLOWED CLAIMS",
+        "description": "Claims that were allowed",
+        "example": "Claims 1-5 allowed covering the core apparatus..."
+      },
+      {
+        "name": "ABANDONED CLAIMS",
+        "description": "Claims that were rejected/withdrawn",
+        "example": "Claims 6-15 withdrawn after restriction requirement; Claims 16-20 cancelled in response to prior art..."
+      },
+      {
+        "name": "COMMERCIAL INTEREST",
+        "description": "What commercial products/features need protection",
+        "example": "The SaaS product launching Q4 2026 uses the method of claim 6 plus additional AI features..."
+      },
+      {
+        "name": "COMPETITOR CONTEXT",
+        "description": "Known competitor activity",
+        "example": "Competitor X filed a patent application in 2024 (US 2024/XXXXXX) that appears to cover..."
+      }
+    ],
+    "modelNotes": "File the continuation before the parent issues (35 U.S.C. § 120). The continuation must be co-pending with the parent.",
+    "dateAdded": "2026-03-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-fto-01",
+    "title": "Freedom-to-Operate Risk Assessment Framework",
+    "description": "Structures an FTO analysis for a product or technology.",
+    "category": "freedom-to-operate",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-18",
+      "chapter-15"
+    ],
+    "tags": [
+      "FTO",
+      "freedom to operate",
+      "infringement",
+      "risk assessment"
+    ],
+    "promptText": "Structure a freedom-to-operate risk assessment for the following product/technology. Generate:\n\n1. PRODUCT DECOMPOSITION: Break the product into discrete technical features to analyze\n2. SEARCH TARGETS: For each feature, identify patent classifications and keywords to search\n3. RISK MATRIX TEMPLATE: Create a table with columns: Patent / Claims / Product Feature Covered / Risk Level / Notes\n4. ANALYSIS FRAMEWORK: For each identified patent:\n   a. Claim-by-claim analysis format\n   b. All-elements rule application\n   c. Doctrine of equivalents considerations\n5. DESIGN-AROUND OPTIONS: Template for documenting design-around alternatives\n6. RISK RANKING: Green / Amber / Red framework for final risk assessment\n7. RECOMMENDED ACTIONS: Table of recommended actions by risk level\n\nProduct/Technology:\n[PRODUCT DESCRIPTION]\n\nKey jurisdictions: [JURISDICTIONS]",
+    "variables": [
+      {
+        "name": "PRODUCT DESCRIPTION",
+        "description": "Description of the product or technology to analyze",
+        "example": "A SaaS platform for industrial predictive maintenance using edge AI and federated learning..."
+      },
+      {
+        "name": "JURISDICTIONS",
+        "description": "Markets where the product will be sold",
+        "example": "India, USA, Germany, UK"
+      }
+    ],
+    "modelNotes": "An AI-generated FTO framework is a starting point only. An actual FTO opinion requires a registered patent attorney, a professional patent search, and legal analysis of identified patents. Never rely on AI output alone for FTO clearance.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-strategy-01",
+    "title": "Patent Landscape Analysis Prompt",
+    "description": "Generates a framework for conducting a patent landscape analysis in a technology area.",
+    "category": "strategy",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-01",
+      "chapter-16",
+      "chapter-15"
+    ],
+    "tags": [
+      "landscape",
+      "strategy",
+      "portfolio",
+      "competitive analysis"
+    ],
+    "promptText": "Design a patent landscape analysis framework for the technology area below.\n\nProvide:\n1. SCOPE DEFINITION: Recommended search scope (CPC codes, keywords, date range, jurisdictions)\n2. KEY PLAYERS: Framework for identifying top assignees by application volume\n3. TECHNOLOGY CLUSTERS: How to map the technology into sub-clusters for visualization\n4. WHITE SPACE MAP: Framework for identifying areas of low patent density (filing opportunities)\n5. TREND ANALYSIS: What filing trends to look for (growth areas, declining areas)\n6. KEY PATENTS: Criteria for identifying 'blocking patents' vs 'foundational patents'\n7. OUTPUT DELIVERABLES: Template for a landscape report (sections, charts, key insights)\n\nTechnology area:\n[TECHNOLOGY AREA]\n\nBusiness context:\n[BUSINESS CONTEXT]",
+    "variables": [
+      {
+        "name": "TECHNOLOGY AREA",
+        "description": "The technology domain to analyze",
+        "example": "Edge AI for industrial IoT anomaly detection"
+      },
+      {
+        "name": "BUSINESS CONTEXT",
+        "description": "Why the landscape is being conducted and what decisions it will inform",
+        "example": "Pre-investment due diligence for a Series A round in a startup building an edge AI platform..."
+      }
+    ],
+    "modelNotes": "For actual landscape analysis, use commercial tools (Patsnap, Derwent Innovation, Orbit Intelligence) or professional patent search services. AI can help structure the analysis but cannot conduct the actual database search.",
+    "dateAdded": "2026-01-15",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-strategy-02",
+    "title": "PCT National Phase Entry Decision Analyzer",
+    "description": "Analyzes which countries to enter national phase in, based on commercial and strategic factors.",
+    "category": "strategy",
+    "jurisdiction": [
+      "PCT"
+    ],
+    "chapterIds": [
+      "chapter-11",
+      "chapter-16",
+      "chapter-15"
+    ],
+    "tags": [
+      "PCT",
+      "national phase",
+      "strategy",
+      "cost-benefit"
+    ],
+    "promptText": "Help me decide which jurisdictions to enter in the national phase of my PCT application.\n\nApplication technology: [TECHNOLOGY]\nMarkets of commercial interest: [MARKETS]\nEstimated patent life value: [VALUE ESTIMATE]\nBudget for national phase entry: [BUDGET]\nKey competitors and their jurisdictions: [COMPETITOR PATENTS]\n\nFor each jurisdiction below, analyze: (a) cost estimate for national phase + prosecution through grant, (b) commercial rationale, (c) enforcement environment score (1-5), (d) recommendation (Enter / Defer / Skip):\n\nJurisdictions to consider: India, USA, Europe (EP), China, Japan, South Korea, UK, Germany, Canada, Australia, Brazil\n\nAlso recommend: (1) minimum viable jurisdiction set, (2) ideal jurisdiction set given unlimited budget, (3) decision criteria for deferred jurisdictions.",
+    "variables": [
+      {
+        "name": "TECHNOLOGY",
+        "description": "The technology of the patent application",
+        "example": "AI-based drug discovery platform for rare diseases"
+      },
+      {
+        "name": "MARKETS",
+        "description": "Primary commercial markets",
+        "example": "India, USA, Europe - primary manufacturing in India, sales globally"
+      },
+      {
+        "name": "VALUE ESTIMATE",
+        "description": "Commercial value estimate",
+        "example": "Patent covers core platform expected to generate $50M+ revenue over 5 years"
+      },
+      {
+        "name": "BUDGET",
+        "description": "Budget for national phase",
+        "example": "USD 80,000 total for all national phase entries and prosecution"
+      },
+      {
+        "name": "COMPETITOR PATENTS",
+        "description": "Known competitor patents and their jurisdictions",
+        "example": "Competitor A (US, EP, CN) - Competitor B (US, IN, JP)"
+      }
+    ],
+    "modelNotes": "Cost estimates vary by agent fees and exchange rates. Get updated quotes from local associates. This framework helps structure the decision but actual costs must be verified.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-strategy-03",
+    "title": "IP Portfolio Audit Framework",
+    "description": "Generates a structured audit framework for an existing patent portfolio.",
+    "category": "strategy",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-16",
+      "chapter-15"
+    ],
+    "tags": [
+      "portfolio",
+      "audit",
+      "maintenance",
+      "strategy"
+    ],
+    "promptText": "Design a portfolio audit framework for a patent portfolio of [PORTFOLIO SIZE] patents across [JURISDICTIONS].\n\nThe audit should evaluate each patent on:\n1. COMMERCIAL ALIGNMENT: Does the patent cover current or planned products? (Score 1-5)\n2. COMPETITIVE VALUE: Does the patent block or read on competitor products? (Score 1-5)\n3. STRENGTH: What is the likelihood of surviving validity challenge? (Score 1-5)\n4. MAINTENANCE COST vs VALUE: Is the annual cost justified? (Score 1-5)\n5. LICENSING POTENTIAL: Could the patent generate licensing revenue? (Score 1-5)\n\nOutput:\n1. Audit scoring matrix template\n2. Action categories: MAINTAIN / LICENCE OUT / ASSERT / ABANDON / SELL\n3. Portfolio heat map structure (by technology area, jurisdiction, value score)\n4. Pruning recommendation framework (which categories to abandon first)\n\nBusiness context: [BUSINESS CONTEXT]",
+    "variables": [
+      {
+        "name": "PORTFOLIO SIZE",
+        "description": "Number of patents",
+        "example": "45 granted patents, 20 pending applications"
+      },
+      {
+        "name": "JURISDICTIONS",
+        "description": "Countries covered",
+        "example": "India (30), USA (25), Europe (10)"
+      },
+      {
+        "name": "BUSINESS CONTEXT",
+        "description": "Why the audit is being conducted",
+        "example": "Pre-Series B fundraise - investor wants IP portfolio analysis; also evaluating cost reduction..."
+      }
+    ],
+    "modelNotes": "Portfolio audits should be conducted by a registered patent attorney. This framework helps structure the work but legal analysis of claim scope requires professional judgment.",
+    "dateAdded": "2026-02-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-strategy-04",
+    "title": "Licensing Term Sheet Generator",
+    "description": "Generates a first-draft licensing term sheet for a patent licensing negotiation.",
+    "category": "strategy",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-16",
+      "chapter-18",
+      "chapter-15"
+    ],
+    "tags": [
+      "licensing",
+      "term sheet",
+      "royalty",
+      "negotiation"
+    ],
+    "promptText": "Draft a patent licensing term sheet for the following licensing scenario.\n\nLicensor: [LICENSOR]\nLicensee: [LICENSEE]\nPatent(s) being licensed: [PATENT DESCRIPTION]\nLicensed product/field: [FIELD OF USE]\nGeography: [GEOGRAPHY]\n\nDraft a term sheet covering:\n1. GRANT: Exclusive / Non-exclusive / Sub-licensable? Field of use and geography.\n2. CONSIDERATION: Upfront fee, milestone payments, running royalties (suggest a range based on comparable technology sector norms)\n3. REPORTING: Royalty reporting frequency, audit rights\n4. TERM: Duration, renewal options, early termination triggers\n5. IMPROVEMENTS: Grantback provisions, improvements license\n6. REPRESENTATIONS: What the licensor represents about the patent\n7. ENFORCEMENT: Who controls enforcement, shared enforcement option\n8. MOST-FAVOURED LICENSEE: Include or exclude?\n\nNote: this is a starting framework - mark as 'FOR DISCUSSION PURPOSES ONLY - NOT A BINDING OFFER'.",
+    "variables": [
+      {
+        "name": "LICENSOR",
+        "description": "The patent owner",
+        "example": "DeepTech Innovations Pvt Ltd"
+      },
+      {
+        "name": "LICENSEE",
+        "description": "The party being licensed",
+        "example": "ManuSmart Manufacturing Ltd"
+      },
+      {
+        "name": "PATENT DESCRIPTION",
+        "description": "Brief description of the patent(s)",
+        "example": "IN 123456 - AI-based predictive maintenance system"
+      },
+      {
+        "name": "FIELD OF USE",
+        "description": "What the license covers",
+        "example": "Automotive manufacturing plants only"
+      },
+      {
+        "name": "GEOGRAPHY",
+        "description": "Territory",
+        "example": "India only"
+      }
+    ],
+    "modelNotes": "This is a drafting framework only. Actual licensing agreements require qualified IP lawyers and commercial negotiators. 'Comparable royalty rates' are jurisdiction and industry specific - research current benchmarks.",
+    "dateAdded": "2026-02-15",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-strategy-05",
+    "title": "India Innovation Paradox Briefing Generator",
+    "description": "Generates a briefing note on India's IP gap for a specific industry sector.",
+    "category": "strategy",
+    "jurisdiction": [
+      "IN"
+    ],
+    "chapterIds": [
+      "chapter-17",
+      "chapter-15"
+    ],
+    "tags": [
+      "India",
+      "innovation",
+      "policy",
+      "startup",
+      "IP strategy"
+    ],
+    "promptText": "Generate a briefing note on India's Innovation Paradox for the following industry sector and audience.\n\nSector: [SECTOR]\nAudience: [AUDIENCE] (e.g., startup founders, corporate IP team, policymaker, investor)\n\nThe briefing should:\n1. CONTEXT: State the India Innovation Paradox (startup growth vs patent filing gap) with current statistics\n2. SECTOR ANALYSIS: How does [SECTOR] specifically underperform in Indian patent filings vs innovation output?\n3. ROOT CAUSES: 3-4 structural reasons for the gap in this sector\n4. GLOBAL COMPARISON: How does India's [SECTOR] patent filing rate compare to China, South Korea, Germany?\n5. OPPORTUNITY: What is the economic opportunity if Indian [SECTOR] companies patented at comparable rates?\n6. ACTION ITEMS: 5 specific, actionable steps the [AUDIENCE] can take\n7. RESOURCES: 3 recommended resources (government schemes, IP clinics, trade bodies)\n\nKeep tone: authoritative, data-driven, constructive (not despairing).",
+    "variables": [
+      {
+        "name": "SECTOR",
+        "description": "Industry sector",
+        "example": "Deeptech / Pharma / Manufacturing / Agritech / Fintech"
+      },
+      {
+        "name": "AUDIENCE",
+        "description": "Who the briefing is for",
+        "example": "Startup founders at a Tier 2 city accelerator"
+      }
+    ],
+    "modelNotes": "Verify statistics from WIPO, DPIIT, and CII reports. The India Innovation Paradox is a documented phenomenon - use the book's Chapter 17 framework as the analytical backbone.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-strategy-06",
+    "title": "IP Due Diligence Checklist Generator",
+    "description": "Generates a tailored IP due diligence checklist for M&A, investment, or licensing transactions.",
+    "category": "strategy",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-18",
+      "chapter-15"
+    ],
+    "tags": [
+      "due diligence",
+      "M&A",
+      "investment",
+      "IP audit"
+    ],
+    "promptText": "Generate a comprehensive IP due diligence checklist for the following transaction type and target company.\n\nTransaction Type: [TRANSACTION TYPE] (M&A / Series A investment / Licensing deal / Joint venture)\nTarget Company: [TARGET DESCRIPTION]\nPrimary IP Assets: [IP ASSETS] (patents, trademarks, copyrights, trade secrets, domain names)\n\nChecklist should cover:\n1. OWNERSHIP VERIFICATION (title, assignments, inventor agreements, chain of title)\n2. VALIDITY RISKS (prosecution history, prior art risk, maintenance fee status)\n3. ENCUMBRANCES (licenses granted, security interests, government funding IP obligations)\n4. INFRINGEMENT RISK (FTO status, litigation history, threatened claims)\n5. EMPLOYEE & CONTRACTOR IP AGREEMENTS (IP assignment clauses, non-competes)\n6. OPEN SOURCE COMPLIANCE (software: GPL contamination risk, CLA status)\n7. TRADE SECRETS (identification, protection measures, exit interview protocols)\n8. KEY DOCUMENT REQUESTS (list of documents to request in data room)\n\nAlso provide: RED FLAG list (issues that should halt or restructure the transaction).",
+    "variables": [
+      {
+        "name": "TRANSACTION TYPE",
+        "description": "Type of transaction",
+        "example": "Series B investment in a deeptech AI startup"
+      },
+      {
+        "name": "TARGET DESCRIPTION",
+        "description": "Brief description of the target company",
+        "example": "3-year-old B2B SaaS startup, 12 employees, 2 granted patents in India, 1 US patent pending..."
+      },
+      {
+        "name": "IP ASSETS",
+        "description": "Primary IP assets of concern",
+        "example": "Patents (core technology), software copyright, brand trademark"
+      }
+    ],
+    "modelNotes": "IP due diligence for material transactions must be conducted by qualified IP counsel. This checklist is a comprehensive starting framework - adapt based on transaction specifics and applicable law.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-research-01",
+    "title": "Technical Prior Art Summary Generator",
+    "description": "Summarizes a batch of prior art references to identify the state of the art for examination purposes.",
+    "category": "research",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-01",
+      "chapter-02",
+      "chapter-15"
+    ],
+    "tags": [
+      "prior art",
+      "research",
+      "state of the art",
+      "summary"
+    ],
+    "promptText": "I will provide you with abstracts/excerpts from [NUMBER] prior art references in the field of [TECHNOLOGY FIELD]. \n\nFor each reference, provide:\n1. One-sentence summary of the core teaching\n2. Key technical features taught (bullet list of 3-5 items)\n3. What problem it solves\n4. What it does NOT teach or suggests it cannot achieve\n\nThen provide a synthesized 'State of the Art' summary (2-3 paragraphs) describing what a person skilled in the art would know from these references collectively.\n\nReferences:\n[REFERENCES HERE]",
+    "variables": [
+      {
+        "name": "NUMBER",
+        "description": "Number of references",
+        "example": "5"
+      },
+      {
+        "name": "TECHNOLOGY FIELD",
+        "description": "Technical field",
+        "example": "Machine learning for industrial predictive maintenance"
+      },
+      {
+        "name": "REFERENCES HERE",
+        "description": "Abstracts or excerpts from references",
+        "example": "Reference 1 (Smith, US 10,000,000): [abstract] ... Reference 2 (Jones, EP 3456789): [abstract] ..."
+      }
+    ],
+    "modelNotes": "Useful for preparing the 'Background of the Invention' section and for structuring arguments in prosecution. Verify all summaries against the original documents.",
+    "dateAdded": "2026-01-15",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-research-02",
+    "title": "AI Tool Evaluation Framework for IP Work",
+    "description": "Evaluates an AI tool for use in a specific IP workflow task.",
+    "category": "research",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-14",
+      "chapter-15"
+    ],
+    "tags": [
+      "AI tools",
+      "evaluation",
+      "LLM",
+      "workflow"
+    ],
+    "promptText": "Evaluate [AI TOOL NAME] for use in the following IP workflow task: [TASK DESCRIPTION]\n\nAssessment criteria:\n1. ACCURACY: On a scale of 1-5, assess likely accuracy for this task. What types of errors are most likely?\n2. HALLUCINATION RISK: What specifically might the tool confidently get wrong? How would you detect it?\n3. VERIFICATION PROTOCOL: What must a human verify before using AI output for this task?\n4. PROMPT REQUIREMENTS: What information must be provided in the prompt for acceptable quality output?\n5. KNOWN LIMITATIONS: Specific limitations of this tool for this task\n6. ETHICS/PROFESSIONAL RESPONSIBILITY: Any professional responsibility concerns in using AI for this task?\n7. VERDICT: Recommended for this task (Yes / With significant caveats / No) + reasoning\n\nAI Tool: [AI TOOL NAME]\nTask: [TASK DESCRIPTION]\nJurisdiction context: [JURISDICTION]",
+    "variables": [
+      {
+        "name": "AI TOOL NAME",
+        "description": "The AI tool to evaluate",
+        "example": "Claude 3.5 Sonnet / ChatGPT-4o / Gemini Ultra / CoPilot"
+      },
+      {
+        "name": "TASK DESCRIPTION",
+        "description": "The specific IP task",
+        "example": "Drafting responses to §103 obviousness rejections based on examiner summaries"
+      },
+      {
+        "name": "JURISDICTION",
+        "description": "Which jurisdiction's law applies",
+        "example": "USPTO / India IPO / EPO"
+      }
+    ],
+    "modelNotes": "This meta-prompt asks an AI to evaluate AI tools. Use the output as a structured starting point but apply your own professional judgment - particularly for ethical and liability assessments.",
+    "dateAdded": "2026-01-15",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  },
+  {
+    "promptId": "prompt-research-03",
+    "title": "AI Inventorship Analysis: Current Legal Status",
+    "description": "Provides a structured analysis of the current legal status of AI inventorship across key jurisdictions.",
+    "category": "research",
+    "jurisdiction": [
+      "ANY"
+    ],
+    "chapterIds": [
+      "chapter-19",
+      "chapter-15"
+    ],
+    "tags": [
+      "AI inventorship",
+      "DABUS",
+      "future of patents",
+      "legal analysis"
+    ],
+    "promptText": "Provide a structured analysis of the current legal status of AI inventorship across the following jurisdictions, as of your knowledge cutoff.\n\nFor each jurisdiction (India, USA, UK, EPO, Australia, South Africa):\n1. Current legal position: Can an AI be named as inventor? (YES / NO / UNCLEAR)\n2. Controlling authority (statute, case law, or examination guideline)\n3. How courts/offices have treated AI-generated inventions\n4. Pending legislative or regulatory changes\n5. Practical implications for patent filers using AI in invention\n\nAlso provide: a 2-paragraph synthesis on the global trend and what patent practitioners should advise clients now.\n\nNote: This is a fast-moving area of law. Always verify against the most recent updates before advising clients.",
+    "variables": [],
+    "modelNotes": "AI inventorship law is rapidly evolving. Verify all statements against current official guidance before relying on this analysis. The DABUS cases (UK, US, AU, EP) are the key precedents to track.",
+    "dateAdded": "2026-01-01",
+    "lastUpdated": "2026-06-01",
+    "featured": false
+  }
+]

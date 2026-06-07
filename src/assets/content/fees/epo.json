@@ -1,0 +1,105 @@
+{
+  "jurisdiction": "European Patent Office",
+  "jurisdictionCode": "EP",
+  "currency": "EUR",
+  "lastUpdated": "2026-06-01",
+  "effectiveDate": "2026-04-01",
+  "sourceUrl": "https://www.epo.org/en/applying/fees",
+  "mustVerify": true,
+  "verifyNote": "MUST VERIFY all amounts against the current EPO Schedule of Fees and Expenses. EPO fees are revised annually, typically effective 1 April.",
+  "categories": [
+    {
+      "category": "Filing & Search Fees",
+      "fees": [
+        {
+          "feeId": "EP-F-01",
+          "label": "Filing Fee (electronic)",
+          "amount": 135,
+          "unit": "per application"
+        },
+        {
+          "feeId": "EP-F-02",
+          "label": "Additional Filing Fee (pages > 35)",
+          "amount": 17,
+          "unit": "per additional page"
+        },
+        {
+          "feeId": "EP-F-03",
+          "label": "Search Fee",
+          "amount": 1460,
+          "unit": "per application"
+        },
+        {
+          "feeId": "EP-F-04",
+          "label": "Excess Claims Fee (> 15 claims, per claim)",
+          "amount": 235,
+          "unit": "per excess claim"
+        }
+      ]
+    },
+    {
+      "category": "Examination & Grant",
+      "fees": [
+        {
+          "feeId": "EP-E-01",
+          "label": "Examination Fee",
+          "amount": 1890,
+          "unit": "per application"
+        },
+        {
+          "feeId": "EP-E-02",
+          "label": "Grant Fee",
+          "amount": 1010,
+          "unit": "per patent"
+        },
+        {
+          "feeId": "EP-E-03",
+          "label": "Claim Fee at Grant (> 15 claims)",
+          "amount": 235,
+          "unit": "per excess claim"
+        }
+      ]
+    },
+    {
+      "category": "Renewal Fees (at EPO, pre-grant)",
+      "fees": [
+        {
+          "feeId": "EP-R-01",
+          "label": "2nd year renewal",
+          "amount": 160,
+          "unit": "per year"
+        },
+        {
+          "feeId": "EP-R-02",
+          "label": "3rd year renewal",
+          "amount": 335,
+          "unit": "per year"
+        },
+        {
+          "feeId": "EP-R-03",
+          "label": "4th year renewal (minimum starting rate)",
+          "amount": 545,
+          "unit": "per year",
+          "notes": "EPO pre-grant renewal fees increase each year from year 4 through year 10. The amount shown is the year-4 starting rate only. MUST VERIFY the full per-year progression at epo.org/en/applying/fees — do not quote a flat rate to clients."
+        }
+      ]
+    },
+    {
+      "category": "Opposition & Appeal",
+      "fees": [
+        {
+          "feeId": "EP-O-01",
+          "label": "Opposition Fee",
+          "amount": 880,
+          "unit": "per opposition"
+        },
+        {
+          "feeId": "EP-O-02",
+          "label": "Appeal Fee",
+          "amount": 2460,
+          "unit": "per appeal"
+        }
+      ]
+    }
+  ]
+}

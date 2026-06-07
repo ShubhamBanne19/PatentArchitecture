@@ -1,0 +1,249 @@
+@if (loading) {
+  <div class="chapter-loading section section--dark">
+    <div class="container">
+      <p>Loading chapter companion…</p>
+    </div>
+  </div>
+} @else if (notFound) {
+  <div class="chapter-not-found section section--dark">
+    <div class="container">
+      <span class="eyebrow">Chapter Not Found</span>
+      <h1>This chapter doesn't exist.</h1>
+      <p>The chapter ID in this URL is not valid. Please scan the QR code again or go to the Companion Hub.</p>
+      <pa-btn variant="primary" routerLink="/companion">Go to Companion Hub</pa-btn>
+    </div>
+  </div>
+} @else if (chapter) {
+
+  <!-- CHAPTER HEADER ─────────────────────────────────────────────────────── -->
+  <section class="ch-header section section--dark">
+    <div class="container">
+      <div class="ch-header__breadcrumb">
+        <a routerLink="/companion">Companion Hub</a>
+        <span aria-hidden="true"> / </span>
+        <span>Phase {{chapter.phase}}: {{chapter.phaseTitle}}</span>
+      </div>
+
+      <div class="ch-header__inner">
+        <div class="ch-header__content">
+          <div class="ch-header__num-badge">Chapter {{chapter.number}}</div>
+          <h1 class="ch-header__title">{{chapter.title}}</h1>
+          @if (chapter.subtitle) {
+            <p class="ch-header__subtitle">{{chapter.subtitle}}</p>
+          }
+          <p class="ch-header__summary">{{chapter.summary}}</p>
+
+          <div class="ch-header__badges">
+            @if (hasChangedFigures) {
+              <span class="status-badge status-badge--update">Updated figures</span>
+            }
+            @if (errata.length > 0) {
+              <span class="status-badge status-badge--errata">{{errata.length}} errata</span>
+            }
+            @if (prompts.length > 0) {
+              <span class="status-badge status-badge--prompt">{{prompts.length}} AI prompts</span>
+            }
+          </div>
+
+          <p class="ch-header__updated">
+            Companion last updated: <strong>{{chapter.lastUpdated | date:'MMMM d, y'}}</strong>
+          </p>
+        </div>
+
+        <div class="ch-header__topics">
+          <h3>Key Topics</h3>
+          <ul class="topic-list">
+            @for (topic of chapter.keyTopics; track topic) {
+              <li class="topic-list__item">{{topic}}</li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <pa-rule></pa-rule>
+
+  <!-- UPDATED FIGURES ────────────────────────────────────────────────────── -->
+  @if (hasChangedFigures) {
+    <section class="ch-section section section--dark">
+      <div class="container">
+        <div class="ch-section__header">
+          <span class="eyebrow">Changed Since Print</span>
+          <h2>Updated Figures &amp; Data</h2>
+          <p>The following figures or data from this chapter have been updated since the print edition.</p>
+        </div>
+
+        <div class="figures-grid">
+          @for (fig of chapter.figures; track fig.figureId) {
+            @if (fig.changedSincePrint) {
+              <div class="figure-card figure-card--updated">
+                <div class="figure-card__id">{{fig.figureId | uppercase}}</div>
+                <p class="figure-card__caption">{{fig.caption}}</p>
+                @if (fig.currentValue) {
+                  <div class="figure-card__value">
+                    Current value: <strong>{{fig.currentValue}}</strong>
+                    @if (fig.unit) { <span class="figure-card__unit">{{fig.unit}}</span> }
+                  </div>
+                }
+                @if (fig.changeNote) {
+                  <p class="figure-card__note">{{fig.changeNote}}</p>
+                }
+                <div class="figure-card__meta">
+                  <span>Updated {{fig.lastUpdated | date:'MMM d, y'}}</span>
+                  @if (fig.sourceUrl) {
+                    <a [href]="fig.sourceUrl" target="_blank" rel="noopener noreferrer" class="figure-card__source">
+                      Source →
+                    </a>
+                  }
+                </div>
+              </div>
+            }
+          }
+        </div>
+
+        @if (hasFeeData) {
+          <div class="figure-card__fee-link">
+            <p>For current official fee schedules, see the <a routerLink="/companion/fees">Fees page →</a></p>
+          </div>
+        }
+      </div>
+    </section>
+
+    <pa-rule variant="hair"></pa-rule>
+  }
+
+  <!-- ERRATA ─────────────────────────────────────────────────────────────── -->
+  @if (errata.length > 0) {
+    <section class="ch-section section section--dark">
+      <div class="container">
+        <div class="ch-section__header">
+          <span class="eyebrow">Errata</span>
+          <h2>Corrections &amp; Clarifications</h2>
+        </div>
+
+        <div class="errata-list">
+          @for (entry of errata; track entry.errataId) {
+            <div class="errata-item">
+              <div class="errata-item__meta">
+                <span class="errata-item__sev errata-item__sev--{{entry.severity}}">{{entry.severity | titlecase}}</span>
+                <span class="errata-item__page">{{entry.pageRef}}</span>
+                <span class="errata-item__date">{{entry.dateAdded | date:'MMM d, y'}}</span>
+              </div>
+              <p class="errata-item__desc"><strong>{{entry.description}}</strong></p>
+              <p class="errata-item__text">{{entry.correction}}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <pa-rule variant="hair"></pa-rule>
+  }
+
+  <!-- AI PROMPTS ──────────────────────────────────────────────────────────── -->
+  @if (prompts.length > 0) {
+    <section class="ch-section section section--dark">
+      <div class="container">
+        <div class="ch-section__header">
+          <span class="eyebrow">AI Prompt Library</span>
+          <h2>Prompts for This Chapter</h2>
+          <p>Tested AI prompts relevant to the topics covered in Chapter {{chapter.number}}. Copy and adapt for your work.</p>
+        </div>
+
+        <div class="prompts-grid">
+          @for (prompt of prompts; track prompt.promptId) {
+            <div class="prompt-card">
+              <div class="prompt-card__header">
+                <span class="prompt-card__cat">{{prompt.category | titlecase}}</span>
+                <div class="prompt-card__jurisdictions">
+                  @for (j of prompt.jurisdiction; track j) {
+                    <span class="prompt-card__j">{{j}}</span>
+                  }
+                </div>
+              </div>
+              <h3 class="prompt-card__title">{{prompt.title}}</h3>
+              <p class="prompt-card__desc">{{prompt.description}}</p>
+              <div class="prompt-card__tags">
+                @for (tag of prompt.tags.slice(0,4); track tag) {
+                  <span class="prompt-card__tag">{{tag}}</span>
+                }
+              </div>
+              <div class="prompt-card__footer">
+                <button
+                  class="prompt-card__copy"
+                  (click)="copyPrompt(prompt)"
+                  [class.prompt-card__copy--copied]="copiedPromptId === prompt.promptId"
+                >
+                  {{copiedPromptId === prompt.promptId ? '✓ Copied!' : 'Copy prompt'}}
+                </button>
+                <a [routerLink]="['/prompts']" [queryParams]="{id: prompt.promptId}" class="prompt-card__view">
+                  View full prompt →
+                </a>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="ch-section__cta">
+          <pa-btn variant="outline" routerLink="/prompts">Full AI Prompt Library →</pa-btn>
+        </div>
+      </div>
+    </section>
+
+    <pa-rule variant="hair"></pa-rule>
+  }
+
+  <!-- FURTHER READING ────────────────────────────────────────────────────── -->
+  @if (chapter.furtherReading && chapter.furtherReading.length > 0) {
+    <section class="ch-section section section--dark">
+      <div class="container">
+        <div class="ch-section__header">
+          <span class="eyebrow">Further Reading</span>
+          <h2>Recommended Resources</h2>
+        </div>
+
+        <ul class="further-reading">
+          @for (link of chapter.furtherReading; track link.url) {
+            <li class="further-reading__item">
+              <a [href]="link.url" target="_blank" rel="noopener noreferrer" class="further-reading__link">
+                <span class="further-reading__source">{{link.source}}</span>
+                {{link.title}} →
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+    </section>
+
+    <pa-rule variant="hair"></pa-rule>
+  }
+
+  <!-- CHAPTER NAVIGATION ─────────────────────────────────────────────────── -->
+  <section class="ch-nav section section--surface">
+    <div class="container">
+      <div class="ch-nav__inner">
+        @if (prevChapterId()) {
+          <a [routerLink]="['/companion', prevChapterId()]" class="ch-nav__link ch-nav__link--prev">
+            <span class="ch-nav__dir">← Previous Chapter</span>
+            <span class="ch-nav__num">Chapter {{chapter.number - 1}}</span>
+          </a>
+        } @else {
+          <div></div>
+        }
+
+        <a routerLink="/companion" class="ch-nav__hub">All Chapters</a>
+
+        @if (nextChapterId()) {
+          <a [routerLink]="['/companion', nextChapterId()]" class="ch-nav__link ch-nav__link--next">
+            <span class="ch-nav__dir">Next Chapter →</span>
+            <span class="ch-nav__num">Chapter {{chapter.number + 1}}</span>
+          </a>
+        } @else {
+          <div></div>
+        }
+      </div>
+    </div>
+  </section>
+
+}

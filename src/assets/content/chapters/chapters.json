@@ -1,0 +1,530 @@
+[
+  {
+    "id": "chapter-01",
+    "number": 1,
+    "phase": 1,
+    "phaseTitle": "Foundations of the Patent System",
+    "title": "The Patent System: Purpose, Rationale & Global Architecture",
+    "subtitle": "Why Patents Exist and How the System Works",
+    "summary": "A rigorous first-principles examination of why patent systems exist, the quid-pro-quo theory of disclosure, and how the major national and international frameworks relate. Traces the evolution from the Statute of Monopolies to the modern TRIPS-WTO architecture.",
+    "keyTopics": [
+      "Quid-pro-quo disclosure theory",
+      "TRIPS Agreement and WTO",
+      "India Patents Act 1970 as amended",
+      "Paris Convention priority",
+      "Global patent system architecture"
+    ],
+    "figures": [
+      {
+        "figureId": "fig-1-1",
+        "caption": "Global patent filing volumes by jurisdiction (2022–present)",
+        "dataType": "statistic",
+        "currentValue": "3.5 million",
+        "unit": "applications/year globally",
+        "sourceUrl": "https://www.wipo.int/en/web/publications/ip-statistics",
+        "lastUpdated": "2026-03-01",
+        "changedSincePrint": true,
+        "changeNote": "WIPO 2024 data shows 3.5M global applications vs 3.2M in print edition."
+      }
+    ],
+    "errata": [],
+    "prompts": [
+      "prompt-research-01",
+      "prompt-strategy-01"
+    ],
+    "furtherReading": [
+      {
+        "title": "WIPO IP Statistics Data Center",
+        "url": "https://www.wipo.int/en/web/publications/ip-statistics",
+        "source": "WIPO"
+      }
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-02",
+    "number": 2,
+    "phase": 1,
+    "phaseTitle": "Foundations of the Patent System",
+    "title": "Patentability: Novelty, Inventive Step & Industrial Applicability",
+    "subtitle": "The Three Pillars of a Valid Patent",
+    "summary": "A deep-dive into patentability criteria under Indian, US and European law. Examines absolute vs relative novelty, the person-skilled-in-the-art standard, and how inventive step is assessed with worked examples from real prosecution histories.",
+    "keyTopics": [
+      "Absolute novelty under Indian law",
+      "Inventive step vs non-obviousness",
+      "TSM test and Graham v. John Deere",
+      "Industrial applicability vs utility",
+      "Anticipation by prior use"
+    ],
+    "figures": [
+      {
+        "figureId": "fig-2-1",
+        "caption": "Novelty assessment framework: India vs USPTO vs EPO",
+        "dataType": "table",
+        "lastUpdated": "2026-01-01",
+        "changedSincePrint": false
+      }
+    ],
+    "errata": [],
+    "prompts": [
+      "prompt-claims-01",
+      "prompt-prior-art-01"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-03",
+    "number": 3,
+    "phase": 1,
+    "phaseTitle": "Foundations of the Patent System",
+    "title": "Subject-Matter Eligibility: What Can (and Cannot) Be Patented",
+    "subtitle": "Navigating Section 3, Alice/Mayo, and EPO Exclusions",
+    "summary": "Maps the excluded subject-matter landscape - Section 3(d), 3(k) and 3(m) under Indian law, Alice-Mayo under US law, and the EPO technical-character requirement. Includes practical claim-drafting strategies to overcome eligibility rejections.",
+    "keyTopics": [
+      "Section 3(d) pharmaceutical exclusion (Novartis case)",
+      "Section 3(k) software & business methods",
+      "Alice/Mayo framework (US)",
+      "EPO technical character doctrine",
+      "Claim drafting strategies for software inventions"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-claims-02",
+      "prompt-drafting-01"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-04",
+    "number": 4,
+    "phase": 1,
+    "phaseTitle": "Foundations of the Patent System",
+    "title": "The Patent Document: Structure, Anatomy & Formal Requirements",
+    "subtitle": "Understanding Every Section of a Patent Application",
+    "summary": "Comprehensive walkthrough of every section of a patent application - title, field, background, summary, detailed description, claims, abstract - with annotated examples drawn from real Indian and US patents.",
+    "keyTopics": [
+      "Complete patent application structure",
+      "Provisional vs complete specifications",
+      "Written description and enablement",
+      "Best-mode requirement",
+      "Claim hierarchy: independent and dependent"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-drafting-02",
+      "prompt-drafting-03"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-05",
+    "number": 5,
+    "phase": 2,
+    "phaseTitle": "The Art of Claims Drafting",
+    "title": "Claims Architecture: The Claim Set as a Fortress",
+    "subtitle": "Designing a Multi-Layered Claim Portfolio",
+    "summary": "The pivot of the book. Introduces the fortress metaphor for claim architecture - independent claims as outer walls, dependent claims as fallback positions, method/system/CRM triplets, omnibus claims, and claim-set stress testing.",
+    "keyTopics": [
+      "Independent vs dependent claim architecture",
+      "Method, system, CRM claim triplets",
+      "Claim-set stress testing",
+      "Jepson claims and open/closed transitional phrases",
+      "Means-plus-function claiming"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-claims-03",
+      "prompt-claims-04"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-06",
+    "number": 6,
+    "phase": 2,
+    "phaseTitle": "The Art of Claims Drafting",
+    "title": "Drafting Methodology: From Invention Disclosure to Filing-Ready Application",
+    "subtitle": "A Practitioner's Step-by-Step Process",
+    "summary": "A systematic drafting methodology - from the initial invention disclosure meeting through claim mapping, specification writing, and internal review - with checklists and templates practitioners can adopt immediately.",
+    "keyTopics": [
+      "Invention disclosure interview techniques",
+      "Claim mapping process",
+      "Specification writing order",
+      "Internal review checklist",
+      "Filing-ready quality gate"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-drafting-04",
+      "prompt-drafting-05"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-07",
+    "number": 7,
+    "phase": 2,
+    "phaseTitle": "The Art of Claims Drafting",
+    "title": "Specification Writing: Description, Drawings & Enablement",
+    "subtitle": "Writing Specifications That Hold Up in Prosecution and Litigation",
+    "summary": "Deep-dives into specification writing - using drawings effectively, creating an enabling disclosure, avoiding written-description pitfalls, and building support for the broadest possible claims across all embodiments.",
+    "keyTopics": [
+      "Drawing requirements and best practices",
+      "Enablement across all embodiments",
+      "Written description support",
+      "Prophetic examples",
+      "Definitions and special definitions"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-drafting-06"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-08",
+    "number": 8,
+    "phase": 2,
+    "phaseTitle": "The Art of Claims Drafting",
+    "title": "Examiner Psychology & the Art of Anticipation",
+    "subtitle": "Drafting to Survive the Examination Gauntlet",
+    "summary": "A candid look at how patent examiners work - their incentive structures, search patterns, art-unit biases, and common rejection strategies - and how to draft claims that are both broad and examination-resilient.",
+    "keyTopics": [
+      "Examiner incentive structures and art-unit culture",
+      "Common rejection strategies (102, 103, 112)",
+      "Prosecution-history estoppel and drafting choices",
+      "Claim language to avoid",
+      "Designing for IPR/PGR resilience"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-office-action-01"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-09",
+    "number": 9,
+    "phase": 3,
+    "phaseTitle": "Prosecution Mastery",
+    "title": "Patent Prosecution: India IPO - Procedure, Timelines & Strategy",
+    "subtitle": "Navigating the Indian Patent Office End-to-End",
+    "summary": "Complete guide to Indian patent prosecution - filing, publication, examination request, examination report, hearings, grant, and post-grant opposition. Includes current official fees and strategic timelines.",
+    "keyTopics": [
+      "India filing procedures and official forms",
+      "Publication and examination request strategy",
+      "First examination report (FER) response",
+      "Hearing at the IPO",
+      "Post-grant opposition strategy"
+    ],
+    "figures": [
+      {
+        "figureId": "fig-9-1",
+        "caption": "India IPO official fees - filing, examination, grant (as of print)",
+        "dataType": "fee",
+        "sourceUrl": "https://ipindia.gov.in/",
+        "lastUpdated": "2026-06-01",
+        "changedSincePrint": true,
+        "changeNote": "Indian IPO fee revision effective April 2026 - see current fee schedule on the Fees page."
+      }
+    ],
+    "errata": [],
+    "prompts": [
+      "prompt-prosecution-01",
+      "prompt-office-action-02"
+    ],
+    "furtherReading": [
+      {
+        "title": "Indian Patent Office Fee Schedule",
+        "url": "https://ipindia.gov.in/fees.htm",
+        "source": "IP India"
+      }
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-10",
+    "number": 10,
+    "phase": 3,
+    "phaseTitle": "Prosecution Mastery",
+    "title": "USPTO Prosecution: Office Actions, Appeals & Allowance Strategy",
+    "subtitle": "Mastering the US Patent Prosecution Lifecycle",
+    "summary": "End-to-end USPTO prosecution - from filing to allowance or appeal. Covers responding to §102/§103/§112 rejections, the AFCP 2.0 program, after-final practice, the PTAB appeal process, and continuation strategy.",
+    "keyTopics": [
+      "Responding to §102 and §103 rejections",
+      "§112(b) indefiniteness rejections",
+      "AFCP 2.0 after-final practice",
+      "PTAB ex parte appeal",
+      "Continuation / CIP / divisional strategy"
+    ],
+    "figures": [
+      {
+        "figureId": "fig-10-1",
+        "caption": "USPTO official fees - filing, search, examination (FY2026)",
+        "dataType": "fee",
+        "sourceUrl": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+        "lastUpdated": "2026-06-01",
+        "changedSincePrint": true,
+        "changeNote": "USPTO fee adjustment effective Jan 2026 - see current fee schedule on the Fees page."
+      }
+    ],
+    "errata": [],
+    "prompts": [
+      "prompt-prosecution-02",
+      "prompt-office-action-03"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-11",
+    "number": 11,
+    "phase": 3,
+    "phaseTitle": "Prosecution Mastery",
+    "title": "PCT Practice: International Filing, the ISR & National Phase Entry",
+    "subtitle": "Using the PCT System Strategically",
+    "summary": "Comprehensive PCT guide - Chapter I and Chapter II procedures, choosing receiving offices, international search and preliminary examination, optimizing the national phase entry decision, and using PCT delays strategically.",
+    "keyTopics": [
+      "PCT Chapter I and Chapter II",
+      "Selecting receiving offices",
+      "International Search Report and Written Opinion",
+      "Demand for International Preliminary Examination",
+      "National phase entry decisions and timing"
+    ],
+    "figures": [
+      {
+        "figureId": "fig-11-1",
+        "caption": "PCT official fees - transmittal, international search, designation (2026)",
+        "dataType": "fee",
+        "sourceUrl": "https://www.wipo.int/pct/en/fees/",
+        "lastUpdated": "2026-06-01",
+        "changedSincePrint": true,
+        "changeNote": "PCT fees updated as of January 2026 - see current fee schedule."
+      }
+    ],
+    "errata": [],
+    "prompts": [
+      "prompt-strategy-02"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-12",
+    "number": 12,
+    "phase": 3,
+    "phaseTitle": "Prosecution Mastery",
+    "title": "EPO Practice: European Patent Applications & EPC Prosecution",
+    "subtitle": "Filing and Prosecuting Before the European Patent Office",
+    "summary": "Guide to EPO prosecution under the EPC - filing strategy, the search and examination phases, opposition proceedings, and the validation country decision. Covers the Unitary Patent and Unified Patent Court.",
+    "keyTopics": [
+      "EPC filing requirements and procedures",
+      "EPO examination and search phases",
+      "EPO opposition proceedings",
+      "Unitary Patent and UPC",
+      "Validation country strategy"
+    ],
+    "figures": [
+      {
+        "figureId": "fig-12-1",
+        "caption": "EPO official fees - filing, search, claims, grant (2026)",
+        "dataType": "fee",
+        "sourceUrl": "https://www.epo.org/en/applying/fees",
+        "lastUpdated": "2026-06-01",
+        "changedSincePrint": true,
+        "changeNote": "EPO fee revision effective April 2026."
+      }
+    ],
+    "errata": [],
+    "prompts": [
+      "prompt-prosecution-03"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-13",
+    "number": 13,
+    "phase": 3,
+    "phaseTitle": "Prosecution Mastery",
+    "title": "Responding to Examination: Claim Amendments, Arguments & Interviews",
+    "subtitle": "The Craft of the Office Action Response",
+    "summary": "Structured framework for responding to office actions across all jurisdictions - when to amend vs argue, claim differentiation strategies, the art of the examiner interview, and building prosecution history with appeal in mind.",
+    "keyTopics": [
+      "Amendment vs argument strategies",
+      "Claim differentiation principles",
+      "Examiner interview tactics",
+      "Building prosecution history for litigation",
+      "After-final amendment options"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-office-action-04",
+      "prompt-office-action-05"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-14",
+    "number": 14,
+    "phase": 4,
+    "phaseTitle": "AI-Augmented IP Strategy",
+    "title": "AI in Patent Practice: Tools, Capabilities & Limitations",
+    "subtitle": "A Practitioner's Honest Assessment of AI for IP Work",
+    "summary": "A rigorous, practitioner-focused survey of AI tools in the IP landscape - prior-art search engines, claim drafting assistants, prosecution analytics, and LLM-based drafting. Covers capabilities, limitations, and ethical obligations.",
+    "keyTopics": [
+      "AI prior-art search tools (Google Patents AI, Lens.org, Patsnap)",
+      "LLM-assisted claim drafting",
+      "Prosecution analytics tools",
+      "Ethical obligations and unauthorized practice risks",
+      "Hallucination risk and verification discipline"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-research-02",
+      "prompt-drafting-07"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-15",
+    "number": 15,
+    "phase": 4,
+    "phaseTitle": "AI-Augmented IP Strategy",
+    "title": "The AI Prompt Library: Frameworks for IP Work",
+    "subtitle": "Tested Prompts for Every Stage of the Patent Lifecycle",
+    "summary": "The core of the AI companion. Provides the full structured prompt library with 60+ tested prompts covering drafting, prosecution, prior-art research, claims analysis, FTO, and strategy - with usage notes and worked examples.",
+    "keyTopics": [
+      "Prompt engineering for patent work",
+      "Drafting prompts (claims, specification, abstract)",
+      "Prosecution prompts (OA responses, claim amendments)",
+      "Research and FTO prompts",
+      "Strategy and portfolio prompts"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-drafting-01",
+      "prompt-drafting-02",
+      "prompt-claims-01",
+      "prompt-prosecution-01",
+      "prompt-research-01"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-16",
+    "number": 16,
+    "phase": 4,
+    "phaseTitle": "AI-Augmented IP Strategy",
+    "title": "Patent Portfolio Strategy: Building, Managing & Monetising IP",
+    "subtitle": "From Single Patent to Strategic Portfolio",
+    "summary": "Strategic framework for building and managing a patent portfolio - landscape analysis, white-space identification, portfolio pruning, licensing strategy, patent assertion, and the build-buy-license decision framework.",
+    "keyTopics": [
+      "Patent landscape analysis",
+      "White-space identification",
+      "Portfolio pruning and maintenance decisions",
+      "Licensing strategy and royalty structures",
+      "Build-buy-license-partner decision framework"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-strategy-03",
+      "prompt-strategy-04"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-17",
+    "number": 17,
+    "phase": 4,
+    "phaseTitle": "AI-Augmented IP Strategy",
+    "title": "India's Innovation Paradox: The IP Gap and the Path Forward",
+    "subtitle": "Why India's Patent Filing Lags Its Innovation Output",
+    "summary": "The book's policy chapter. Examines the statistical gap between India's startup growth and its patent filings, the structural causes, global comparators, and a framework for what practitioners, policymakers, and institutions can do.",
+    "keyTopics": [
+      "India startup vs patent filing statistics",
+      "Structural barriers to IP adoption",
+      "Global comparators (China, South Korea, Germany)",
+      "Policy recommendations",
+      "The practitioner's role in building IP culture"
+    ],
+    "figures": [
+      {
+        "figureId": "fig-17-1",
+        "caption": "India patent applications per 1000 startups vs China, US, South Korea (2022–2024)",
+        "dataType": "chart",
+        "sourceUrl": "https://www.wipo.int/en/web/publications/ip-statistics",
+        "lastUpdated": "2026-06-01",
+        "changedSincePrint": true,
+        "changeNote": "Updated with 2024 WIPO data. India's ratio improved marginally but gap persists."
+      }
+    ],
+    "errata": [],
+    "prompts": [
+      "prompt-strategy-05"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-18",
+    "number": 18,
+    "phase": 4,
+    "phaseTitle": "AI-Augmented IP Strategy",
+    "title": "IP Due Diligence, Valuation & Transactions",
+    "subtitle": "Patents in M&A, Investment, and Licensing Transactions",
+    "summary": "Practical guide to IP due diligence - for M&A, investment rounds, and licensing deals. Covers patent valuation methodologies, freedom-to-operate analyses, IP representations and warranties, and deal structuring.",
+    "keyTopics": [
+      "IP due diligence checklist for M&A",
+      "Patent valuation methodologies",
+      "Freedom-to-operate analysis",
+      "IP reps and warranties",
+      "Licensing deal structuring"
+    ],
+    "figures": [],
+    "errata": [],
+    "prompts": [
+      "prompt-fto-01",
+      "prompt-strategy-06"
+    ],
+    "lastUpdated": "2026-06-01"
+  },
+  {
+    "id": "chapter-19",
+    "number": 19,
+    "phase": 4,
+    "phaseTitle": "AI-Augmented IP Strategy",
+    "title": "The Future of Patents: AI Inventorship, Emerging Technologies & Global Trends",
+    "subtitle": "Where Patent Law is Heading",
+    "summary": "Forward-looking capstone chapter - AI inventorship debates (DABUS and beyond), patents for quantum computing, biotechnology, and advanced materials, the evolving role of the patent agent in an AI-augmented world.",
+    "keyTopics": [
+      "AI inventorship: DABUS and legal developments",
+      "Patents for AI-generated inventions",
+      "Quantum computing and biotech patent trends",
+      "The future role of the patent practitioner",
+      "Building a future-proof IP practice"
+    ],
+    "figures": [
+      {
+        "figureId": "fig-19-1",
+        "caption": "AI-related patent applications by jurisdiction (2020–2024)",
+        "dataType": "statistic",
+        "sourceUrl": "https://www.wipo.int/en/web/publications/ip-statistics",
+        "lastUpdated": "2026-06-01",
+        "changedSincePrint": true,
+        "changeNote": "Rapid growth in AI-related filings - updated figures from WIPO 2024 Technology Trends."
+      }
+    ],
+    "errata": [],
+    "prompts": [
+      "prompt-research-03"
+    ],
+    "lastUpdated": "2026-06-01"
+  }
+]

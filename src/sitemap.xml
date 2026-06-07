@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core pages -->
+  <url><loc>https://shubhambanne.github.io/patent-architect/</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/book</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/about</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/sample</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/endorsements</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/contact</loc><lastmod>2026-06-01</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/newsletter</loc><lastmod>2026-06-01</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
+
+  <!-- Companion hub -->
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/fees</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/errata</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/figures</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+
+  <!-- Chapter companion pages (QR deep-link targets) -->
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-01</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-02</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-03</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-04</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-05</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-06</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-07</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-08</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-09</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-10</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-11</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-12</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-13</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-14</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-15</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-16</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-17</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-18</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/companion/chapter-19</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- AI Prompt Library -->
+  <url><loc>https://shubhambanne.github.io/patent-architect/prompts</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+
+  <!-- Blog -->
+  <url><loc>https://shubhambanne.github.io/patent-architect/blog</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/blog/india-innovation-paradox</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/blog/ten-examiner-traps</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/blog/ai-patent-tools-honest-assessment</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/blog/section-3k-software-patents-india</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://shubhambanne.github.io/patent-architect/blog/building-patent-portfolio-startup</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+
+</urlset>

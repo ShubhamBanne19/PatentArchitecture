@@ -1,0 +1,103 @@
+[
+  {
+    "slug": "india-innovation-paradox",
+    "title": "India's Innovation Paradox: Why the World's Third-Largest Startup Ecosystem Files Fewer Patents Than Denmark",
+    "subtitle": "The data, the causes, and what practitioners can do about it",
+    "author": "Shubham Sanjay Banne",
+    "datePublished": "2026-02-01",
+    "lastUpdated": "2026-06-01",
+    "category": "innovation-paradox",
+    "tags": [
+      "India",
+      "startup ecosystem",
+      "patent filing",
+      "IP strategy",
+      "policy"
+    ],
+    "excerpt": "India mints startups at a remarkable rate - over 100,000 DPIIT-recognized startups as of 2024. Yet Indian companies file patents at a fraction of the rate of Chinese, South Korean, or German peers. This is not a funding problem, a talent problem, or an ambition problem. It is an IP culture problem - and it has a structural cause.",
+    "readingTime": 12,
+    "featured": true,
+    "contentPath": "assets/content/blog/india-innovation-paradox.md"
+  },
+  {
+    "slug": "ten-examiner-traps",
+    "title": "Ten Examiner Traps That Kill Good Patent Applications",
+    "subtitle": "The most common drafting mistakes that give examiners ammunition",
+    "author": "Shubham Sanjay Banne",
+    "datePublished": "2026-03-01",
+    "lastUpdated": "2026-06-01",
+    "category": "examiner-traps",
+    "tags": [
+      "claims drafting",
+      "prosecution",
+      "examiner",
+      "office actions",
+      "mistakes"
+    ],
+    "excerpt": "After years of drafting and prosecuting patents across India and the US, certain patterns emerge in applications that repeatedly attract difficult rejections. These are not obscure errors - they are common, teachable, and avoidable. Here are the ten drafting traps that consistently give examiners the leverage to reject otherwise valid inventions.",
+    "readingTime": 15,
+    "featured": true,
+    "contentPath": "assets/content/blog/ten-examiner-traps.md"
+  },
+  {
+    "slug": "ai-patent-tools-honest-assessment",
+    "title": "An Honest Assessment of AI for Patent Drafting in 2026",
+    "subtitle": "What works, what doesn't, and what will get you into trouble",
+    "author": "Shubham Sanjay Banne",
+    "datePublished": "2026-04-01",
+    "lastUpdated": "2026-06-01",
+    "category": "ai-tools",
+    "tags": [
+      "AI",
+      "LLM",
+      "Claude",
+      "patent drafting",
+      "tools",
+      "professional responsibility"
+    ],
+    "excerpt": "Every IP practitioner is now navigating a landscape where AI tools promise to transform patent drafting. The promise is partly real. But the risks - hallucination, scope errors, prosecution history problems, and professional responsibility traps - are just as real. This is a practitioner's honest assessment of where AI actually helps in 2026.",
+    "readingTime": 14,
+    "featured": true,
+    "contentPath": "assets/content/blog/ai-patent-tools-honest-assessment.md"
+  },
+  {
+    "slug": "section-3k-software-patents-india",
+    "title": "Section 3(k) and Software Patents in India: The State of Play in 2026",
+    "subtitle": "What Indian patent practice currently accepts and rejects for software inventions",
+    "author": "Shubham Sanjay Banne",
+    "datePublished": "2026-01-15",
+    "lastUpdated": "2026-06-01",
+    "category": "india-ip",
+    "tags": [
+      "India",
+      "Section 3(k)",
+      "software patents",
+      "eligibility",
+      "IPO guidelines"
+    ],
+    "excerpt": "Section 3(k) of the Indian Patents Act excludes 'a mathematical method or a business method or a computer programme per se or algorithms.' Yet the Indian Patent Office grants software-related patents regularly. Understanding the line between 'per se' software and patentable technical innovation is the practitioner's essential skill.",
+    "readingTime": 11,
+    "featured": false,
+    "contentPath": "assets/content/blog/section-3k-software-patents-india.md"
+  },
+  {
+    "slug": "building-patent-portfolio-startup",
+    "title": "Building a Patent Portfolio as an Indian Startup: A Practical Framework",
+    "subtitle": "From first filing to strategic portfolio - a founder's guide",
+    "author": "Shubham Sanjay Banne",
+    "datePublished": "2026-05-01",
+    "lastUpdated": "2026-06-01",
+    "category": "patent-strategy",
+    "tags": [
+      "startup",
+      "patent portfolio",
+      "India",
+      "strategy",
+      "first patent"
+    ],
+    "excerpt": "Most Indian startups approach patents reactively - filing defensively when the VC asks, or after a competitor scare. A strategic approach looks different: a small, carefully chosen filing program that protects the core innovation, signals seriousness to investors, and builds a moat with each new product iteration.",
+    "readingTime": 10,
+    "featured": false,
+    "contentPath": "assets/content/blog/building-patent-portfolio-startup.md"
+  }
+]

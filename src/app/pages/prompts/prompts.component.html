@@ -1,0 +1,272 @@
+<!-- AI PROMPT LIBRARY ────────────────────────────────────────────────────── -->
+
+<pa-blueprint-grid opacity="0.04">
+  <section class="prompts-hero section section--dark">
+    <div class="container">
+      <span class="eyebrow">AI Prompt Library</span>
+      <h1>
+        Tested Prompts for<br />
+        <span class="text-gold">Every Stage of Patent Work</span>
+      </h1>
+      <p class="prompts-hero__desc">
+        {{ allPrompts.length }} prompts covering drafting, prosecution, claims
+        analysis, prior-art research, FTO, and strategy. All tested, annotated,
+        and continuously updated. Copy, adapt, and use - no signup required.
+      </p>
+      <p class="prompts-hero__note">
+        Variables shown as <mark class="prompt-var">[VARIABLE NAME]</mark> -
+        replace with your content before use. Always verify AI output with
+        professional judgment.
+      </p>
+    </div>
+  </section>
+</pa-blueprint-grid>
+
+<!-- ─── FILTERS ──────────────────────────────────────────────────────────────── -->
+<div class="prompts-filters">
+  <div class="container">
+    <div class="prompts-filters__inner">
+      <!-- Search -->
+      <div class="prompts-search">
+        <span class="prompts-search__icon" aria-hidden="true">🔍</span>
+        <input
+          type="search"
+          placeholder="Search prompts…"
+          class="prompts-search__input"
+          [value]="searchQuery()"
+          (input)="searchQuery.set($any($event.target).value)"
+          aria-label="Search prompts"
+        />
+        @if (searchQuery()) {
+          <button
+            class="prompts-search__clear"
+            (click)="searchQuery.set('')"
+            aria-label="Clear search"
+          >
+            ✕
+          </button>
+        }
+      </div>
+
+      <!-- Category filters -->
+      <div class="prompts-cats">
+        @for (cat of categories; track cat.value) {
+          <button
+            class="prompts-cat"
+            [class.prompts-cat--active]="activeCategory() === cat.value"
+            (click)="activeCategory.set(cat.value)"
+          >
+            {{ cat.label }}
+          </button>
+        }
+      </div>
+
+      <!-- Jurisdiction filter -->
+      <div class="prompts-jurisdictions">
+        @for (j of jurisdictions; track j) {
+          <button
+            class="prompts-j"
+            [class.prompts-j--active]="activeJurisdiction() === j"
+            (click)="activeJurisdiction.set(j)"
+          >
+            {{ j === "all" ? "All Jurisdictions" : j }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="prompts-filters__count">
+      @if (filteredPrompts().length === allPrompts.length) {
+        Showing all {{ allPrompts.length }} prompts
+      } @else {
+        {{ filteredPrompts().length }} of {{ allPrompts.length }} prompts
+      }
+    </div>
+  </div>
+</div>
+
+<!-- ─── PROMPT LIST ───────────────────────────────────────────────────────────── -->
+<section class="prompts-list section section--dark">
+  <div class="container">
+    @if (loading) {
+      <div class="prompts-loading">Loading prompts…</div>
+    } @else if (filteredPrompts().length === 0) {
+      <div class="prompts-empty">
+        <p>
+          No prompts match your search.
+          <button
+            (click)="
+              searchQuery.set('');
+              activeCategory.set('all');
+              activeJurisdiction.set('all')
+            "
+          >
+            Clear filters
+          </button>
+        </p>
+      </div>
+    } @else {
+      <div class="prompt-grid">
+        @for (prompt of filteredPrompts(); track prompt.promptId) {
+          <div
+            class="prompt-item"
+            [id]="'prompt-' + prompt.promptId"
+            [class.prompt-item--expanded]="expandedId() === prompt.promptId"
+            [class.prompt-item--featured]="prompt.featured"
+          >
+            <!-- Prompt header (always visible) -->
+            <div
+              class="prompt-item__header"
+              (click)="toggleExpand(prompt.promptId)"
+              role="button"
+              tabindex="0"
+              (keydown.enter)="toggleExpand(prompt.promptId)"
+              [attr.aria-expanded]="expandedId() === prompt.promptId"
+            >
+              <div class="prompt-item__meta">
+                <span class="prompt-item__cat">{{
+                  prompt.category | titlecase
+                }}</span>
+                @if (prompt.featured) {
+                  <span class="prompt-item__featured">Featured</span>
+                }
+                <div class="prompt-item__juris">
+                  @for (j of prompt.jurisdiction; track j) {
+                    <span class="prompt-item__j">{{ j }}</span>
+                  }
+                </div>
+              </div>
+
+              <h3 class="prompt-item__title">{{ prompt.title }}</h3>
+              <p class="prompt-item__desc">{{ prompt.description }}</p>
+
+              <div class="prompt-item__tags">
+                @for (tag of prompt.tags.slice(0, 5); track tag) {
+                  <span class="prompt-item__tag">{{ tag }}</span>
+                }
+              </div>
+
+              <div class="prompt-item__toggle">
+                <span class="prompt-item__toggle-label">
+                  {{
+                    expandedId() === prompt.promptId ? "Close" : "View prompt"
+                  }}
+                </span>
+                <span
+                  class="prompt-item__chevron"
+                  [class.prompt-item__chevron--open]="
+                    expandedId() === prompt.promptId
+                  "
+                  >▾</span
+                >
+              </div>
+            </div>
+
+            <!-- Expanded content -->
+            @if (expandedId() === prompt.promptId) {
+              <div class="prompt-item__body">
+                <pa-rule variant="hair"></pa-rule>
+
+                <!-- Prompt text -->
+                <div class="prompt-text">
+                  <div class="prompt-text__toolbar">
+                    <span class="prompt-text__label">Prompt Text</span>
+                    <button
+                      class="prompt-copy-btn"
+                      (click)="copyPrompt(prompt)"
+                      [class.prompt-copy-btn--copied]="
+                        copiedId() === prompt.promptId
+                      "
+                    >
+                      {{
+                        copiedId() === prompt.promptId
+                          ? "✓ Copied to clipboard!"
+                          : "⎘ Copy prompt"
+                      }}
+                    </button>
+                  </div>
+                  <pre
+                    class="prompt-text__pre"
+                    [innerHTML]="formatPromptText(prompt.promptText)"
+                  ></pre>
+                </div>
+
+                <!-- Variables -->
+                @if (prompt.variables && prompt.variables.length > 0) {
+                  <div class="prompt-vars">
+                    <h4 class="prompt-vars__heading">Variables to Replace</h4>
+                    <div class="prompt-vars__list">
+                      @for (v of prompt.variables; track v.name) {
+                        <div class="prompt-var-item">
+                          <code class="prompt-var-item__name"
+                            >[{{ v.name }}]</code
+                          >
+                          <span class="prompt-var-item__desc">{{
+                            v.description
+                          }}</span>
+                          <em class="prompt-var-item__example"
+                            >e.g. {{ v.example }}</em
+                          >
+                        </div>
+                      }
+                    </div>
+                  </div>
+                }
+
+                <!-- Model notes -->
+                @if (prompt.modelNotes) {
+                  <div class="prompt-notes">
+                    <span class="prompt-notes__icon" aria-hidden="true"
+                      >⚠️</span
+                    >
+                    <p class="prompt-notes__text">{{ prompt.modelNotes }}</p>
+                  </div>
+                }
+
+                <!-- Chapters -->
+                @if (prompt.chapterIds.length > 0) {
+                  <div class="prompt-chapters">
+                    <span class="prompt-chapters__label"
+                      >Related Chapters:</span
+                    >
+                    @for (cId of prompt.chapterIds; track cId) {
+                      <a
+                        [routerLink]="['/companion', cId]"
+                        class="prompt-chapters__link"
+                      >
+                        {{ cId | titlecase | replace: "-" : " " }}
+                      </a>
+                    }
+                  </div>
+                }
+
+                <p class="prompt-item__updated">
+                  Last updated: {{ prompt.lastUpdated | date: "MMMM y" }}
+                </p>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ─── DISCLAIMER ────────────────────────────────────────────────────────────── -->
+<section class="prompts-disclaimer section section--surface">
+  <div class="container">
+    <div class="prompts-disclaimer__inner">
+      <span class="prompts-disclaimer__icon" aria-hidden="true">⚠️</span>
+      <div>
+        <strong>Professional Responsibility Reminder</strong>
+        <p>
+          AI-generated content, including outputs from these prompts, must be
+          reviewed by a qualified patent practitioner before use in actual
+          prosecution. AI tools can hallucinate legal standards, mis-cite cases,
+          and miss critical distinctions. These prompts are drafting aids - not
+          substitutes for professional judgment.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Patent Architect - Buy Once. Stay Current Forever.</title>
+    <!-- base href is overridden at build time with --base-href for GitHub Pages -->
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1B1F3B" />
+    <meta
+      name="description"
+      content="The Patent Architect - A Practitioner's Definitive Guide to Drafting, Prosecution & AI-Augmented IP Strategy Across India, USA & the World. Buy once, stay current forever."
+    />
+
+    <!-- Open Graph defaults (overridden per-route by SeoService) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="The Patent Architect" />
+    <meta
+      property="og:title"
+      content="The Patent Architect - Buy Once. Stay Current Forever."
+    />
+    <meta
+      property="og:description"
+      content="The definitive practitioner's guide to patent drafting, prosecution & AI-augmented IP strategy."
+    />
+    <meta property="og:image" content="https://shubhambanne.github.io/patent-architect/assets/images/og-default.jpg" />
+
+    <!-- Twitter Card defaults -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Patent Architect" />
+    <meta
+      name="twitter:description"
+      content="The definitive practitioner's guide to patent drafting, prosecution & AI-augmented IP strategy."
+    />
+    <meta name="twitter:image" content="https://shubhambanne.github.io/patent-architect/assets/images/og-default.jpg" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/images/apple-touch-icon.png"
+    />
+
+    <!-- Preconnect for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Skip link for accessibility -->
+    <!-- SPA GitHub Pages redirect handler - must be first script in head -->
+    <script>
+      // Receives the redirected path from 404.html and restores it using history.replaceState
+      (function (l) {
+        if (l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(
+            null,
+            null,
+            l.pathname.slice(0, -1) + decoded + l.hash,
+          );
+        }
+      })(window.location);
+    </script>
+
+    <style>
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: var(--space-4, 1rem);
+        background: #c9a961;
+        color: #1b1f3b;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        z-index: 9999;
+        border-radius: 0 0 4px 4px;
+        text-decoration: none;
+      }
+      .skip-link:focus {
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <app-root></app-root>
+  </body>
+</html>

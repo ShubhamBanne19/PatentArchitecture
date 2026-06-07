@@ -1,0 +1,47 @@
+[
+  {
+    "errataId": "errata-001",
+    "chapterId": "chapter-09",
+    "pageRef": "p. 287",
+    "severity": "update",
+    "description": "India IPO fee schedule updated after print",
+    "correction": "The filing fees shown in Table 9.1 (p.287) were updated by a notification from the Indian Patent Office effective 1 April 2026. The current fee schedule is maintained on the companion website Fees page. The structural explanation of fees in the chapter remains accurate.",
+    "dateAdded": "2026-06-01"
+  },
+  {
+    "errataId": "errata-002",
+    "chapterId": "chapter-10",
+    "pageRef": "p. 341",
+    "severity": "update",
+    "description": "USPTO fee adjustment effective January 2026",
+    "correction": "USPTO adjusted its fee schedule effective January 19, 2026, as part of its biennial fee setting cycle. Filing, search, and examination fees increased by approximately 4%. The current fee schedule is on the companion website Fees page. All procedural and strategic guidance in Chapter 10 remains current.",
+    "dateAdded": "2026-06-01"
+  },
+  {
+    "errataId": "errata-003",
+    "chapterId": "chapter-12",
+    "pageRef": "p. 398",
+    "severity": "update",
+    "description": "EPO fee revision effective April 2026 - UPC developments",
+    "correction": "The European Patent Office revised its fee schedule effective 1 April 2026. Additionally, the Unified Patent Court (UPC) continued to develop its case law during 2024-25, with several significant decisions on scope of protection and preliminary injunctions. The UPC section on pp.398-401 should be read alongside the UPC case law tracker maintained on the companion website.",
+    "dateAdded": "2026-06-01"
+  },
+  {
+    "errataId": "errata-004",
+    "chapterId": "chapter-01",
+    "pageRef": "p. 42",
+    "severity": "update",
+    "description": "WIPO 2024 Global Patent Filing Statistics",
+    "correction": "Figure 1.1 (p.42) showed 2022 WIPO filing statistics. Updated 2024 WIPO data: global patent applications reached approximately 3.5 million in 2023 (up from 3.2M in 2022). India's share grew to approximately 67,000 applications (up from 61,000). The structural analysis in Chapter 1 remains valid; the figures have been updated on the companion website.",
+    "dateAdded": "2026-06-01"
+  },
+  {
+    "errataId": "errata-005",
+    "chapterId": "chapter-17",
+    "pageRef": "p. 487",
+    "severity": "update",
+    "description": "India Innovation Paradox statistics - 2024 update",
+    "correction": "The India patent filing per startup ratio in Chapter 17 (p.487) is based on 2022 data. Updated 2024 data shows improvement: India now files approximately 0.8 patents per startup vs 6.2 in China and 12.4 in South Korea (2023 figures, WIPO filing data combined with national startup registry counts). The trend is improving but the gap persists. The analytical framework and policy arguments in Chapter 17 remain fully applicable. See also the blog essay 'India's Innovation Paradox' on the companion website for fuller country comparisons.",
+    "dateAdded": "2026-06-01"
+  }
+]

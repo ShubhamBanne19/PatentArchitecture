@@ -1,0 +1,66 @@
+[
+  {
+    "id": "t-01",
+    "name": "Priya Krishnaswamy",
+    "title": "Senior Patent Attorney",
+    "organization": "Major Indian IP Law Firm",
+    "quote": "Finally, a book on Indian patent practice that treats practitioners as professionals. The claims architecture framework alone is worth the price. I have recommended it to every associate in our firm.",
+    "type": "practitioner"
+  },
+  {
+    "id": "t-02",
+    "name": "Arjun Mehta",
+    "title": "Head of IP, Deep Technology Startup",
+    "organization": "IIT-Mumbai Spin-Out, Series B",
+    "quote": "We filed our first patent using the drafting framework in Chapter 6. The checklist saved us from three errors our external agent had missed. The AI prompt library alone has saved us hundreds of hours in prosecution.",
+    "type": "corporate"
+  },
+  {
+    "id": "t-03",
+    "name": "Dr. Kavitha Rajan",
+    "title": "Associate Professor, IP Law",
+    "organization": "National Law School",
+    "quote": "The Patent Architect is the book I wished existed when I started teaching IP law. Its treatment of the intersection between Indian patent doctrine and global prosecution practice is rigorous, current, and compellingly written.",
+    "type": "academic"
+  },
+  {
+    "id": "t-04",
+    "name": "Rohan Desai",
+    "title": "Patent Agent Exam Topper (2024)",
+    "organization": "Indian Patent Agent",
+    "quote": "I prepared for the patent agent exam primarily using this book alongside the bare act. The conceptual frameworks made the practical examination papers far more navigable. Chapters 2, 3, and 9 are essential reading for any serious exam aspirant.",
+    "type": "student"
+  },
+  {
+    "id": "t-05",
+    "name": "Vikram Nair",
+    "title": "Chief Technology Officer",
+    "organization": "Automotive Technology Company",
+    "quote": "I am a technologist, not a lawyer. This is the first IP book that spoke to me in terms I could use - the invention disclosure process, the claims fortress metaphor, the portfolio strategy framework. I now understand why my patents matter and what I should be asking my IP counsel.",
+    "type": "inventor"
+  },
+  {
+    "id": "t-06",
+    "name": "Sunita Patel",
+    "title": "Registered US Patent Agent",
+    "organization": "Solo IP Practice, USA",
+    "quote": "As a cross-border practitioner, I value the India-US comparative treatment immensely. The prosecution chapters are accurate, detailed, and capture nuances that most US-centric books completely miss. The AI chapter is the most practical treatment of the topic I have read.",
+    "type": "practitioner"
+  },
+  {
+    "id": "t-07",
+    "name": "Ananya Singh",
+    "title": "IP Policy Analyst",
+    "organization": "Indian Think Tank on Technology Policy",
+    "quote": "Chapter 17 - the India Innovation Paradox - should be required reading at DPIIT. The data analysis is honest, the policy proposals are grounded, and the call to action for practitioners resonates. This is policy writing that can actually move people to act.",
+    "type": "academic"
+  },
+  {
+    "id": "t-08",
+    "name": "Siddharth Rao",
+    "title": "Founder & CEO",
+    "organization": "Agritech Startup, Karnataka",
+    "quote": "I was about to let my first patent lapse because I didn't know what I was doing. The chapter on portfolio strategy taught me how to think about my IP as business infrastructure, not just a legal document. The companion website's fee tracker means I never miss a renewal date.",
+    "type": "inventor"
+  }
+]

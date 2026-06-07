@@ -1,0 +1,184 @@
+<!-- COMPANION HUB ─────────────────────────────────────────────────────────── -->
+
+<pa-blueprint-grid opacity="0.05">
+  <section class="hub-hero section section--dark">
+    <div class="container">
+      <span class="eyebrow">Living Companion</span>
+      <h1 class="hub-hero__title">
+        The Patent Architect<br />
+        <span class="text-gold">Companion Hub</span>
+      </h1>
+      <p class="hub-hero__desc">
+        The living layer of your book. Current fees, updated statistics, growing
+        AI prompt library, and errata - all keyed to the chapter you're reading.
+        No signup needed.
+      </p>
+      <div class="hub-hero__meta">
+        @if (fees.length) {
+          <span class="hub-hero__badge">
+            Fees last updated:
+            <strong>{{ feeLastUpdated(fees) | date: "MMMM d, y" }}</strong>
+          </span>
+        }
+        @if (errata.length) {
+          <span class="hub-hero__badge">
+            {{ errata.length }} errata entries on record
+          </span>
+        }
+      </div>
+    </div>
+  </section>
+</pa-blueprint-grid>
+
+<!-- ─── QUICK ACCESS GRID ────────────────────────────────────────────────────── -->
+<section class="quick-access section section--surface">
+  <div class="container">
+    <div class="quick-access__grid">
+      <a routerLink="/companion/fees" class="quick-card">
+        <span class="quick-card__icon" aria-hidden="true">💰</span>
+        <h3>Fee Schedules</h3>
+        <p>
+          Current official fees for India IPO, USPTO, EPO &amp; PCT - updated as
+          they change
+        </p>
+        <span class="quick-card__action">Open fees →</span>
+      </a>
+
+      <a routerLink="/prompts" class="quick-card">
+        <span class="quick-card__icon" aria-hidden="true">🤖</span>
+        <h3>AI Prompt Library</h3>
+        <p>60+ tested prompts for every stage of the patent lifecycle</p>
+        <span class="quick-card__action">Browse prompts →</span>
+      </a>
+
+      <a routerLink="/companion/errata" class="quick-card">
+        <span class="quick-card__icon" aria-hidden="true">⚠️</span>
+        <h3>Errata &amp; Updates</h3>
+        <p>
+          All corrections and significant updates since print, keyed to chapter
+          and page
+        </p>
+        <span class="quick-card__action">View errata →</span>
+        @if (errata.length) {
+          <span class="quick-card__badge">{{ errata.length }}</span>
+        }
+      </a>
+
+      <a routerLink="/companion/figures" class="quick-card">
+        <span class="quick-card__icon" aria-hidden="true">📊</span>
+        <h3>Figures &amp; Currency Tracker</h3>
+        <p>Statistics and data that have changed since the print edition</p>
+        <span class="quick-card__action">See changes →</span>
+        @if (changedFigures.length) {
+          <span class="quick-card__badge">{{ changedFigures.length }}</span>
+        }
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CHAPTER INDEX ─────────────────────────────────────────────────────────── -->
+<section class="chapter-index section section--dark">
+  <div class="container">
+    <div class="chapter-index__header">
+      <span class="eyebrow">Navigate by Chapter</span>
+      <h2>All 19 Chapters</h2>
+      <p>
+        Select a chapter to see its companion page - current errata, updated
+        figures, relevant AI prompts, and further reading.
+      </p>
+    </div>
+
+    @if (loading) {
+      <div class="chapter-index__loading">Loading chapters…</div>
+    } @else {
+      @for (phase of phases; track phase.num) {
+        <div class="phase-section" [id]="'phase-' + phase.num">
+          <div class="phase-section__header">
+            <span class="phase-section__num">Phase {{ phase.num }}</span>
+            <h3 class="phase-section__title">{{ phase.label }}</h3>
+            <span class="phase-section__range">Chapters {{ phase.range }}</span>
+          </div>
+
+          <div class="phase-section__grid">
+            @for (ch of getChaptersForPhase(phase.num); track ch.id) {
+              <a [routerLink]="['/companion', ch.id]" class="chapter-card">
+                <div class="chapter-card__num">Ch. {{ ch.number }}</div>
+                <div class="chapter-card__body">
+                  <h4 class="chapter-card__title">{{ ch.title }}</h4>
+                  @if (ch.subtitle) {
+                    <p class="chapter-card__subtitle">{{ ch.subtitle }}</p>
+                  }
+                  <div class="chapter-card__badges">
+                    @if (chapterHasChangedFigures(ch)) {
+                      <span
+                        class="chapter-card__badge chapter-card__badge--update"
+                        >Updated figures</span
+                      >
+                    }
+                    @if (ch.errata.length > 0) {
+                      <span
+                        class="chapter-card__badge chapter-card__badge--errata"
+                        >Errata</span
+                      >
+                    }
+                    @if (ch.prompts.length > 0) {
+                      <span
+                        class="chapter-card__badge chapter-card__badge--prompt"
+                        >{{ ch.prompts.length }} prompts</span
+                      >
+                    }
+                  </div>
+                </div>
+                <span class="chapter-card__arrow" aria-hidden="true">→</span>
+              </a>
+            }
+          </div>
+        </div>
+      }
+    }
+  </div>
+</section>
+
+<!-- ─── ERRATA FEED ───────────────────────────────────────────────────────────── -->
+@if (errata.length) {
+  <section class="errata-feed section section--surface">
+    <div class="container">
+      <div class="errata-feed__header">
+        <span class="eyebrow">Recent Updates</span>
+        <h2>Errata &amp; Clarifications</h2>
+        <p>
+          Corrections, updates, and clarifications since the print edition. All
+          entries are keyed to chapter and page.
+        </p>
+      </div>
+
+      <div class="errata-feed__list">
+        @for (entry of errata; track entry.errataId) {
+          <div class="errata-entry">
+            <div class="errata-entry__meta">
+              <span
+                class="errata-entry__severity errata-entry__severity--{{
+                  entry.severity
+                }}"
+              >
+                {{ entry.severity | titlecase }}
+              </span>
+              <span class="errata-entry__location">
+                <a [routerLink]="['/companion', entry.chapterId]">
+                  {{ entry.chapterId | titlecase | replace: "-" : " " }}
+                </a>
+                · {{ entry.pageRef }}
+              </span>
+              <span class="errata-entry__date">{{
+                entry.dateAdded | date: "MMM d, y"
+              }}</span>
+            </div>
+            <p class="errata-entry__desc">{{ entry.description }}</p>
+            <p class="errata-entry__correction">{{ entry.correction }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}

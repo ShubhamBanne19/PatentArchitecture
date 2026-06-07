@@ -1,0 +1,9 @@
+{
+  "_instructions": "BEFORE LAUNCH: 1) Set isLive to true. 2) Replace amazonUrl with the actual Amazon product page URL. 3) Update launchDate and launchDateDisplay if the date changed.",
+  "launchDate": "2026-06-01",
+  "launchDateDisplay": "June 2026",
+  "amazonUrl": "https://www.amazon.in",
+  "isLive": false,
+  "bookTitle": "The Patent Architect",
+  "author": "Shubham Sanjay Banne"
+}

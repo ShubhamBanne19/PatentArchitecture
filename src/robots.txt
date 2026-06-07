@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shubhambanne.github.io/patent-architect/sitemap.xml
+
+# Disallow internal build artifacts
+Disallow: /assets/downloads/

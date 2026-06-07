@@ -1,0 +1,85 @@
+{
+  "jurisdiction": "PCT (WIPO)",
+  "jurisdictionCode": "PCT",
+  "currency": "CHF",
+  "lastUpdated": "2026-06-01",
+  "effectiveDate": "2026-01-01",
+  "sourceUrl": "https://www.wipo.int/pct/en/fees/",
+  "mustVerify": true,
+  "verifyNote": "MUST VERIFY all amounts against the current WIPO PCT Fee Table (updated annually, effective 1 January). USD-denominated ISA fees must also be verified against the USPTO fee schedule.",
+  "categories": [
+    {
+      "category": "International Phase Fees",
+      "fees": [
+        {
+          "feeId": "PCT-F-01",
+          "label": "Transmittal Fee (RO/IB)",
+          "amount": 0,
+          "notes": "Some receiving offices charge a transmittal fee. RO/IB: CHF 0.",
+          "unit": "per application"
+        },
+        {
+          "feeId": "PCT-F-02",
+          "label": "International Filing Fee (up to 30 pages)",
+          "amount": 1381,
+          "unit": "per application",
+          "notes": "Reduced fee (15%) available for e-filing using ePCT"
+        },
+        {
+          "feeId": "PCT-F-03",
+          "label": "International Filing Fee (additional pages)",
+          "amount": 16,
+          "unit": "per additional sheet"
+        },
+        {
+          "feeId": "PCT-F-04",
+          "label": "Search Fee (EPO as ISA, in CHF equivalent)",
+          "amount": 2131,
+          "unit": "per application",
+          "notes": "Search fee varies by chosen International Searching Authority"
+        },
+        {
+          "feeId": "PCT-F-05",
+          "label": "Search Fee (USPTO as ISA)",
+          "amount": 2206,
+          "currency": "USD",
+          "unit": "per application",
+          "notes": "Payable in USD directly to the USPTO. MUST VERIFY current USD amount at uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule."
+        },
+        {
+          "feeId": "PCT-F-06",
+          "label": "Search Fee (India IPO as ISA)",
+          "amount": 160,
+          "currency": "USD",
+          "unit": "per application",
+          "notes": "India IPO offers significantly reduced ISA fees — a strategic advantage for India-based filers. Payable in USD. MUST VERIFY current amount."
+        },
+        {
+          "feeId": "PCT-F-07",
+          "label": "Designation Fee (all PCT contracting states)",
+          "amount": null,
+          "currency": "CHF",
+          "unit": "flat fee covering all designations",
+          "notes": "MUST VERIFY current designation fee at wipo.int/pct/en/fees/ — a single unified fee covers all PCT contracting states. This is a mandatory fee for every PCT application and must not be omitted when quoting total PCT costs."
+        }
+      ]
+    },
+    {
+      "category": "Chapter II (IPEA) Fees",
+      "fees": [
+        {
+          "feeId": "PCT-II-01",
+          "label": "Handling Fee for IPEA",
+          "amount": 218,
+          "unit": "per demand"
+        },
+        {
+          "feeId": "PCT-II-02",
+          "label": "Preliminary Examination Fee (EPO as IPEA)",
+          "amount": 2131,
+          "unit": "per demand"
+        }
+      ]
+    }
+  ]
+}

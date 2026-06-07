@@ -1,0 +1,390 @@
+<!-- ─── HERO ──────────────────────────────────────────────────────────────────── -->
+<pa-blueprint-grid opacity="0.05">
+  <section class="hero section section--dark">
+    <div class="container">
+      <div class="hero__inner">
+        <div class="hero__content">
+          <span class="eyebrow">The Definitive Reference</span>
+          <h1 class="hero__title">
+            The Patent<br />
+            <span class="hero__title-accent">Architect</span>
+          </h1>
+          <p class="hero__subtitle">
+            A Practitioner's Definitive Guide to Drafting, Prosecution &amp;
+            AI&#8209;Augmented IP Strategy Across India, USA &amp; the World
+          </p>
+          <p class="hero__author">by <strong>Shubham Sanjay Banne</strong></p>
+
+          <pa-rule></pa-rule>
+
+          <p class="hero__promise">
+            Buy the book once.
+            <span class="text-gold">Stay current forever.</span>
+          </p>
+          <p class="hero__desc">
+            Patent law changes constantly - fees, statistics, AI tools, and case
+            law all date quickly. The book carries the
+            <em>stable</em> knowledge. This website carries the
+            <em>volatile, always-current</em> layer: updated fee schedules,
+            refreshed statistics, an ever-growing AI prompt library, and errata
+            keyed to the exact chapter they affect.
+          </p>
+
+          <div class="hero__ctas">
+            @if (siteConfig?.isLive) {
+              <pa-btn
+                variant="primary"
+                size="lg"
+                [href]="siteConfig!.amazonUrl"
+                [external]="true"
+                iconRight="→"
+              >
+                Buy the Book
+              </pa-btn>
+            } @else {
+              <pa-btn variant="outline" size="lg" routerLink="/newsletter">
+                Coming {{ siteConfig?.launchDateDisplay }}
+              </pa-btn>
+            }
+            <pa-btn variant="outline" size="lg" routerLink="/companion">
+              Open Living Companion
+            </pa-btn>
+          </div>
+
+          <p class="hero__reader-note">
+            <span class="text-gold">Already have the book?</span>
+            Scan the QR code on your copy, or
+            <a routerLink="/companion">go straight to the Companion Hub →</a>
+          </p>
+        </div>
+
+        <!-- Book cover mockup -->
+        <div class="hero__visual" aria-hidden="true">
+          <div class="book-cover">
+            <div class="book-cover__spine"></div>
+            <div class="book-cover__face">
+              <div class="book-cover__grid"></div>
+              <div class="book-cover__content">
+                <span class="book-cover__vol">Volume I</span>
+                <div class="book-cover__title-block">
+                  <span class="book-cover__hex">⬡</span>
+                  <h2 class="book-cover__name">The Patent<br />Architect</h2>
+                </div>
+                <div class="book-cover__subtitle">
+                  A Practitioner's Definitive Guide to Drafting, Prosecution
+                  &amp; AI-Augmented IP Strategy Across India, USA &amp; the
+                  World
+                </div>
+                <div class="book-cover__author">Shubham Sanjay Banne</div>
+                <div class="book-cover__rule"></div>
+                <div class="book-cover__stats">
+                  <span>19 Chapters</span>
+                  <span>·</span>
+                  <span>7 Appendices</span>
+                  <span>·</span>
+                  <span>60+ AI Prompts</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</pa-blueprint-grid>
+
+<!-- ─── PROMISE BANNER ────────────────────────────────────────────────────────── -->
+<section class="promise-banner section--surface">
+  <div class="container">
+    <div class="promise-banner__inner">
+      <div class="promise-banner__item">
+        <span class="promise-banner__icon">📅</span>
+        <div>
+          <strong>Current Fees</strong>
+          <p>
+            India IPO, USPTO, EPO &amp; PCT schedules updated as they change
+          </p>
+        </div>
+      </div>
+      <div class="promise-banner__divider" aria-hidden="true">|</div>
+      <div class="promise-banner__item">
+        <span class="promise-banner__icon">🤖</span>
+        <div>
+          <strong>Growing Prompt Library</strong>
+          <p>60+ tested AI prompts - more added as AI tools evolve</p>
+        </div>
+      </div>
+      <div class="promise-banner__divider" aria-hidden="true">|</div>
+      <div class="promise-banner__item">
+        <span class="promise-banner__icon">⚠️</span>
+        <div>
+          <strong>Errata &amp; Clarifications</strong>
+          <p>
+            Keyed to exact chapter and page, so you always know what changed
+          </p>
+        </div>
+      </div>
+      <div class="promise-banner__divider" aria-hidden="true">|</div>
+      <div class="promise-banner__item">
+        <span class="promise-banner__icon">📊</span>
+        <div>
+          <strong>Updated Statistics</strong>
+          <p>Figures &amp; Currency tracker shows every change since print</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOR READERS (QR CTA) ─────────────────────────────────────────────────── -->
+<section class="reader-cta section section--dark">
+  <div class="container">
+    <div class="reader-cta__inner">
+      <div class="reader-cta__icon" aria-hidden="true">
+        <div class="qr-icon">
+          <div class="qr-icon__corner qr-icon__corner--tl"></div>
+          <div class="qr-icon__corner qr-icon__corner--tr"></div>
+          <div class="qr-icon__corner qr-icon__corner--bl"></div>
+          <div class="qr-icon__dot"></div>
+        </div>
+      </div>
+      <div class="reader-cta__text">
+        <span class="eyebrow">For Readers</span>
+        <h2>Arrived via QR code?</h2>
+        <p>
+          Your copy of The Patent Architect contains QR codes linking to
+          companion pages for each chapter - updated fees, current errata,
+          related prompts, and further reading. No signup required.
+        </p>
+        <div class="reader-cta__actions">
+          <pa-btn variant="primary" routerLink="/companion">
+            Open Companion Hub
+          </pa-btn>
+          <pa-btn variant="ghost" routerLink="/book">
+            Browse All 19 Chapters
+          </pa-btn>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PHASES ────────────────────────────────────────────────────────────────── -->
+<section class="phases section section--dark">
+  <div class="container">
+    <div class="phases__header">
+      <span class="eyebrow">Four Phases, 19 Chapters</span>
+      <h2>A Complete Education in Patent Practice</h2>
+      <pa-rule class="gold-rule--center"></pa-rule>
+      <p>
+        Structured as a progressive curriculum - from first principles through
+        advanced prosecution strategy and AI-augmented practice. Each chapter
+        stands alone as a reference; together they form a complete system.
+      </p>
+    </div>
+
+    <div class="phases__grid">
+      @for (phase of phases; track phase.num) {
+        <pa-card
+          variant="surface"
+          [hoverable]="true"
+          [label]="'Phase ' + phase.num"
+        >
+          <h3 class="phases__phase-title">{{ phase.title }}</h3>
+          <span class="phases__chapters">Chapters {{ phase.chapters }}</span>
+          <p class="phases__desc">{{ phase.desc }}</p>
+          <a
+            routerLink="/book"
+            [fragment]="'phase-' + phase.num"
+            class="phases__link"
+          >
+            Explore chapters →
+          </a>
+        </pa-card>
+      }
+    </div>
+
+    <div class="phases__cta">
+      <pa-btn variant="outline" routerLink="/book"
+        >Full Chapter Guide & Overview</pa-btn
+      >
+    </div>
+  </div>
+</section>
+
+<pa-rule variant="hair"></pa-rule>
+
+<!-- ─── WHY THIS BOOK ─────────────────────────────────────────────────────────── -->
+<section class="why section section--dark">
+  <div class="container">
+    <div class="why__header">
+      <span class="eyebrow">Why The Patent Architect</span>
+      <h2>The Book the Field Has Been Waiting For</h2>
+      <pa-rule class="gold-rule--center"></pa-rule>
+    </div>
+
+    <div class="why__grid">
+      @for (reason of reasons; track reason.title) {
+        <div class="why__item">
+          <span class="why__icon" aria-hidden="true">{{ reason.icon }}</span>
+          <h3 class="why__title">{{ reason.title }}</h3>
+          <p class="why__desc">{{ reason.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ─── INNOVATION PARADOX CALLOUT ───────────────────────────────────────────── -->
+<pa-blueprint-grid opacity="0.06">
+  <section class="paradox section section--dark">
+    <div class="container">
+      <div class="paradox__inner">
+        <div class="paradox__stat-col">
+          <div class="paradox__stat">
+            <span class="paradox__stat-num">100,000+</span>
+            <span class="paradox__stat-label">DPIIT-recognized startups in India <small>(as of 2024, DPIIT)</small></span>
+          </div>
+          <div class="paradox__stat">
+            <span class="paradox__stat-num">0.8</span>
+            <span class="paradox__stat-label">patent applications per startup per year <small>(2023, WIPO)</small></span>
+          </div>
+          <div class="paradox__stat paradox__stat--contrast">
+            <span class="paradox__stat-num text-gold">12.4</span>
+            <span class="paradox__stat-label">patent applications per startup in South Korea <small>(2023, WIPO)</small></span>
+          </div>
+        </div>
+        <div class="paradox__text-col">
+          <span class="eyebrow">India's Innovation Paradox</span>
+          <h2>
+            India invents. India doesn't patent. This book is here to change
+            that.
+          </h2>
+          <p>
+            India is the world's third-largest startup ecosystem. Yet Indian
+            companies file patents at a fraction of the rate of Chinese, Korean,
+            or German peers. This is not a talent problem. It is an IP culture
+            problem - and it has a structural cause.
+          </p>
+          <p>
+            The Patent Architect is written with a mission: to put rigorous IP
+            knowledge in the hands of the practitioners, founders, and educators
+            who can change this ratio. The book is priced for access, not
+            profit. The website is free. The mission is real.
+          </p>
+          <pa-btn variant="outline" routerLink="/blog/india-innovation-paradox">
+            Read the Essay →
+          </pa-btn>
+        </div>
+      </div>
+    </div>
+  </section>
+</pa-blueprint-grid>
+
+<!-- ─── TESTIMONIALS ──────────────────────────────────────────────────────────── -->
+@if (testimonials.length) {
+  <section class="testimonials section section--surface">
+    <div class="container">
+      <div class="testimonials__header">
+        <span class="eyebrow">Endorsements</span>
+        <h2>What Practitioners Are Saying</h2>
+        <pa-rule class="gold-rule--center"></pa-rule>
+      </div>
+
+      <div class="testimonials__grid">
+        @for (t of testimonials; track t.id) {
+          <blockquote class="testimonial-card">
+            <p class="testimonial-card__quote">"{{ t.quote }}"</p>
+            <footer class="testimonial-card__footer">
+              <strong class="testimonial-card__name">{{ t.name }}</strong>
+              <span class="testimonial-card__role"
+                >{{ t.title }}, {{ t.organization }}</span
+              >
+            </footer>
+          </blockquote>
+        }
+      </div>
+
+      <div class="testimonials__cta">
+        <pa-btn variant="ghost" routerLink="/endorsements"
+          >All Endorsements →</pa-btn
+        >
+      </div>
+    </div>
+  </section>
+}
+
+<!-- ─── BLOG PREVIEW ──────────────────────────────────────────────────────────── -->
+@if (featuredPosts.length) {
+  <section class="blog-preview section section--dark">
+    <div class="container">
+      <div class="blog-preview__header">
+        <span class="eyebrow">From the Blog</span>
+        <h2>Essays &amp; Frameworks</h2>
+        <pa-rule class="gold-rule--center"></pa-rule>
+      </div>
+
+      <div class="blog-preview__grid">
+        @for (post of featuredPosts; track post.slug) {
+          <a [routerLink]="['/blog', post.slug]" class="blog-card">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">{{
+                post.category | titlecase
+              }}</span>
+              <span class="blog-card__time"
+                >{{ post.readingTime }} min read</span
+              >
+            </div>
+            <h3 class="blog-card__title">{{ post.title }}</h3>
+            <p class="blog-card__excerpt">
+              {{ post.excerpt.substring(0, 120) }}…
+            </p>
+            <span class="blog-card__read">Read essay →</span>
+          </a>
+        }
+      </div>
+
+      <div class="blog-preview__cta">
+        <pa-btn variant="outline" routerLink="/blog">All Resources</pa-btn>
+      </div>
+    </div>
+  </section>
+}
+
+<!-- ─── FINAL CTA ─────────────────────────────────────────────────────────────── -->
+<pa-blueprint-grid opacity="0.06">
+  <section class="final-cta section section--dark">
+    <div class="container">
+      <div class="final-cta__inner">
+        <span class="eyebrow">Get the Book</span>
+        <h2 class="final-cta__title">
+          The definitive reference<br />for the modern IP practitioner.
+        </h2>
+        <pa-rule class="gold-rule--center"></pa-rule>
+        <p class="final-cta__desc">
+          19 chapters. 7 appendices. 60+ AI prompts. A companion website that
+          never goes stale. Written by a practitioner, for practitioners.
+        </p>
+        <div class="final-cta__actions">
+          @if (siteConfig?.isLive) {
+            <pa-btn
+              variant="primary"
+              size="lg"
+              [href]="siteConfig!.amazonUrl"
+              [external]="true"
+            >
+              Buy on Amazon India
+            </pa-btn>
+          } @else {
+            <pa-btn variant="outline" size="lg" routerLink="/newsletter">
+              Coming {{ siteConfig?.launchDateDisplay }}
+            </pa-btn>
+          }
+          <pa-btn variant="outline" size="lg" routerLink="/sample">
+            Download Free Sample
+          </pa-btn>
+        </div>
+      </div>
+    </div>
+  </section>
+</pa-blueprint-grid>

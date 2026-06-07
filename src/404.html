@@ -1,0 +1,96 @@
+<!doctype html>
+<!--
+  GitHub Pages SPA deep-link fallback.
+
+  CRITICAL for the printed QR code system:
+  When a reader scans a QR code pointing to /companion/chapter-06 and GitHub Pages
+  returns a 404 (because it doesn't know about SPA routes), this page intercepts,
+  encodes the URL into the query string, and redirects to index.html which picks it
+  up and replaces the URL, allowing Angular's router to handle the route correctly.
+
+  Based on https://github.com/rafgraph/spa-github-pages
+  License: MIT
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Patent Architect</title>
+    <meta name="description" content="The Patent Architect - Redirecting…" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #1b1f3b;
+        color: #f4efe6;
+        font-family: "Inter", system-ui, sans-serif;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .redirect {
+        text-align: center;
+        padding: 2rem;
+      }
+      .redirect__hex {
+        font-size: 3rem;
+        color: #c9a961;
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .redirect__title {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+      .redirect__sub {
+        color: rgba(244, 239, 230, 0.6);
+        font-size: 0.875rem;
+      }
+    </style>
+    <script>
+      // SPA redirect script for GitHub Pages
+      // Encodes the path and query into the query string and fragment
+      // so it survives the redirect to index.html
+      (function (l) {
+        if (l.search[1] === "/") {
+          // Already redirected - do nothing
+          return;
+        }
+
+        var segmentCount = 1; // Number of path segments in the repo URL (0 for custom domain, 1 for username.github.io/repo-name)
+
+        var encodedPath =
+          l.pathname
+            .slice(1)
+            .split("/")
+            .slice(segmentCount)
+            .join("/")
+            .replace(/&/g, "~and~") +
+          (l.search ? "&q=" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+          l.hash;
+
+        // Redirect: go to the root of the site with the path encoded
+        l.replace(
+          l.protocol +
+            "//" +
+            l.hostname +
+            (l.port ? ":" + l.port : "") +
+            l.pathname.slice(0, 1 + segmentCount) +
+            "?" +
+            (segmentCount
+              ? l.pathname.slice(1, l.pathname.slice(1).indexOf("/") + 2) + "/"
+              : "") +
+            encodedPath,
+        );
+      })(window.location);
+    </script>
+  </head>
+  <body>
+    <div class="redirect">
+      <span class="redirect__hex" aria-hidden="true">⬡</span>
+      <p class="redirect__title">The Patent Architect</p>
+      <p class="redirect__sub">Redirecting…</p>
+    </div>
+  </body>
+</html>

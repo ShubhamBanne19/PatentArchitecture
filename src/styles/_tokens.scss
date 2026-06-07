@@ -1,0 +1,112 @@
+// ─── PATENT ARCHITECT - DESIGN TOKENS ────────────────────────────────────────
+// Single source of truth. Import in every component stylesheet.
+
+// ── COLOUR ───────────────────────────────────────────────────────────────────
+:root {
+  --color-navy:        #1B1F3B;   // primary dark background
+  --color-gold:        #C9A961;   // antique gold accent (headings, rules, CTAs)
+  --color-gold-light:  #DEC07A;   // hover/lighter gold variant
+  --color-gold-dark:   #A8883E;   // pressed gold
+  --color-silver:      #B8B8B8;   // brushed silver secondary
+  --color-ivory:       #F4EFE6;   // warm ivory surfaces / light text
+  --color-ivory-dim:   #E8E0D4;   // slightly dimmer ivory for borders
+  --color-text-dark:   #0F1226;   // near-black for on-ivory body copy
+  --color-text-mid:    #4A4E6B;   // mid-tone for captions / metadata
+  --color-text-muted:  #888BAA;   // muted / placeholder
+  --color-surface-1:   #22274A;   // slightly lighter navy card surface
+  --color-surface-2:   #2C3160;   // even lighter navy for nested cards
+  --color-overlay:     rgba(27, 31, 59, 0.85); // modal / scrim
+}
+
+// SCSS aliases (for use in mixins / maps)
+$navy:       #1B1F3B;
+$gold:       #C9A961;
+$gold-light: #DEC07A;
+$gold-dark:  #A8883E;
+$silver:     #B8B8B8;
+$ivory:      #F4EFE6;
+$ivory-dim:  #E8E0D4;
+$text-dark:  #0F1226;
+$text-mid:   #4A4E6B;
+$text-muted: #888BAA;
+$surface-1:  #22274A;
+$surface-2:  #2C3160;
+
+// ── TYPOGRAPHY ────────────────────────────────────────────────────────────────
+:root {
+  --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-body:    'Inter', 'Manrope', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+}
+
+$font-display: var(--font-display);
+$font-body:    var(--font-body);
+$font-mono:    var(--font-mono);
+
+// Type scale (fluid)
+:root {
+  --text-xs:   0.75rem;    //  12px
+  --text-sm:   0.875rem;   //  14px
+  --text-base: 1rem;       //  16px
+  --text-md:   1.125rem;   //  18px
+  --text-lg:   1.25rem;    //  20px
+  --text-xl:   1.5rem;     //  24px
+  --text-2xl:  1.875rem;   //  30px
+  --text-3xl:  2.25rem;    //  36px
+  --text-4xl:  3rem;       //  48px
+  --text-5xl:  4rem;       //  64px
+  --text-6xl:  5rem;       //  80px
+}
+
+// ── SPACING ───────────────────────────────────────────────────────────────────
+:root {
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.25rem;
+  --space-6:   1.5rem;
+  --space-8:   2rem;
+  --space-10:  2.5rem;
+  --space-12:  3rem;
+  --space-16:  4rem;
+  --space-20:  5rem;
+  --space-24:  6rem;
+  --space-32:  8rem;
+}
+
+// ── LAYOUT ────────────────────────────────────────────────────────────────────
+:root {
+  --max-width-content: 72rem;   // 1152px - comfortable reading measure
+  --max-width-prose:   42rem;   // prose line-length cap
+  --max-width-wide:    90rem;   // hero / full-bleed sections
+  --header-h:          4.5rem;  // height of sticky nav
+  --border-radius:     0.25rem;
+  --border-radius-md:  0.5rem;
+  --border-radius-lg:  1rem;
+}
+
+// ── BORDERS & SHADOWS ────────────────────────────────────────────────────────
+:root {
+  --border-hair:  1px solid rgba(201, 169, 97, 0.25);  // hairline gold rule
+  --border-thin:  1px solid rgba(201, 169, 97, 0.45);
+  --border-solid: 1px solid var(--color-gold);
+  --shadow-card:  0 2px 24px rgba(0, 0, 0, 0.45);
+  --shadow-glow:  0 0 32px rgba(201, 169, 97, 0.15);
+}
+
+// ── TRANSITIONS ───────────────────────────────────────────────────────────────
+:root {
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in:   cubic-bezier(0.64, 0, 0.78, 0);
+  --duration:  220ms;
+}
+
+// ── Z-INDEX ───────────────────────────────────────────────────────────────────
+$z-below:   -1;
+$z-base:     0;
+$z-raised:  10;
+$z-sticky:  100;
+$z-nav:     200;
+$z-modal:   300;
+$z-toast:   400;

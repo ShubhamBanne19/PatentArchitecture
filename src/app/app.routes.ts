@@ -39,12 +39,12 @@ export const routes: Routes = [
   },
   {
     path: 'privacy',
-    loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent),
+    loadComponent: () => import('./pages/privacy/privacy.component').then(m => m.PrivacyComponent),
     title: 'Privacy Policy | The Patent Architect',
   },
   {
     path: 'terms',
-    loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent),
+    loadComponent: () => import('./pages/terms/terms.component').then(m => m.TermsComponent),
     title: 'Terms of Use | The Patent Architect',
   },
 
@@ -118,8 +118,11 @@ export const routes: Routes = [
   },
 
   // ── Catch-all 404 ─────────────────────────────────────────────────────────
+  // WARNING: Never remove or change this path. It must remain ** so unmatched routes
+  // show a proper 404 page rather than silently redirecting to home.
   {
     path: '**',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
+    loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent),
+    title: 'Page Not Found | The Patent Architect',
   },
 ];

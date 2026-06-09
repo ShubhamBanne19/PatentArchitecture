@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { ContentService } from '../../../core/services/content.service';
 import { SeoService } from '../../../core/services/seo.service';
+import { SiteConfigService, SiteConfig } from '../../../core/services/site-config.service';
 import { BlogPost } from '../../../core/models/content.models';
 import { BtnComponent } from '../../../shared/components/btn/btn.component';
 import { HairlineRuleComponent } from '../../../shared/components/hairline-rule/hairline-rule.component';
@@ -53,7 +54,11 @@ import { of } from 'rxjs';
         <div class="post-body section section--dark">
           <div class="container">
             <div class="prose">
-              <markdown [src]="post.contentPath" (error)="onMarkdownError()"></markdown>
+              @if (contentError) {
+                <p class="post-body__error">This essay could not be loaded. Please try refreshing the page.</p>
+              } @else {
+                <markdown [src]="post.contentPath" (error)="onMarkdownError()"></markdown>
+              }
             </div>
           </div>
         </div>
@@ -62,7 +67,11 @@ import { of } from 'rxjs';
           <div class="container">
             <div class="post-footer__inner">
               <pa-btn variant="outline" routerLink="/blog">← All Essays</pa-btn>
-              <pa-btn variant="primary" href="https://www.amazon.in" [external]="true">Buy the Book →</pa-btn>
+              @if (siteConfig?.isLive) {
+                <pa-btn variant="primary" [href]="siteConfig!.amazonUrl" [external]="true">Buy the Book →</pa-btn>
+              } @else {
+                <pa-btn variant="outline" routerLink="/newsletter">Coming {{ siteConfig?.launchDateDisplay }}</pa-btn>
+              }
             </div>
           </div>
         </footer>
@@ -82,6 +91,7 @@ import { of } from 'rxjs';
     .post-header__sub { font-family: $font-display; font-style: italic; font-size: var(--text-xl); color: var(--color-silver); margin-bottom: var(--space-4); max-width: none; }
     .post-header__byline { font-size: var(--text-sm); color: var(--color-silver); display: flex; gap: var(--space-2); flex-wrap: wrap; }
     .post-body { padding-block: var(--space-8) var(--space-16); }
+    .post-body__error { color: var(--color-silver); font-style: italic; padding: var(--space-8) 0; }
     .prose {
       max-width: var(--max-width-prose);
       h1,h2,h3,h4 { font-family: $font-display; color: var(--color-ivory); margin-block: var(--space-6) var(--space-3); }
@@ -102,14 +112,18 @@ import { of } from 'rxjs';
   `]
 })
 export class BlogPostComponent implements OnInit {
-  private route   = inject(ActivatedRoute);
-  private content = inject(ContentService);
-  private seo     = inject(SeoService);
+  private route          = inject(ActivatedRoute);
+  private content        = inject(ContentService);
+  private seo            = inject(SeoService);
+  private siteConfigSvc  = inject(SiteConfigService);
 
   post?: BlogPost;
   loading = true;
+  contentError = false;
+  siteConfig: SiteConfig | null = null;
 
   ngOnInit(): void {
+    this.siteConfigSvc.config$.subscribe(c => this.siteConfig = c);
     this.route.params.pipe(
       switchMap(params => this.content.getBlogPost(params['slug']))
     ).subscribe(post => {
@@ -126,6 +140,6 @@ export class BlogPostComponent implements OnInit {
   }
 
   onMarkdownError(): void {
-    console.warn('Could not load markdown content');
+    this.contentError = true;
   }
 }

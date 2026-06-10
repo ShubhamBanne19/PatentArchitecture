@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, RouterLinkActive } from '@angular/router';
 import { BtnComponent } from '../btn/btn.component';
 import { SiteConfigService, SiteConfig } from '../../../core/services/site-config.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 interface NavLink {
   label: string;
@@ -61,8 +62,9 @@ interface NavLink {
 
         <!-- CTAs -->
         <div class="site-header__actions">
-          <pa-btn variant="ghost" size="sm" routerLink="/companion">
-            Companion
+          <pa-btn variant="ghost" size="sm" routerLink="/pricing">Pricing</pa-btn>
+          <pa-btn variant="ghost" size="sm" [routerLink]="auth.isAuthenticated() ? '/dashboard' : '/login'">
+            {{ auth.isAuthenticated() ? 'Dashboard' : 'Login' }}
           </pa-btn>
           @if (siteConfig?.isLive) {
             <pa-btn variant="primary" size="sm" [href]="siteConfig!.amazonUrl" [external]="true">
@@ -106,6 +108,17 @@ interface NavLink {
           <div class="mobile-nav__ctas">
             <pa-btn variant="outline" routerLink="/companion" [fullWidth]="true" (clicked)="mobileOpen.set(false)">
               Open Companion
+            </pa-btn>
+            <pa-btn variant="outline" routerLink="/pricing" [fullWidth]="true" (clicked)="mobileOpen.set(false)">
+              Pricing
+            </pa-btn>
+            <pa-btn
+              variant="outline"
+              [routerLink]="auth.isAuthenticated() ? '/dashboard' : '/login'"
+              [fullWidth]="true"
+              (clicked)="mobileOpen.set(false)"
+            >
+              {{ auth.isAuthenticated() ? 'Dashboard' : 'Login' }}
             </pa-btn>
             @if (siteConfig?.isLive) {
               <pa-btn variant="primary" [href]="siteConfig!.amazonUrl" [fullWidth]="true" [external]="true">
@@ -342,6 +355,7 @@ interface NavLink {
 })
 export class HeaderComponent implements OnInit {
   private siteConfigService = inject(SiteConfigService);
+  readonly auth = inject(AuthService);
   siteConfig: SiteConfig | null = null;
 
   scrolled = signal(false);
@@ -351,12 +365,14 @@ export class HeaderComponent implements OnInit {
   navLinks: NavLink[] = [
     { label: 'Home', path: '/' },
     { label: 'The Book', path: '/book' },
+    { label: 'Pricing', path: '/pricing' },
     {
       label: 'Companion', path: '/companion',
       children: [
         { label: 'Companion Hub', path: '/companion' },
         { label: 'Fee Schedules', path: '/companion/fees' },
         { label: 'AI Prompt Library', path: '/prompts' },
+        { label: 'Premium Companion', path: '/premium' },
       ]
     },
     { label: 'Blog', path: '/blog' },

@@ -46,6 +46,7 @@ import { HairlineRuleComponent } from '../hairline-rule/hairline-rule.component'
                 <li><a routerLink="/companion/fees">Fee Schedules</a></li>
                 <li><a routerLink="/prompts">AI Prompt Library</a></li>
                 <li><a routerLink="/companion/errata">Errata & Updates</a></li>
+                <li><a routerLink="/premium">Premium Companion</a></li>
               </ul>
             </div>
 
@@ -53,6 +54,8 @@ import { HairlineRuleComponent } from '../hairline-rule/hairline-rule.component'
             <div class="site-footer__col">
               <h3 class="site-footer__heading">Learn & Connect</h3>
               <ul class="site-footer__links">
+                <li><a routerLink="/pricing">Pricing</a></li>
+                <li><a routerLink="/dashboard">Dashboard</a></li>
                 <li><a routerLink="/blog">Blog & Resources</a></li>
                 <li><a routerLink="/about">About the Author</a></li>
                 <li><a routerLink="/newsletter">Newsletter</a></li>

@@ -1,17 +1,20 @@
-# ─── THE PATENT ARCHITECT - GitHub Pages Deployment ─────────────────────────
-# Builds the Angular site and deploys to GitHub Pages on push to main.
-#
-# IMPORTANT - base-href:
-#   Replace "patent-architect" below with your actual GitHub repo name.
-#   If you use a custom domain (e.g. patentarchitect.in), change base-href to /
-#   and configure your CNAME file in src/assets.
+# ─── THE PATENT ARCHITECT - Firebase Hosting Deployment ───────────────────────
+# Builds the Angular SPA on Firebase Hosting (Spark/Free plan) with QR companion
+# routes and Razorpay subscription backend.
 #
 # IMPORTANT - QR codes:
 #   Once the book is printed, the /companion/chapter-NN routes are permanent.
-#   Never remove those routes from app.routes.ts or change this deployment target.
+#   Never remove those routes from app.routes.ts or change Firebase Hosting config.
+#
+# Setup:
+#   1. Install Firebase CLI: npm install -g firebase-tools
+#   2. Authenticate: firebase login:ci --no-localhost (get token for secrets)
+#   3. Create repo secrets:
+#      - FIREBASE_CI_TOKEN: from step 2
+#   4. Update firebase.json with your Firebase project ID
 # ─────────────────────────────────────────────────────────────────────────────
 
-name: Deploy to GitHub Pages
+name: Build and Deploy to Firebase Hosting
 
 on:
   push:
@@ -20,29 +23,26 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch: # Allow manual triggers
+  workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+  pull-requests: write
 
-# Allow only one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+env:
+  FIREBASE_PROJECT_ID: patent-architect
 
 jobs:
   build:
-    name: Build Angular Site
+    name: Build Angular App
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: "npm"
@@ -51,38 +51,37 @@ jobs:
         run: npm ci
 
       - name: Build Angular app (production)
-        # --base-href: set to /PatentArchitecture/ for github.io/PatentArchitecture
-        # If you have a custom domain, change this to /
-        # The trailing slash is REQUIRED for Angular's router to work correctly.
-        run: |
-          npx ng build --configuration=production \
-            --base-href=/PatentArchitecture/ \
-            --output-path=dist/PatentArchitecture || (echo "Build failed. Checking for errors:" && exit 1)
+        run: npx ng build --configuration production
 
-      - name: Copy 404.html for SPA deep-link fallback
-        # This is CRITICAL for QR code deep-links to work.
-        # GitHub Pages serves 404.html for unknown paths. Our 404.html
-        # encodes the URL and redirects to index.html, where Angular's
-        # router handles the actual navigation.
-        run: |
-          cp dist/PatentArchitecture/404.html dist/PatentArchitecture/404.html || true
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          path: dist/PatentArchitecture
+          name: angular-build
+          path: dist/patent-architect
+          retention-days: 1
 
   deploy:
-    name: Deploy to GitHub Pages
+    name: Deploy to Firebase Hosting
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: angular-build
+          path: dist/patent-architect
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: patent-architect
+          channelId: live
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworksci

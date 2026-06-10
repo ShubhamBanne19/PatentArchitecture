@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGuard, guestGuard } from './core/guards/auth.guard';
+import { subscriptionGuard } from './core/guards/subscription.guard';
 
 export const routes: Routes = [
   // ── Sales / discovery routes ────────────────────────────────────────────
@@ -11,6 +13,11 @@ export const routes: Routes = [
     path: 'book',
     loadComponent: () => import('./pages/book/book.component').then(m => m.BookComponent),
     title: 'Book Overview & Chapters | The Patent Architect',
+  },
+  {
+    path: 'pricing',
+    loadComponent: () => import('./pages/pricing/pricing.component').then(m => m.PricingComponent),
+    title: 'Pricing | The Patent Architect',
   },
   {
     path: 'about',
@@ -46,6 +53,49 @@ export const routes: Routes = [
     path: 'terms',
     loadComponent: () => import('./pages/terms/terms.component').then(m => m.TermsComponent),
     title: 'Terms of Use | The Patent Architect',
+  },
+
+  {
+    path: 'login',
+    canActivate: [guestGuard],
+    loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent),
+    title: 'Login | The Patent Architect',
+  },
+  {
+    path: 'register',
+    canActivate: [guestGuard],
+    loadComponent: () => import('./pages/auth/register/register.component').then(m => m.RegisterComponent),
+    title: 'Register | The Patent Architect',
+  },
+  {
+    path: 'dashboard',
+    canActivate: [authGuard],
+    loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
+    title: 'Dashboard | The Patent Architect',
+  },
+  {
+    path: 'subscription',
+    canActivate: [authGuard],
+    loadComponent: () => import('./pages/subscription/subscription.component').then(m => m.SubscriptionComponent),
+    title: 'My Subscription | The Patent Architect',
+  },
+  {
+    path: 'profile',
+    canActivate: [authGuard],
+    loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent),
+    title: 'Profile | The Patent Architect',
+  },
+  {
+    path: 'premium',
+    canActivate: [authGuard],
+    loadComponent: () => import('./pages/premium/premium.component').then(m => m.PremiumComponent),
+    title: 'Premium Companion | The Patent Architect',
+  },
+  {
+    path: 'premium/:id',
+    canActivate: [authGuard, subscriptionGuard],
+    loadComponent: () => import('./pages/premium/premium.component').then(m => m.PremiumComponent),
+    title: 'Premium Resource | The Patent Architect',
   },
 
   // ── Blog ─────────────────────────────────────────────────────────────────

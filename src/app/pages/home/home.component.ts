@@ -8,12 +8,17 @@ import { BlueprintGridComponent } from '../../shared/components/blueprint-grid/b
 import { BtnComponent } from '../../shared/components/btn/btn.component';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { HairlineRuleComponent } from '../../shared/components/hairline-rule/hairline-rule.component';
+import { ThreeBackdropComponent } from '../../shared/components/three-backdrop/three-backdrop.component';
+import { ScrollRevealDirective, TiltDirective, ParallaxDirective } from '../../shared/motion';
 import { Testimonial, BlogPost } from '../../core/models/content.models';
 
 @Component({
   selector: 'pa-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, BlueprintGridComponent, BtnComponent, CardComponent, HairlineRuleComponent],
+  imports: [
+    CommonModule, RouterModule, BlueprintGridComponent, BtnComponent, CardComponent,
+    HairlineRuleComponent, ThreeBackdropComponent, ScrollRevealDirective, TiltDirective, ParallaxDirective,
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

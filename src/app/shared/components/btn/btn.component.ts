@@ -52,6 +52,8 @@ export type BtnSize = 'sm' | 'md' | 'lg';
   `,
   styles: [`
     .pa-btn {
+      position: relative;
+      overflow: hidden;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -65,6 +67,35 @@ export type BtnSize = 'sm' | 'md' | 'lg';
       white-space: nowrap;
       border: 2px solid transparent;
       outline: none;
+
+      // Shine sweep on hover (primary / outline only)
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -80%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+          105deg,
+          transparent,
+          rgba(255, 255, 255, 0.28),
+          transparent
+        );
+        transform: skewX(-20deg);
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      &--primary:hover:not(:disabled)::before,
+      &--outline:hover:not(:disabled)::before {
+        opacity: 1;
+        animation: pa-btn-shine 700ms var(--ease-out);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        &::before { display: none; }
+      }
 
       &:focus-visible {
         outline: 2px solid var(--color-gold);
@@ -139,6 +170,11 @@ export type BtnSize = 'sm' | 'md' | 'lg';
         align-items: center;
         font-size: 1.1em;
       }
+    }
+
+    @keyframes pa-btn-shine {
+      from { left: -80%; }
+      to   { left: 130%; }
     }
   `]
 })

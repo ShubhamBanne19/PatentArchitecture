@@ -4,9 +4,16 @@
 
 // ── HERO ──────────────────────────────────────────────────────────────────────
 .hero {
+  position: relative; // anchors the 3D backdrop canvas
   padding-block: var(--space-24) var(--space-20);
 
   @include bp(lg) { padding-block: var(--space-32); }
+
+  // Content sits above the decorative canvas (z-index 0)
+  .container {
+    position: relative;
+    z-index: 1;
+  }
 
   &__inner {
     display: grid;
@@ -31,6 +38,23 @@
   &__title-accent {
     color: var(--color-gold);
     display: block;
+
+    // Animated shimmer across the gold accent. Graceful fallback: solid
+    // gold (set above) wherever background-clip:text is unsupported.
+    @supports (-webkit-background-clip: text) or (background-clip: text) {
+      background: linear-gradient(
+        100deg,
+        var(--color-gold) 38%,
+        #f0e2bb 50%,
+        var(--color-gold) 62%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: pa-shimmer 7s linear infinite;
+    }
   }
 
   &__subtitle {
@@ -98,6 +122,29 @@
   filter: drop-shadow(0 20px 60px rgba(0,0,0,0.7));
 
   @include bp(lg) { width: 300px; height: 420px; }
+
+  // Ambient float when idle. On hover the animation is removed entirely so
+  // the paTilt directive's inline transform can take over (an animated
+  // transform - even paused - would override inline styles).
+  &--floating {
+    animation: pa-float 7s ease-in-out infinite;
+
+    &:hover { animation: none; }
+  }
+
+  // Specular glare that follows the pointer while tilting (driven by the
+  // --pointer-x/--pointer-y custom properties set by TiltDirective).
+  &--floating:hover &__face::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at calc(var(--pointer-x, 0.5) * 100%) calc(var(--pointer-y, 0.5) * 100%),
+      rgba(244, 239, 230, 0.14),
+      transparent 55%
+    );
+  }
 
   &__spine {
     position: absolute;

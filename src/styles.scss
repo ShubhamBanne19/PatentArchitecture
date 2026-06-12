@@ -141,3 +141,69 @@ input, textarea, select {
   outline: 2px solid var(--color-gold);
   outline-offset: 3px;
 }
+
+// ── MOTION LAYER ─────────────────────────────────────────────────────────────
+// Classes applied by ScrollRevealDirective. The base class is only ever added
+// when motion is allowed, so content is never hidden for reduced-motion users
+// or when JS/IntersectionObserver is unavailable.
+.pa-reveal {
+  opacity: 0;
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 700ms var(--ease-out);
+
+  &--up    { transform: translateY(28px); }
+  &--fade  { transform: none; }
+  &--left  { transform: translateX(-32px); }
+  &--right { transform: translateX(32px); }
+  &--scale { transform: scale(0.94); }
+
+  &--in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// Router page transitions (View Transitions API - progressive enhancement;
+// browsers without support simply swap instantly).
+::view-transition-old(root) {
+  animation: pa-page-out 220ms var(--ease-in) both;
+}
+::view-transition-new(root) {
+  animation: pa-page-in 360ms var(--ease-out) both;
+}
+
+@keyframes pa-page-out {
+  to { opacity: 0; transform: translateY(-8px); }
+}
+@keyframes pa-page-in {
+  from { opacity: 0; transform: translateY(12px); }
+}
+
+// Ambient float for decorative elements (used by hero visual)
+@keyframes pa-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+// Gold shimmer sweep used on display headings' accent text
+@keyframes pa-shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+// ── REDUCED MOTION (global kill-switch) ──────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}

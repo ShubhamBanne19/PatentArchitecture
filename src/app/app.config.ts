@@ -5,6 +5,7 @@ import {
   PreloadAllModules,
   withRouterConfig,
   withInMemoryScrolling,
+  withViewTransitions,
 } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -16,7 +17,8 @@ export const appConfig: ApplicationConfig = {
       routes,
       withPreloading(PreloadAllModules),
       withRouterConfig({ onSameUrlNavigation: 'reload' }),
-      withInMemoryScrolling({ scrollPositionRestoration: 'top', anchorScrolling: 'enabled' })
+      withInMemoryScrolling({ scrollPositionRestoration: 'top', anchorScrolling: 'enabled' }),
+      withViewTransitions({ skipInitialTransition: true })
     ),
     provideHttpClient(withFetch()),
     importProvidersFrom(

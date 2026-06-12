@@ -1,27 +1,28 @@
 <!-- ─── HERO ──────────────────────────────────────────────────────────────────── -->
 <pa-blueprint-grid opacity="0.05">
   <section class="hero section section--dark">
+    <pa-three-backdrop></pa-three-backdrop>
     <div class="container">
       <div class="hero__inner">
         <div class="hero__content">
-          <span class="eyebrow">The Definitive Reference</span>
-          <h1 class="hero__title">
+          <span class="eyebrow" paReveal="fade">The Definitive Reference</span>
+          <h1 class="hero__title" paReveal paRevealDelay="80">
             The Patent<br />
             <span class="hero__title-accent">Architect</span>
           </h1>
-          <p class="hero__subtitle">
+          <p class="hero__subtitle" paReveal paRevealDelay="160">
             A Practitioner's Definitive Guide to Drafting, Prosecution &amp;
             AI&#8209;Augmented IP Strategy Across India, USA &amp; the World
           </p>
-          <p class="hero__author">by <strong>Shubham Sanjay Banne</strong></p>
+          <p class="hero__author" paReveal paRevealDelay="220">by <strong>Shubham Sanjay Banne</strong></p>
 
           <pa-rule></pa-rule>
 
-          <p class="hero__promise">
+          <p class="hero__promise" paReveal paRevealDelay="280">
             Buy the book once.
             <span class="text-gold">Stay current forever.</span>
           </p>
-          <p class="hero__desc">
+          <p class="hero__desc" paReveal paRevealDelay="340">
             Patent law changes constantly - fees, statistics, AI tools, and case
             law all date quickly. The book carries the
             <em>stable</em> knowledge. This website carries the
@@ -30,7 +31,7 @@
             keyed to the exact chapter they affect.
           </p>
 
-          <div class="hero__ctas">
+          <div class="hero__ctas" paReveal paRevealDelay="420">
             @if (siteConfig?.isLive) {
               <pa-btn
                 variant="primary"
@@ -51,7 +52,7 @@
             </pa-btn>
           </div>
 
-          <p class="hero__reader-note">
+          <p class="hero__reader-note" paReveal="fade" paRevealDelay="520">
             <span class="text-gold">Already have the book?</span>
             Scan the QR code on your copy, or
             <a routerLink="/companion">go straight to the Companion Hub →</a>
@@ -59,8 +60,8 @@
         </div>
 
         <!-- Book cover mockup -->
-        <div class="hero__visual" aria-hidden="true">
-          <div class="book-cover">
+        <div class="hero__visual" aria-hidden="true" paReveal="scale" paRevealDelay="300">
+          <div class="book-cover book-cover--floating" paTilt [paTiltMax]="9" [paTiltScale]="1.03">
             <div class="book-cover__spine"></div>
             <div class="book-cover__face">
               <div class="book-cover__grid"></div>
@@ -97,7 +98,7 @@
 <section class="promise-banner section--surface">
   <div class="container">
     <div class="promise-banner__inner">
-      <div class="promise-banner__item">
+      <div class="promise-banner__item" paReveal paRevealDelay="0">
         <span class="promise-banner__icon" aria-hidden="true">📅</span>
         <div>
           <strong>Current Fees</strong>
@@ -107,7 +108,7 @@
         </div>
       </div>
       <div class="promise-banner__divider" aria-hidden="true">|</div>
-      <div class="promise-banner__item">
+      <div class="promise-banner__item" paReveal paRevealDelay="100">
         <span class="promise-banner__icon" aria-hidden="true">🤖</span>
         <div>
           <strong>Growing Prompt Library</strong>
@@ -115,7 +116,7 @@
         </div>
       </div>
       <div class="promise-banner__divider" aria-hidden="true">|</div>
-      <div class="promise-banner__item">
+      <div class="promise-banner__item" paReveal paRevealDelay="200">
         <span class="promise-banner__icon" aria-hidden="true">⚠️</span>
         <div>
           <strong>Errata &amp; Clarifications</strong>
@@ -125,7 +126,7 @@
         </div>
       </div>
       <div class="promise-banner__divider" aria-hidden="true">|</div>
-      <div class="promise-banner__item">
+      <div class="promise-banner__item" paReveal paRevealDelay="300">
         <span class="promise-banner__icon" aria-hidden="true">📊</span>
         <div>
           <strong>Updated Statistics</strong>
@@ -140,7 +141,7 @@
 <section class="reader-cta section section--dark">
   <div class="container">
     <div class="reader-cta__inner">
-      <div class="reader-cta__icon" aria-hidden="true">
+      <div class="reader-cta__icon" aria-hidden="true" paReveal="left">
         <div class="qr-icon">
           <div class="qr-icon__corner qr-icon__corner--tl"></div>
           <div class="qr-icon__corner qr-icon__corner--tr"></div>
@@ -148,7 +149,7 @@
           <div class="qr-icon__dot"></div>
         </div>
       </div>
-      <div class="reader-cta__text">
+      <div class="reader-cta__text" paReveal="right" paRevealDelay="120">
         <span class="eyebrow">For Readers</span>
         <h2>Arrived via QR code?</h2>
         <p>
@@ -172,7 +173,7 @@
 <!-- ─── PHASES ────────────────────────────────────────────────────────────────── -->
 <section class="phases section section--dark">
   <div class="container">
-    <div class="phases__header">
+    <div class="phases__header" paReveal>
       <span class="eyebrow">Four Phases, 19 Chapters</span>
       <h2>A Complete Education in Patent Practice</h2>
       <pa-rule class="gold-rule--center"></pa-rule>
@@ -189,6 +190,8 @@
           variant="surface"
           [hoverable]="true"
           [label]="'Phase ' + phase.num"
+          paReveal
+          [paRevealDelay]="$index * 90"
         >
           <h3 class="phases__phase-title">{{ phase.title }}</h3>
           <span class="phases__chapters">Chapters {{ phase.chapters }}</span>
@@ -217,7 +220,7 @@
 <!-- ─── WHY THIS BOOK ─────────────────────────────────────────────────────────── -->
 <section class="why section section--dark">
   <div class="container">
-    <div class="why__header">
+    <div class="why__header" paReveal>
       <span class="eyebrow">Why The Patent Architect</span>
       <h2>The Book the Field Has Been Waiting For</h2>
       <pa-rule class="gold-rule--center"></pa-rule>
@@ -225,7 +228,7 @@
 
     <div class="why__grid">
       @for (reason of reasons; track reason.title) {
-        <div class="why__item">
+        <div class="why__item" paReveal [paRevealDelay]="($index % 3) * 100">
           <span class="why__icon" aria-hidden="true">{{ reason.icon }}</span>
           <h3 class="why__title">{{ reason.title }}</h3>
           <p class="why__desc">{{ reason.desc }}</p>
@@ -240,21 +243,21 @@
   <section class="paradox section section--dark">
     <div class="container">
       <div class="paradox__inner">
-        <div class="paradox__stat-col">
-          <div class="paradox__stat">
+        <div class="paradox__stat-col" paParallax [paParallaxSpeed]="0.06">
+          <div class="paradox__stat" paReveal="left">
             <span class="paradox__stat-num">100,000+</span>
             <span class="paradox__stat-label">DPIIT-recognized startups in India <small>(as of 2024, DPIIT)</small></span>
           </div>
-          <div class="paradox__stat">
+          <div class="paradox__stat" paReveal="left" paRevealDelay="120">
             <span class="paradox__stat-num">0.8</span>
             <span class="paradox__stat-label">patent applications per startup per year <small>(2023, WIPO)</small></span>
           </div>
-          <div class="paradox__stat paradox__stat--contrast">
+          <div class="paradox__stat paradox__stat--contrast" paReveal="left" paRevealDelay="240">
             <span class="paradox__stat-num text-gold">12.4</span>
             <span class="paradox__stat-label">patent applications per startup in South Korea <small>(2023, WIPO)</small></span>
           </div>
         </div>
-        <div class="paradox__text-col">
+        <div class="paradox__text-col" paReveal="right" paRevealDelay="100">
           <span class="eyebrow">India's Innovation Paradox</span>
           <h2>
             India invents. India doesn't patent. This book is here to change
@@ -285,7 +288,7 @@
 @if (testimonials.length) {
   <section class="testimonials section section--surface">
     <div class="container">
-      <div class="testimonials__header">
+      <div class="testimonials__header" paReveal>
         <span class="eyebrow">Endorsements</span>
         <h2>What Practitioners Are Saying</h2>
         <pa-rule class="gold-rule--center"></pa-rule>
@@ -293,7 +296,7 @@
 
       <div class="testimonials__grid">
         @for (t of testimonials; track t.id) {
-          <blockquote class="testimonial-card">
+          <blockquote class="testimonial-card" paReveal [paRevealDelay]="($index % 2) * 120">
             <p class="testimonial-card__quote">"{{ t.quote }}"</p>
             <footer class="testimonial-card__footer">
               <strong class="testimonial-card__name">{{ t.name }}</strong>
@@ -318,7 +321,7 @@
 @if (featuredPosts.length) {
   <section class="blog-preview section section--dark">
     <div class="container">
-      <div class="blog-preview__header">
+      <div class="blog-preview__header" paReveal>
         <span class="eyebrow">From the Blog</span>
         <h2>Essays &amp; Frameworks</h2>
         <pa-rule class="gold-rule--center"></pa-rule>
@@ -326,7 +329,7 @@
 
       <div class="blog-preview__grid">
         @for (post of featuredPosts; track post.slug) {
-          <a [routerLink]="['/blog', post.slug]" class="blog-card">
+          <a [routerLink]="['/blog', post.slug]" class="blog-card" paReveal [paRevealDelay]="$index * 100">
             <div class="blog-card__meta">
               <span class="blog-card__category">{{
                 post.category | titlecase
@@ -355,7 +358,7 @@
 <pa-blueprint-grid opacity="0.06">
   <section class="final-cta section section--dark">
     <div class="container">
-      <div class="final-cta__inner">
+      <div class="final-cta__inner" paReveal="scale">
         <span class="eyebrow">Get the Book</span>
         <h2 class="final-cta__title">
           The definitive reference<br />for the modern IP practitioner.

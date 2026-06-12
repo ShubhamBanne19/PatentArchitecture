@@ -1,5 +1,15 @@
-import { Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  NgZone,
+  OnDestroy,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { isTouchDevice, prefersReducedMotion } from '../../motion';
 
 export type CardVariant = 'navy' | 'surface' | 'ivory' | 'outlined';
 
@@ -8,7 +18,7 @@ export type CardVariant = 'navy' | 'surface' | 'ivory' | 'outlined';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="pa-card pa-card--{{variant}}" [class.pa-card--hover]="hoverable">
+    <div #card class="pa-card pa-card--{{variant}}" [class.pa-card--hover]="hoverable">
       @if (label) {
         <span class="pa-card__label">{{label}}</span>
       }
@@ -17,10 +27,12 @@ export type CardVariant = 'navy' | 'surface' | 'ivory' | 'outlined';
   `,
   styles: [`
     .pa-card {
+      position: relative;
       padding: var(--space-6);
       border-radius: var(--border-radius-md);
       transition: transform var(--duration) var(--ease-out),
-                  box-shadow var(--duration) var(--ease-out);
+                  box-shadow var(--duration) var(--ease-out),
+                  border-color var(--duration) var(--ease-out);
 
       &--navy {
         background: var(--color-navy);
@@ -43,11 +55,31 @@ export type CardVariant = 'navy' | 'surface' | 'ivory' | 'outlined';
         border: 1px solid rgba(201,169,97,0.3);
       }
 
+      // Pointer-tracking spotlight. --mx/--my are set from a zone-free
+      // pointermove listener; the overlay never intercepts events.
+      &--hover::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 350ms var(--ease-out);
+        background: radial-gradient(
+          480px circle at var(--mx, 50%) var(--my, 50%),
+          rgba(201, 169, 97, 0.1),
+          transparent 65%
+        );
+      }
+
       &--hover {
         cursor: pointer;
         &:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,169,97,0.3);
+          transform: translateY(-4px);
+          border-color: rgba(201,169,97,0.4);
+          box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 24px rgba(201,169,97,0.08);
+
+          &::after { opacity: 1; }
         }
       }
 
@@ -61,10 +93,38 @@ export type CardVariant = 'navy' | 'surface' | 'ivory' | 'outlined';
         margin-bottom: var(--space-3);
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pa-card--hover:hover { transform: none; }
+    }
   `]
 })
-export class CardComponent {
+export class CardComponent implements AfterViewInit, OnDestroy {
   @Input() variant: CardVariant = 'surface';
   @Input() hoverable = false;
   @Input() label?: string;
+
+  @ViewChild('card') private cardRef?: ElementRef<HTMLElement>;
+  private zone = inject(NgZone);
+  private detach?: () => void;
+
+  ngAfterViewInit(): void {
+    if (!this.hoverable || prefersReducedMotion() || isTouchDevice()) return;
+    const node = this.cardRef?.nativeElement;
+    if (!node) return;
+
+    this.zone.runOutsideAngular(() => {
+      const onMove = (ev: PointerEvent) => {
+        const rect = node.getBoundingClientRect();
+        node.style.setProperty('--mx', `${ev.clientX - rect.left}px`);
+        node.style.setProperty('--my', `${ev.clientY - rect.top}px`);
+      };
+      node.addEventListener('pointermove', onMove, { passive: true });
+      this.detach = () => node.removeEventListener('pointermove', onMove);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.detach?.();
+  }
 }

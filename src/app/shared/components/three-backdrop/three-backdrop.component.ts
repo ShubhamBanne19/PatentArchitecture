@@ -158,11 +158,11 @@ export class ThreeBackdropComponent implements AfterViewInit, OnDestroy {
     const pGeo = new THREE.BufferGeometry();
     pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     const pMat = new THREE.PointsMaterial({
-      color: 0xc9a961,
-      size: 1.6,
+      color: 0xd9bc7e,
+      size: 1.9,
       sizeAttenuation: true,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.95,
       depthWrite: false,
     });
     const points = new THREE.Points(pGeo, pMat);
@@ -176,7 +176,7 @@ export class ThreeBackdropComponent implements AfterViewInit, OnDestroy {
     const lMat = new THREE.LineBasicMaterial({
       color: 0xc9a961,
       transparent: true,
-      opacity: 0.14,
+      opacity: 0.2,
       depthWrite: false,
     });
     const lines = new THREE.LineSegments(lGeo, lMat);
@@ -188,7 +188,7 @@ export class ThreeBackdropComponent implements AfterViewInit, OnDestroy {
       color: 0xc9a961,
       wireframe: true,
       transparent: true,
-      opacity: 0.1,
+      opacity: 0.16,
       depthWrite: false,
     });
     const ico = new THREE.Mesh(icoGeo, icoMat);
@@ -262,6 +262,8 @@ export class ThreeBackdropComponent implements AfterViewInit, OnDestroy {
 
       points.rotation.y = t * 0.02;
       lines.rotation.y = t * 0.02;
+      // Slow collective twinkle
+      pMat.opacity = 0.8 + Math.sin(t * 1.2) * 0.15;
       ico.rotation.x = t * 0.08;
       ico.rotation.y = t * 0.12;
       ico.position.y = 4 + Math.sin(t * 0.5) * 2.5;

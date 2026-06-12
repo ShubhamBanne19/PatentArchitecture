@@ -34,6 +34,7 @@
           <div class="hero__ctas" paReveal paRevealDelay="420">
             @if (siteConfig?.isLive) {
               <pa-btn
+                paMagnetic
                 variant="primary"
                 size="lg"
                 [href]="siteConfig!.amazonUrl"
@@ -43,11 +44,11 @@
                 Buy the Book
               </pa-btn>
             } @else {
-              <pa-btn variant="outline" size="lg" routerLink="/newsletter">
+              <pa-btn paMagnetic variant="outline" size="lg" routerLink="/newsletter">
                 Coming {{ siteConfig?.launchDateDisplay }}
               </pa-btn>
             }
-            <pa-btn variant="outline" size="lg" routerLink="/companion">
+            <pa-btn paMagnetic variant="outline" size="lg" routerLink="/companion">
               Open Living Companion
             </pa-btn>
           </div>
@@ -59,11 +60,15 @@
           </p>
         </div>
 
-        <!-- Book cover mockup -->
+        <!-- Book cover mockup (true 3D object: front, back, spine, page block) -->
         <div class="hero__visual" aria-hidden="true" paReveal="scale" paRevealDelay="300">
-          <div class="book-cover book-cover--floating" paTilt [paTiltMax]="9" [paTiltScale]="1.03">
-            <div class="book-cover__spine"></div>
-            <div class="book-cover__face">
+          <div class="book3d-stage">
+            <div class="book3d-tilt" paTilt [paTiltMax]="8" [paTiltScale]="1.02">
+              <div class="book-cover">
+                <div class="book-cover__back"></div>
+                <div class="book-cover__pages"></div>
+                <div class="book-cover__spine"></div>
+                <div class="book-cover__face">
               <div class="book-cover__grid"></div>
               <div class="book-cover__content">
                 <span class="book-cover__vol">Volume I</span>
@@ -86,7 +91,11 @@
                   <span>60+ AI Prompts</span>
                 </div>
               </div>
+                </div>
+              </div>
             </div>
+            <div class="book3d-stage__shadow"></div>
+            <div class="book3d-stage__glow"></div>
           </div>
         </div>
       </div>

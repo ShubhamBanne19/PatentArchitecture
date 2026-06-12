@@ -34,21 +34,32 @@ export type CardVariant = 'navy' | 'surface' | 'ivory' | 'outlined';
                   box-shadow var(--duration) var(--ease-out),
                   border-color var(--duration) var(--ease-out);
 
+      // Gradient hairline border: the card background paints the padding-box
+      // and a gold-to-transparent gradient paints the border-box, giving a
+      // lit top-left edge that reads as premium against the navy canvas.
       &--navy {
-        background: var(--color-navy);
-        border: 1px solid rgba(201,169,97,0.15);
+        border: 1px solid transparent;
+        background:
+          linear-gradient(var(--color-navy), var(--color-navy)) padding-box,
+          linear-gradient(150deg, rgba(201,169,97,0.5), rgba(201,169,97,0.1) 45%, rgba(244,239,230,0.06)) border-box;
         box-shadow: var(--shadow-card);
       }
       &--surface {
-        background: var(--color-surface-1);
-        border: 1px solid rgba(201,169,97,0.15);
+        border: 1px solid transparent;
+        background:
+          linear-gradient(rgba(34,39,74,0.92), rgba(34,39,74,0.92)) padding-box,
+          linear-gradient(150deg, rgba(201,169,97,0.5), rgba(201,169,97,0.1) 45%, rgba(244,239,230,0.06)) border-box;
         box-shadow: var(--shadow-card);
       }
+      // "ivory" stays in the navy family (all screens keep the navy canvas);
+      // it now reads as the brightest elevation tier.
       &--ivory {
-        background: var(--color-ivory);
-        border: 1px solid var(--color-ivory-dim);
-        color: var(--color-text-dark);
-        box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        border: 1px solid transparent;
+        background:
+          linear-gradient(var(--color-surface-2), var(--color-surface-2)) padding-box,
+          linear-gradient(150deg, rgba(201,169,97,0.55), rgba(201,169,97,0.12) 45%, rgba(244,239,230,0.08)) border-box;
+        color: var(--color-ivory);
+        box-shadow: var(--shadow-card);
       }
       &--outlined {
         background: transparent;

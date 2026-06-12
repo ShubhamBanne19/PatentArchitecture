@@ -111,19 +111,26 @@ export type BtnSize = 'sm' | 'md' | 'lg';
 
       // Variants
       &--primary {
-        background: var(--color-gold);
+        background: linear-gradient(180deg, var(--color-gold-light) 0%, var(--color-gold) 55%, var(--color-gold-dark) 100%);
         color: var(--color-navy);
-        border-color: var(--color-gold);
+        border-color: rgba(222, 192, 122, 0.9);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.35),
+          0 2px 12px rgba(201, 169, 97, 0.25);
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
 
         &:hover:not(:disabled) {
-          background: var(--color-gold-light);
+          background: linear-gradient(180deg, #ECD79A 0%, var(--color-gold-light) 55%, var(--color-gold) 100%);
           border-color: var(--color-gold-light);
           transform: translateY(-1px);
-          box-shadow: 0 4px 16px rgba(201,169,97,0.35);
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 6px 24px rgba(201, 169, 97, 0.45);
         }
         &:active:not(:disabled) {
           background: var(--color-gold-dark);
           transform: translateY(0);
+          box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
         }
       }
 

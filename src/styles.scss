@@ -29,6 +29,34 @@ body {
   overflow-x: hidden;
 }
 
+// ── AMBIENT CANVAS ───────────────────────────────────────────────────────────
+// Two fixed, non-interactive layers that give every page depth without ever
+// changing the navy base: (1) soft aurora glows, (2) fine film grain.
+// Both are pure decoration - zero layout impact, GPU-composited.
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 15% -10%, rgba(201, 169, 97, 0.07), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 85% 15%, rgba(76, 88, 170, 0.14), transparent 65%),
+    radial-gradient(ellipse 70% 60% at 50% 110%, rgba(44, 49, 96, 0.5), transparent 70%),
+    linear-gradient(180deg, var(--color-navy-deep), var(--color-navy) 35%);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
 // ── BASE ELEMENTS ─────────────────────────────────────────────────────────────
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-display;
@@ -46,7 +74,7 @@ h5 { font-size: var(--text-lg); }
 h6 { font-size: var(--text-md); }
 
 p {
-  color: rgba(244, 239, 230, 0.82);
+  color: rgba(244, 239, 230, 0.88);
   max-width: var(--max-width-prose);
   line-height: 1.75;
 }
@@ -83,9 +111,12 @@ input, textarea, select {
 
 .section { @include section-padding; }
 
-.section--dark    { background: var(--color-navy); }
-.section--light   { background: var(--color-ivory); color: var(--color-text-dark); }
-.section--surface { background: var(--color-surface-1); }
+// All sections stay on the navy canvas. "dark" is fully transparent so the
+// ambient aurora shows through; "surface" and "light" are translucent navy
+// elevations (the former ivory "light" variant is retired - navy everywhere).
+.section--dark    { background: transparent; }
+.section--light   { background: rgba(44, 49, 96, 0.35); }
+.section--surface { background: rgba(34, 39, 74, 0.55); }
 
 .gold-rule {
   display: block;

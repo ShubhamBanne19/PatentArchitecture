@@ -38,8 +38,8 @@ import { BtnComponent } from '../../shared/components/btn/btn.component';
     .legal-body { padding-block: var(--space-10) var(--space-16); }
     .prose-legal {
       max-width: 680px;
-      h2 { font-family: var(--font-display); font-size: var(--text-xl); color: var(--color-text-dark); margin-block: var(--space-8) var(--space-3); }
-      p { color: var(--color-text-mid); line-height: 1.8; margin-bottom: var(--space-4); }
+      h2 { font-family: var(--font-display); font-size: var(--text-xl); color: var(--color-ivory); margin-block: var(--space-8) var(--space-3); }
+      p { color: rgba(244,239,230,0.84); line-height: 1.8; margin-bottom: var(--space-4); }
       a { color: var(--color-gold); }
     }
   `]

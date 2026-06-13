@@ -23,7 +23,39 @@
     @include bp(lg) { grid-template-columns: 1fr auto; gap: var(--space-20); }
   }
 
-  &__content { max-width: 640px; }
+  &__content {
+    position: relative;
+    max-width: 640px;
+
+    // Localized contrast "spotlight": a soft dark substrate that travels with
+    // the text. It lives inside the container's stacking context (z-index: 1),
+    // so it always paints ABOVE the particle canvas (z-index: 0) but behind the
+    // text (z-index: -1 here) - guaranteeing legibility regardless of what the
+    // decorative aurora/particles do behind it. pointer-events:none keeps the
+    // book + links fully interactive.
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: -4rem -7rem;
+      pointer-events: none;
+      // Diffuse elliptical pool of darkness, anchored under the text and
+      // feathered well before its edges so it reads as soft lighting rather
+      // than a panel. Big blur dissolves any hard boundary.
+      background: radial-gradient(
+        135% 105% at 28% 44%,
+        rgba(9, 11, 24, 0.9) 0%,
+        rgba(10, 13, 28, 0.74) 34%,
+        rgba(12, 15, 31, 0.4) 56%,
+        transparent 78%
+      );
+      filter: blur(22px);
+
+      @include bp(lg) {
+        inset: -5rem -9rem -5rem -10rem;
+      }
+    }
+  }
 
   &__title {
     font-size: clamp(3rem, 7vw, 5.5rem);
@@ -124,6 +156,27 @@ $book-depth: 34px;
   position: relative;
   perspective: 1400px;
 
+  // Soft luminous halo BEHIND the book so it separates cleanly from the dark
+  // canvas (the book is intentionally dark navy; this gives it a lit stage).
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    height: 130%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      ellipse at 42% 45%,
+      rgba(201, 169, 97, 0.22) 0%,
+      rgba(124, 116, 196, 0.16) 35%,
+      transparent 68%
+    );
+    filter: blur(18px);
+    pointer-events: none;
+  }
+
   &__shadow {
     position: absolute;
     left: 50%;
@@ -131,7 +184,7 @@ $book-depth: 34px;
     width: 115%;
     height: 44px;
     transform: translateX(-50%) rotateX(76deg);
-    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55), transparent 68%);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6), transparent 68%);
     filter: blur(6px);
     pointer-events: none;
   }
@@ -139,12 +192,12 @@ $book-depth: 34px;
   &__glow {
     position: absolute;
     left: 50%;
-    bottom: -36px;
-    width: 85%;
+    bottom: -34px;
+    width: 80%;
     height: 30px;
     transform: translateX(-50%);
-    background: radial-gradient(ellipse at center, rgba(201, 169, 97, 0.22), transparent 70%);
-    filter: blur(14px);
+    background: radial-gradient(ellipse at center, rgba(201, 169, 97, 0.35), transparent 72%);
+    filter: blur(16px);
     pointer-events: none;
   }
 }
@@ -219,19 +272,23 @@ $book-depth: 34px;
     position: absolute;
     inset: 0;
     transform: translateZ(calc($book-depth / 2));
+    // Richer, slightly lighter cover so it reads as a distinct object against
+    // the dark canvas, with a warm gold wash toward the top-left light source.
     background:
-      linear-gradient(155deg, #232849 0%, var(--color-navy) 45%, #161a33 100%);
-    border: 1px solid rgba(201, 169, 97, 0.55);
-    border-radius: 0 4px 4px 0;
+      radial-gradient(120% 80% at 18% 12%, rgba(201, 169, 97, 0.16), transparent 55%),
+      linear-gradient(150deg, #2b3163 0%, #20254a 48%, #161a33 100%);
+    border: 1px solid rgba(201, 169, 97, 0.7);
+    border-radius: 0 5px 5px 0;
     overflow: hidden;
     padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
-    // Gold rim light along the outer edge + soft self-shadow for depth
+    // Double gold frame + edge light + ambient gold bloom for a premium feel
     box-shadow:
-      inset 0 0 0 1px rgba(201, 169, 97, 0.12),
-      inset -14px 0 28px rgba(0, 0, 0, 0.35),
-      0 0 36px rgba(201, 169, 97, 0.1);
+      inset 0 0 0 1px rgba(201, 169, 97, 0.25),
+      inset 0 1px 0 rgba(244, 239, 230, 0.12),
+      inset -16px 0 30px rgba(0, 0, 0, 0.4),
+      0 0 50px rgba(201, 169, 97, 0.18);
 
     // Sheen sweeping across the cover
     &::before {

@@ -52,6 +52,8 @@ export type BtnSize = 'sm' | 'md' | 'lg';
   `,
   styles: [`
     .pa-btn {
+      position: relative;
+      overflow: hidden;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -65,6 +67,35 @@ export type BtnSize = 'sm' | 'md' | 'lg';
       white-space: nowrap;
       border: 2px solid transparent;
       outline: none;
+
+      // Shine sweep on hover (primary / outline only)
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -80%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+          105deg,
+          transparent,
+          rgba(255, 255, 255, 0.28),
+          transparent
+        );
+        transform: skewX(-20deg);
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      &--primary:hover:not(:disabled)::before,
+      &--outline:hover:not(:disabled)::before {
+        opacity: 1;
+        animation: pa-btn-shine 700ms var(--ease-out);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        &::before { display: none; }
+      }
 
       &:focus-visible {
         outline: 2px solid var(--color-gold);
@@ -80,19 +111,26 @@ export type BtnSize = 'sm' | 'md' | 'lg';
 
       // Variants
       &--primary {
-        background: var(--color-gold);
+        background: linear-gradient(180deg, var(--color-gold-light) 0%, var(--color-gold) 55%, var(--color-gold-dark) 100%);
         color: var(--color-navy);
-        border-color: var(--color-gold);
+        border-color: rgba(222, 192, 122, 0.9);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.35),
+          0 2px 12px rgba(201, 169, 97, 0.25);
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
 
         &:hover:not(:disabled) {
-          background: var(--color-gold-light);
+          background: linear-gradient(180deg, #ECD79A 0%, var(--color-gold-light) 55%, var(--color-gold) 100%);
           border-color: var(--color-gold-light);
           transform: translateY(-1px);
-          box-shadow: 0 4px 16px rgba(201,169,97,0.35);
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 6px 24px rgba(201, 169, 97, 0.45);
         }
         &:active:not(:disabled) {
           background: var(--color-gold-dark);
           transform: translateY(0);
+          box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
         }
       }
 
@@ -139,6 +177,11 @@ export type BtnSize = 'sm' | 'md' | 'lg';
         align-items: center;
         font-size: 1.1em;
       }
+    }
+
+    @keyframes pa-btn-shine {
+      from { left: -80%; }
+      to   { left: 130%; }
     }
   `]
 })

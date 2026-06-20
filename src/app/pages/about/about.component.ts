@@ -22,18 +22,17 @@ import { BlueprintGridComponent } from '../../shared/components/blueprint-grid/b
               <p class="about-hero__title-sub">Patent Practitioner, Author &amp; IP Educator</p>
               <pa-rule></pa-rule>
               <p>
-                Shubham Sanjay Banne is a patent practitioner with deep expertise across
-                Indian patent law, USPTO prosecution, and AI-augmented IP strategy.
-                He is the author of <em>The Patent Architect</em>, the most comprehensive
-                single-volume treatment of Indian and international patent practice
-                currently available in English.
+                Shubham Sanjay Banne is an intellectual-property researcher with a focus on
+                Indian patent law, USPTO prosecution, and AI-augmented IP strategy. He is the
+                author of <em>The Patent Architect</em>, an integrated single-volume guide to
+                Indian and international patent practice.
               </p>
               <p>
-                His work sits at the intersection of rigorous legal doctrine and the
-                practical realities of patent drafting and prosecution. He has prosecuted
-                patents across technology sectors - software, hardware, biotech, and
-                manufacturing - and advises startups, corporations, and institutions
-                on IP strategy.
+                His work sits at the intersection of legal doctrine and the practical realities
+                of patent drafting and prosecution. Through his research, he has studied patent
+                practice across technology sectors - software, hardware, biotech, and
+                manufacturing - and writes to help inventors, startups, and institutions
+                understand and navigate IP strategy.
               </p>
             </div>
             <div class="about-hero__portrait" aria-hidden="true">
@@ -94,14 +93,14 @@ import { BlueprintGridComponent } from '../../shared/components/blueprint-grid/b
     .about-hero { padding-block: var(--space-16) var(--space-12); }
     .about-hero__inner { display: grid; gap: var(--space-10); @include bp(lg) { grid-template-columns: 2fr 1fr; align-items: start; } }
     .about-hero__title-sub { font-family: $font-display; font-style: italic; font-size: var(--text-xl); color: var(--color-silver); margin-bottom: var(--space-4); max-width: none; }
-    .about-hero__content { h1 { margin-bottom: var(--space-3); } p { color: rgba(244,239,230,0.75); margin-bottom: var(--space-4); } }
+    .about-hero__content { h1 { margin-bottom: var(--space-3); } p { color: rgba(244,239,230,0.86); margin-bottom: var(--space-4); } }
     .about-hero__portrait { display: flex; justify-content: center; align-items: flex-start; }
     .portrait-placeholder { width: 200px; height: 200px; border-radius: 4px; background: var(--color-surface-2); border: 2px solid rgba(201,169,97,0.3); display: grid; place-items: center; }
     .portrait-placeholder__initials { font-family: $font-display; font-size: var(--text-4xl); font-weight: 700; color: var(--color-gold); }
 
     .about-mission { padding-block: var(--space-16); }
-    .about-mission__inner { max-width: 680px; h2 { margin-bottom: var(--space-3); } p { color: var(--color-text-mid); margin-bottom: var(--space-4); } }
-    .about-mission__quote { border-left: 3px solid var(--color-gold); padding-left: var(--space-5); margin-top: var(--space-6); font-family: $font-display; font-style: italic; font-size: var(--text-lg); color: var(--color-navy); line-height: 1.6; }
+    .about-mission__inner { max-width: 680px; h2 { margin-bottom: var(--space-3); } p { color: rgba(244,239,230,0.86); margin-bottom: var(--space-4); } }
+    .about-mission__quote { border-left: 3px solid var(--color-gold); padding-left: var(--space-5); margin-top: var(--space-6); font-family: $font-display; font-style: italic; font-size: var(--text-lg); color: var(--color-ivory); line-height: 1.6; }
 
     .about-ctas { padding-block: var(--space-10); }
     .about-ctas__inner { display: flex; gap: var(--space-4); flex-wrap: wrap; }

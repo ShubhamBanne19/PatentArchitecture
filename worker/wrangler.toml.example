@@ -1,0 +1,18 @@
+name = "patent-architect-razorpay"
+main = "razorpay-worker.ts"
+compatibility_date = "2026-06-10"
+
+# Copy this file to wrangler.toml locally. Keep real secrets out of git.
+# Use `npx wrangler secret put SECRET_NAME` for every value below.
+#
+# Required secrets:
+# - ALLOWED_ORIGIN
+# - BASIC_PLAN_ID
+# - FIREBASE_CLIENT_EMAIL
+# - FIREBASE_PRIVATE_KEY
+# - FIREBASE_PROJECT_ID
+# - FIREBASE_WEB_API_KEY
+# - PREMIUM_PLAN_ID
+# - RAZORPAY_KEY_ID
+# - RAZORPAY_KEY_SECRET
+# - RAZORPAY_WEBHOOK_SECRET

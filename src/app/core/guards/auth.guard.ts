@@ -1,0 +1,38 @@
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { filter, map, take } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+
+export const authGuard: CanActivateFn = (_route, state) => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+
+  if (!auth.loading()) {
+    return auth.isAuthenticated()
+      ? true
+      : router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
+  }
+
+  return auth.ready$.pipe(
+    filter(Boolean),
+    take(1),
+    map(() => auth.isAuthenticated()
+      ? true
+      : router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } }))
+  );
+};
+
+export const guestGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+
+  if (!auth.loading()) {
+    return auth.isAuthenticated() ? router.createUrlTree(['/dashboard']) : true;
+  }
+
+  return auth.ready$.pipe(
+    filter(Boolean),
+    take(1),
+    map(() => auth.isAuthenticated() ? router.createUrlTree(['/dashboard']) : true)
+  );
+};

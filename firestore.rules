@@ -1,0 +1,133 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ─── Helper functions ────────────────────────────────────────────────
+    
+    /// Check if user is authenticated
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    /// Check if request is from the user owning a document
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    /// Get the current user's profile document
+    function userProfile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    /// Check if profile exists
+    function profileExists() {
+      return userProfile().data != null;
+    }
+
+    /// Get user's subscription tier
+    function userTier() {
+      return profileExists() ? userProfile().data.subscription.tier : 'free';
+    }
+
+    /// Get user's subscription status
+    function userStatus() {
+      return profileExists() ? userProfile().data.subscription.status : 'free';
+    }
+
+    /// Check if user has active subscription
+    function hasActiveSubscription() {
+      return signedIn() 
+        && profileExists()
+        && userStatus() == 'active';
+    }
+
+    /// Check if user can read premium content at given access level
+    function canReadPremium(accessLevel) {
+      return hasActiveSubscription()
+        && (
+          (accessLevel == 'basic' && userTier() in ['basic', 'premium'])
+          || (accessLevel == 'premium' && userTier() == 'premium')
+        );
+    }
+
+    // ─── Users collection ────────────────────────────────────────────────
+    // Storage: user/{uid} documents with profile, subscription, and Razorpay ID
+    // Security: Users can only read/write their own profiles
+    // Server-side fields: subscription, razorpayCustomerId (updated by Worker only)
+    
+    match /users/{uid} {
+      /// Allow create: New user registration via auth service
+      /// Enforces initial state: tier=free, status=free, role=user
+      allow create: if isOwner(uid)
+        && request.resource.data.uid == uid
+        && request.resource.data.role == 'user'
+        && request.resource.data.subscription.tier == 'free'
+        && request.resource.data.subscription.status == 'free'
+        && request.resource.data.keys().hasOnly([
+          'uid', 'email', 'name', 'role', 'subscription', 'razorpayCustomerId',
+          'createdAt', 'lastLoginAt'
+        ]);
+
+      /// Allow read: User can read their own profile
+      allow read: if isOwner(uid);
+
+      /// Allow update: User can update non-system fields
+      /// Forbidden updates: role, subscription (updated by Worker via webhook), razorpayCustomerId
+      allow update: if isOwner(uid)
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+          'role',
+          'subscription',
+          'razorpayCustomerId'
+        ]);
+
+      /// Deny delete: Users cannot delete their own accounts (admin-only)
+      allow delete: if false;
+    }
+
+    // ─── Premium Content collection ──────────────────────────────────────
+    // Storage: Document per chapter extra, prompt pack, download, etc.
+    // Fields: id, chapterId, title, type, accessLevel ('basic'|'premium'),
+    //         bodyMarkdown, published, updatedAt
+    // Security: Published content readable by active subscribers matching tier
+    
+    match /premiumContent/{contentId} {
+      /// Allow read: Published content only, access control by subscription tier
+      allow read: if resource.data.published == true 
+        && canReadPremium(resource.data.accessLevel);
+
+      /// Deny all writes: Content managed by admin only
+      allow write: if false;
+    }
+
+    // ─── Subscriptions collection ────────────────────────────────────────
+    // Storage: Tracking subscription state, managed by Worker webhooks
+    // Fields: uid, tier, status, provider, planId, razorpayCustomerId,
+    //         razorpayStatus, currentStart, currentEnd, createdAt, updatedAt
+    // Security: Readable by subscription owner only, writable by Worker only
+    
+    match /subscriptions/{subscriptionId} {
+      /// Allow read: Owner can view their subscription records
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+
+      /// Deny all writes: Webhook-only updates (via Worker credentials)
+      allow write: if false;
+    }
+
+    // ─── Razorpay Events collection ──────────────────────────────────────
+    // Storage: Webhook events for audit trail and deduplication
+    // Fields: event, subscriptionId, uid, processed, processedAt
+    // Security: Audit-only, no user access
+    
+    match /razorpayEvents/{eventId} {
+      /// Deny all access: Service-account only (Worker)
+      allow read, write: if false;
+    }
+
+    // ─── Catch-all ───────────────────────────────────────────────────────
+    // Explicitly deny access to any undeclared collections
+    
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

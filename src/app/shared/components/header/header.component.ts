@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, RouterLinkActive } from '@angular/router';
 import { BtnComponent } from '../btn/btn.component';
 import { SiteConfigService, SiteConfig } from '../../../core/services/site-config.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 interface NavLink {
   label: string;
@@ -61,8 +62,9 @@ interface NavLink {
 
         <!-- CTAs -->
         <div class="site-header__actions">
-          <pa-btn variant="ghost" size="sm" routerLink="/companion">
-            Companion
+          <pa-btn variant="ghost" size="sm" routerLink="/pricing">Pricing</pa-btn>
+          <pa-btn variant="ghost" size="sm" [routerLink]="auth.isAuthenticated() ? '/dashboard' : '/login'">
+            {{ auth.isAuthenticated() ? 'Dashboard' : 'Login' }}
           </pa-btn>
           @if (siteConfig?.isLive) {
             <pa-btn variant="primary" size="sm" [href]="siteConfig!.amazonUrl" [external]="true">
@@ -107,6 +109,17 @@ interface NavLink {
             <pa-btn variant="outline" routerLink="/companion" [fullWidth]="true" (clicked)="mobileOpen.set(false)">
               Open Companion
             </pa-btn>
+            <pa-btn variant="outline" routerLink="/pricing" [fullWidth]="true" (clicked)="mobileOpen.set(false)">
+              Pricing
+            </pa-btn>
+            <pa-btn
+              variant="outline"
+              [routerLink]="auth.isAuthenticated() ? '/dashboard' : '/login'"
+              [fullWidth]="true"
+              (clicked)="mobileOpen.set(false)"
+            >
+              {{ auth.isAuthenticated() ? 'Dashboard' : 'Login' }}
+            </pa-btn>
             @if (siteConfig?.isLive) {
               <pa-btn variant="primary" [href]="siteConfig!.amazonUrl" [fullWidth]="true" [external]="true">
                 Buy the Book
@@ -127,14 +140,43 @@ interface NavLink {
       top: 0;
       z-index: 200;
       height: var(--header-h);
-      background: rgba(27, 31, 59, 0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(27, 31, 59, 0.82);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
       border-bottom: 1px solid rgba(201,169,97,0.1);
-      transition: border-color 200ms, box-shadow 200ms;
+      transition: border-color 200ms, box-shadow 200ms, background 300ms;
+
+      // Animated gold hairline, revealed on scroll
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(201,169,97,0.7) 30%,
+          rgba(222,192,122,0.9) 50%,
+          rgba(201,169,97,0.7) 70%,
+          transparent
+        );
+        opacity: 0;
+        transform: scaleX(0.4);
+        transition: opacity 400ms var(--ease-out), transform 600ms var(--ease-out);
+        pointer-events: none;
+      }
 
       &--scrolled {
-        border-bottom-color: rgba(201,169,97,0.25);
+        background: rgba(27, 31, 59, 0.94);
+        border-bottom-color: rgba(201,169,97,0.18);
         box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+
+        &::after {
+          opacity: 1;
+          transform: scaleX(1);
+        }
       }
 
       &__inner {
@@ -342,6 +384,7 @@ interface NavLink {
 })
 export class HeaderComponent implements OnInit {
   private siteConfigService = inject(SiteConfigService);
+  readonly auth = inject(AuthService);
   siteConfig: SiteConfig | null = null;
 
   scrolled = signal(false);
@@ -351,12 +394,14 @@ export class HeaderComponent implements OnInit {
   navLinks: NavLink[] = [
     { label: 'Home', path: '/' },
     { label: 'The Book', path: '/book' },
+    { label: 'Pricing', path: '/pricing' },
     {
       label: 'Companion', path: '/companion',
       children: [
         { label: 'Companion Hub', path: '/companion' },
         { label: 'Fee Schedules', path: '/companion/fees' },
         { label: 'AI Prompt Library', path: '/prompts' },
+        { label: 'Premium Companion', path: '/premium' },
       ]
     },
     { label: 'Blog', path: '/blog' },

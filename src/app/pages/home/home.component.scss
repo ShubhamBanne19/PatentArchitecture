@@ -175,6 +175,8 @@ $book-depth: 34px;
     );
     filter: blur(18px);
     pointer-events: none;
+    // Slow "breathing" so the stage light feels alive, not static.
+    animation: aura-breathe 7s ease-in-out infinite;
   }
 
   &__shadow {
@@ -202,96 +204,141 @@ $book-depth: 34px;
   }
 }
 
+// Foreshortened orbit ring around the book — a quiet sense of journey/reach
+// ("across India, USA & the World"). A faint full ring with one brighter arc
+// that sweeps around it. Sits behind the book with the halo.
+.book3d-stage__orbit {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: 135%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotateX(74deg) rotate(0deg);
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    conic-gradient(from 0deg, transparent 0 205deg, rgba(222, 192, 122, 0.55) 318deg, transparent 360deg),
+    conic-gradient(rgba(201, 169, 97, 0.1), rgba(201, 169, 97, 0.1));
+  // Carve the disc into a thin ring.
+  -webkit-mask: radial-gradient(closest-side, transparent 77%, #000 80% 84%, transparent 87%);
+          mask: radial-gradient(closest-side, transparent 77%, #000 80% 84%, transparent 87%);
+  animation: orbit-spin 26s linear infinite;
+}
+
+// Idea-motes drifting up around the book — the "wanderlust" sparkle.
+.book3d-stage__motes {
+  position: absolute;
+  inset: -8% -18%;
+  z-index: 2;
+  pointer-events: none;
+
+  i {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    background: radial-gradient(circle, rgba(244, 239, 230, 0.95), rgba(201, 169, 97, 0.6) 45%, transparent 70%);
+    animation: mote-rise var(--mote-dur, 10s) ease-in-out var(--mote-delay, 0s) infinite;
+  }
+
+  i:nth-child(1) { left: 10%; bottom: 6%;  --mote-dur: 8s;  --mote-delay: 0s;   --mote-x: -12px; }
+  i:nth-child(2) { left: 30%; bottom: 0%;  --mote-dur: 11s; --mote-delay: 1.6s; --mote-x: 8px;  }
+  i:nth-child(3) { left: 52%; bottom: 10%; --mote-dur: 9s;  --mote-delay: 3.1s; --mote-x: -6px; }
+  i:nth-child(4) { left: 70%; bottom: 2%;  --mote-dur: 12s; --mote-delay: 0.8s; --mote-x: 14px; }
+  i:nth-child(5) { left: 86%; bottom: 12%; --mote-dur: 10s; --mote-delay: 2.3s; --mote-x: -10px;}
+  i:nth-child(6) { left: 44%; bottom: -4%; --mote-dur: 13s; --mote-delay: 4.2s; --mote-x: 6px;  }
+}
+
 .book3d-tilt {
   transform-style: preserve-3d;
 }
 
-.book-cover {
+// ── THE TOME (multi-page cinematic open) ─────────────────────────────────────
+// A bound book that, once it scrolls into view (paBookOpen adds `.is-open`),
+// flips its cover and pages open to the left one after another and settles on
+// the content page, with golden light blooming from the gutter. Leaves are
+// stacked flush (no gap) and hinged on the spine (left edge); the open spread
+// stays contained. paTilt adds parallax; the whole book gently floats.
+$leaf-radius: 0 5px 5px 0;
+
+.book {
   position: relative;
-  width: 260px;
-  height: 360px;
+  width: 230px;
+  height: 338px;
   transform-style: preserve-3d;
-  // Static resting pose: survives even when animations are disabled
-  // (reduced motion) so the book is always seen in three-quarter view.
-  transform: rotateY(-24deg) rotateX(4deg);
-  animation: book-float 8s ease-in-out infinite;
+  // Shifted right so the leftward-opening spread lands centered; resting
+  // lectern tilt. Survives reduced motion as a static, opened book.
+  // Rightward nudge so the leftward-opening spread reads centered. Reduced on
+  // small screens (see media queries) so the open book never gets clipped.
+  --book-shift: 30%;
+  transform: translateX(var(--book-shift)) rotateY(-22deg) rotateX(12deg);
+  animation: book-float 9s ease-in-out infinite;
 
-  @include bp(lg) { width: 300px; height: 420px; }
+  @include bp(lg) { width: 268px; height: 394px; }
 
-  &__spine {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: $book-depth;
-    transform-origin: left center;
-    transform: rotateY(-90deg) translateX(calc($book-depth / -2));
-    background: linear-gradient(to bottom, #232849, #161a33);
-    border-block: 1px solid rgba(201, 169, 97, 0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &::after {
-      content: '';
-      width: 1px;
-      height: 78%;
-      background: linear-gradient(to bottom, transparent, rgba(201,169,97,0.55), transparent);
-    }
-  }
-
-  &__pages {
-    position: absolute;
-    right: 0;
-    top: 3px;
-    bottom: 3px;
-    width: $book-depth;
-    transform-origin: right center;
-    transform: rotateY(90deg) translateX(calc($book-depth / 2));
-    border-radius: 0 2px 2px 0;
-    // Ivory page block with fine page striations
-    background:
-      repeating-linear-gradient(
-        to right,
-        rgba(15, 18, 38, 0.18) 0 1px,
-        transparent 1px 3px
-      ),
-      linear-gradient(to right, #ddd5c4, #f1ead9 30%, #e6decb);
-  }
-
-  &__back {
+  // ── Leaf + face scaffolding ───────────────────────────────────────────────
+  &__leaf {
     position: absolute;
     inset: 0;
-    transform: translateZ(calc($book-depth / -2));
-    background: #161a33;
-    border: 1px solid rgba(201, 169, 97, 0.2);
-    border-radius: 4px 0 0 4px;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transform: rotateY(0deg);                       // closed: stacked at right
+    transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.2, 1);
+    will-change: transform;
   }
 
   &__face {
     position: absolute;
     inset: 0;
-    transform: translateZ(calc($book-depth / 2));
-    // Richer, slightly lighter cover so it reads as a distinct object against
-    // the dark canvas, with a warm gold wash toward the top-left light source.
+    overflow: hidden;
+    border-radius: $leaf-radius;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 14px 0 22px -12px rgba(0, 0, 0, 0.45);  // curl toward spine
+  }
+  &__face--front { transform: translateZ(0.3px); }
+  &__face--back {
+    transform: rotateY(180deg) translateZ(0.3px);
+    border-radius: 5px 0 0 5px;
+    box-shadow: inset -14px 0 22px -12px rgba(0, 0, 0, 0.45);
+  }
+
+  // Plain ivory paper leaves
+  &__paper {
+    background:
+      repeating-linear-gradient(transparent 0 26px, rgba(42, 47, 82, 0.045) 26px 27px),
+      linear-gradient(125deg, #fbf6ea, #f1ead9 60%, #e7dec9);
+  }
+  &__paper--verso { filter: brightness(0.985); }
+
+  // Stack depth: cover on top, pages descending toward the right page.
+  // (--i is each page's index from the template; higher index = deeper.)
+  // transition-delay here is the CLOSING order (when `is-open` is removed):
+  // the top page flips shut first, the cover caps it last — like a real book.
+  &__leaf--cover { transform: translateZ(8.5px); transition-delay: 0.5s; }
+  &__leaf--page  {
+    transform: translateZ(calc((10 - var(--i)) * 0.62px));
+    transition-delay: calc((9 - var(--i)) * 0.045s);
+  }
+
+  // ── Gilded cover faces ─────────────────────────────────────────────────────
+  &__cover-face {
+    padding: 1.9rem 1.4rem;
+    border: 1px solid rgba(201, 169, 97, 0.7);
     background:
       radial-gradient(120% 80% at 18% 12%, rgba(201, 169, 97, 0.16), transparent 55%),
       linear-gradient(150deg, #2b3163 0%, #20254a 48%, #161a33 100%);
-    border: 1px solid rgba(201, 169, 97, 0.7);
-    border-radius: 0 5px 5px 0;
-    overflow: hidden;
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    // Double gold frame + edge light + ambient gold bloom for a premium feel
     box-shadow:
       inset 0 0 0 1px rgba(201, 169, 97, 0.25),
       inset 0 1px 0 rgba(244, 239, 230, 0.12),
       inset -16px 0 30px rgba(0, 0, 0, 0.4),
       0 0 50px rgba(201, 169, 97, 0.18);
 
-    // Sheen sweeping across the cover
-    &::before {
+    &::before {                                       // slow sheen sweep
       content: '';
       position: absolute;
       inset: 0;
@@ -308,8 +355,7 @@ $book-depth: 34px;
       pointer-events: none;
     }
 
-    // Pointer-following glare (activated on wrapper hover)
-    &::after {
+    &::after {                                        // pointer glare (hover)
       content: '';
       position: absolute;
       inset: 0;
@@ -323,20 +369,227 @@ $book-depth: 34px;
       );
     }
   }
+
+  &__cover-inner {                                    // endpaper (cover back)
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(80% 60% at 70% 30%, rgba(201, 169, 97, 0.12), transparent 60%),
+      linear-gradient(150deg, #20254a, #14182f);
+  }
+  &__cover-emblem {
+    font-size: 2.4rem;
+    color: rgba(201, 169, 97, 0.5);
+    text-shadow: 0 0 20px rgba(201, 169, 97, 0.3);
+  }
+
+  // ── Right (destination) page ───────────────────────────────────────────────
+  &__page--right {
+    position: absolute;
+    inset: 0;
+    transform: translateZ(0);
+    overflow: hidden;
+    padding: 1.9rem 1.4rem 1.9rem 1.7rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: $leaf-radius;
+    background:
+      repeating-linear-gradient(transparent 0 26px, rgba(42, 47, 82, 0.05) 26px 27px),
+      linear-gradient(125deg, #fbf6ea 0%, #f1ead9 55%, #e7dec9 100%);
+    box-shadow:
+      inset 18px 0 26px -14px rgba(0, 0, 0, 0.5),
+      inset 0 0 0 1px rgba(201, 169, 97, 0.22),
+      2px 3px 0 #efe7d6,
+      4px 6px 0 #e7dec9,
+      6px 9px 0 #ddd3bd;
+  }
+  &__page-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(42, 47, 82, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(42, 47, 82, 0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  &__r-hex {
+    position: relative;
+    font-size: 1.85rem;
+    line-height: 1;
+    color: var(--color-gold);
+    margin-bottom: 0.55rem;
+    text-shadow: 0 0 16px rgba(201, 169, 97, 0.45);
+  }
+  &__r-name {
+    position: relative;
+    font-family: $font-display;
+    font-size: 1.72rem;
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: #1c2142;
+  }
+  &__r-tag {
+    position: relative;
+    font-family: $font-body;
+    font-style: italic;
+    font-size: 0.74rem;
+    line-height: 1.55;
+    color: #383d5c;
+    margin-top: 0.5rem;
+    margin-bottom: auto;
+    max-width: none;
+  }
+  &__r-rule {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-gold), transparent);
+    margin-bottom: 0.5rem;
+  }
+  &__r-stats {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-family: $font-body;
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+    color: #3c4060;
+  }
+
+  // ── Left page (back of the last leaf) ──────────────────────────────────────
+  &__leftpage {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.8rem 1.55rem;
+    background:
+      repeating-linear-gradient(transparent 0 26px, rgba(42, 47, 82, 0.045) 26px 27px),
+      linear-gradient(235deg, #fbf6ea, #f1ead9 60%, #e7dec9);
+  }
+  &__l-quote {
+    font-family: $font-display;
+    font-style: italic;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: #2c3050;
+    margin-bottom: 0.8rem;
+  }
+  &__l-author {
+    font-family: $font-body;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6f5b1f;
+  }
+
+  // ── Back board + gutter light ──────────────────────────────────────────────
+  &__board {
+    position: absolute;
+    inset: -3px -3px -5px -3px;
+    transform: translateZ(-12px);
+    background: linear-gradient(150deg, #1c2142, #12162c);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    border-radius: 4px 6px 6px 4px;
+    box-shadow: 0 32px 55px rgba(0, 0, 0, 0.5);
+  }
+  &__light {
+    position: absolute;
+    left: -10%;
+    top: 2%;
+    bottom: 2%;
+    width: 55%;
+    transform: translateZ(9px);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    filter: blur(11px);
+    background: radial-gradient(
+      ellipse at left center,
+      rgba(255, 233, 170, 0.72),
+      rgba(201, 169, 97, 0.3) 38%,
+      transparent 72%
+    );
+    transition: opacity 1.6s var(--ease-out) 0.45s;
+  }
 }
 
-.book3d-tilt:hover .book-cover__face::after {
+// ── OPEN STATE — staggered, cinematic page turns ─────────────────────────────
+.book.is-open {
+  .book__leaf--cover {
+    transform: translateZ(8.5px) rotateY(-150deg);
+    transition-delay: 0.1s;
+  }
+  // All pages land at the SAME angle so they stack cleanly (no fan/peek);
+  // staggered delays make them flip one-by-one for the page-flutter.
+  .book__leaf--page {
+    transform: translateZ(calc((10 - var(--i)) * 0.62px)) rotateY(-148deg);
+    transition-delay: calc(0.18s + var(--i) * 0.055s);
+  }
+  .book__light { opacity: 1; animation: light-flicker 5s ease-in-out infinite 1.1s; }
+}
+
+.book3d-tilt:hover .book__cover-face::after {
   opacity: 1;
 }
 
 @keyframes book-float {
-  0%, 100% { transform: rotateY(-24deg) rotateX(4deg) translateY(0); }
-  50%      { transform: rotateY(-21deg) rotateX(3deg) translateY(-12px); }
+  0%, 100% { transform: translateX(var(--book-shift)) rotateY(-22deg) rotateX(12deg)   translateY(0); }
+  50%      { transform: translateX(var(--book-shift)) rotateY(-19deg) rotateX(10.5deg) translateY(-11px); }
+}
+
+@keyframes light-flicker {
+  0%, 100% { opacity: 0.8; }
+  50%      { opacity: 1; }
+}
+
+// Keep the opening spread within small screens. The book opens to ~2 pages
+// wide, so we scale the whole stage down and ease the rightward shift toward
+// centre as the viewport narrows (body has overflow-x:hidden, so anything that
+// still overflowed would be clipped — these keep it fully visible instead).
+@media (max-width: 760px) {
+  .book3d-stage { transform: scale(0.8); }
+  .book { --book-shift: 20%; }
+}
+@media (max-width: 520px) {
+  .book3d-stage { transform: scale(0.64); }
+  .book { --book-shift: 10%; }
+}
+@media (max-width: 380px) {
+  .book3d-stage { transform: scale(0.52); }
+  .book { --book-shift: 6%; }
 }
 
 @keyframes book-sheen {
   0%, 55%  { background-position: 120% 0; }
   85%, 100% { background-position: -160% 0; }
+}
+
+@keyframes aura-breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: 0.85; }
+  50%      { transform: translate(-50%, -50%) scale(1.07); opacity: 1; }
+}
+
+@keyframes orbit-spin {
+  to { transform: translate(-50%, -50%) rotateX(74deg) rotate(360deg); }
+}
+
+@keyframes mote-rise {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  12%  { opacity: 1; }
+  70%  { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(var(--mote-x, 0), -120px) scale(1.15); }
+}
+
+@keyframes compass-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hex-pulse {
+  0%, 100% { text-shadow: 0 0 0 rgba(201, 169, 97, 0); }
+  50%      { text-shadow: 0 0 14px rgba(201, 169, 97, 0.55); }
 }
 
 // Cover-face inner content (grid texture, title block, stats)
@@ -350,6 +603,58 @@ $book-depth: 34px;
     background-size: 20px 20px;
   }
 
+  // Faint drafting-compass / patent-figure motif tucked into the top-right,
+  // partially clipped by the cover edge like a technical-drawing detail.
+  &__compass {
+    position: absolute;
+    z-index: 0;
+    top: -28px;
+    right: -28px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    opacity: 0.5;
+    pointer-events: none;
+    background:
+      linear-gradient(rgba(201, 169, 97, 0.16), rgba(201, 169, 97, 0.16)) center / 100% 1px no-repeat,
+      linear-gradient(rgba(201, 169, 97, 0.16), rgba(201, 169, 97, 0.16)) center / 1px 100% no-repeat;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 169, 97, 0.28);
+    }
+    // Inner dashed ring rotates slowly, like a drafting instrument.
+    &::after {
+      inset: 26%;
+      border-style: dashed;
+      border-color: rgba(201, 169, 97, 0.4);
+      animation: compass-spin 38s linear infinite;
+    }
+  }
+
+  // Architect's drawing frame — corner ticks (top-left + bottom-right).
+  &__frame {
+    position: absolute;
+    inset: 12px;
+    z-index: 0;
+    pointer-events: none;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 0 solid rgba(201, 169, 97, 0.55);
+    }
+    &::before { top: 0;    left: 0;  border-top-width: 1px;    border-left-width: 1px;  }
+    &::after  { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+  }
+
   &__content {
     position: relative;
     z-index: 1;
@@ -359,7 +664,7 @@ $book-depth: 34px;
   }
 
   &__vol {
-    font-size: 0.6rem;
+    font-size: 0.66rem;
     font-family: $font-body;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -383,11 +688,13 @@ $book-depth: 34px;
     color: var(--color-gold);
     line-height: 1;
     margin-bottom: 0.5rem;
+    width: fit-content;
+    animation: hex-pulse 5s ease-in-out infinite;
   }
 
   &__name {
     font-family: $font-display;
-    font-size: 1.6rem;
+    font-size: 1.9rem;
     font-weight: 700;
     line-height: 1.0;
     letter-spacing: -0.02em;
@@ -395,16 +702,16 @@ $book-depth: 34px;
   }
 
   &__subtitle {
-    font-size: 0.55rem;
-    line-height: 1.5;
-    color: var(--color-silver);
+    font-size: 0.66rem;
+    line-height: 1.55;
+    color: #d7dcea;
     margin-block: 0.75rem;
     max-width: none;
   }
 
   &__author {
     font-family: $font-body;
-    font-size: 0.65rem;
+    font-size: 0.74rem;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -421,9 +728,9 @@ $book-depth: 34px;
   &__stats {
     display: flex;
     gap: 0.4rem;
-    font-size: 0.5rem;
+    font-size: 0.6rem;
     font-family: $font-body;
-    color: var(--color-silver);
+    color: #d7dcea;
     flex-wrap: wrap;
     max-width: none;
   }

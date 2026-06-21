@@ -63,39 +63,82 @@
         <!-- Book cover mockup (true 3D object: front, back, spine, page block) -->
         <div class="hero__visual" aria-hidden="true" paReveal="scale" paRevealDelay="300">
           <div class="book3d-stage">
-            <div class="book3d-tilt" paTilt [paTiltMax]="8" [paTiltScale]="1.02">
-              <div class="book-cover">
-                <div class="book-cover__back"></div>
-                <div class="book-cover__pages"></div>
-                <div class="book-cover__spine"></div>
-                <div class="book-cover__face">
-              <div class="book-cover__grid"></div>
-              <div class="book-cover__content">
-                <span class="book-cover__vol">Volume I</span>
-                <div class="book-cover__title-block">
-                  <span class="book-cover__hex">⬡</span>
-                  <h2 class="book-cover__name">The Patent<br />Architect</h2>
+            <div class="book3d-stage__orbit"></div>
+            <div class="book3d-tilt" paTilt [paTiltMax]="6" [paTiltScale]="1.01">
+              <div class="book" paBookOpen>
+                <!-- Back board (behind the right page, gives the book mass) -->
+                <div class="book__board"></div>
+
+                <!-- Right page: the destination content, revealed once the
+                     cover + leaves have flipped away to the left. -->
+                <div class="book__page book__page--right">
+                  <div class="book__page-grid"></div>
+                  <span class="book__r-hex">⬡</span>
+                  <h2 class="book__r-name">The Patent<br />Architect</h2>
+                  <p class="book__r-tag">Where the architecture of<br />ideas becomes protectable.</p>
+                  <div class="book__r-rule"></div>
+                  <div class="book__r-stats">
+                    <span>19 Chapters</span><span>·</span><span>7 Appendices</span><span>·</span><span>60+ AI Prompts</span>
+                  </div>
                 </div>
-                <div class="book-cover__subtitle">
-                  A Practitioner's Definitive Guide to Drafting, Prosecution
-                  &amp; AI-Augmented IP Strategy Across India, USA &amp; the
-                  World
+
+                <!-- Golden light blooming from the gutter as the book opens -->
+                <div class="book__light"></div>
+
+                <!-- Turning leaves: many pages flip left in quick succession.
+                     The last page's back becomes the visible left page. -->
+                <div class="book__leaf book__leaf--page"
+                     *ngFor="let _ of bookPages; let i = index; let last = last"
+                     [style.--i]="i">
+                  <div class="book__face book__face--front book__paper"></div>
+                  <div class="book__face book__face--back"
+                       [class.book__leftpage]="last"
+                       [class.book__paper]="!last"
+                       [class.book__paper--verso]="!last">
+                    <ng-container *ngIf="last">
+                      <span class="book__l-quote">“Draft the claim as a<br />fortress, not a fence.”</span>
+                      <div class="book__l-author">Shubham Sanjay Banne</div>
+                    </ng-container>
+                  </div>
                 </div>
-                <div class="book-cover__author">Shubham Sanjay Banne</div>
-                <div class="book-cover__rule"></div>
-                <div class="book-cover__stats">
-                  <span>19 Chapters</span>
-                  <span>·</span>
-                  <span>7 Appendices</span>
-                  <span>·</span>
-                  <span>60+ AI Prompts</span>
-                </div>
-              </div>
+
+                <!-- Front cover (flips first) -->
+                <div class="book__leaf book__leaf--cover">
+                  <div class="book__face book__face--front book__cover-face">
+                    <div class="book-cover__grid"></div>
+                    <div class="book-cover__compass"></div>
+                    <div class="book-cover__frame"></div>
+                    <div class="book-cover__content">
+                      <span class="book-cover__vol">Volume I</span>
+                      <div class="book-cover__title-block">
+                        <span class="book-cover__hex">⬡</span>
+                        <h2 class="book-cover__name">The Patent<br />Architect</h2>
+                      </div>
+                      <div class="book-cover__subtitle">
+                        A Practitioner's Definitive Guide to Drafting, Prosecution
+                        &amp; AI-Augmented IP Strategy Across India, USA &amp; the
+                        World
+                      </div>
+                      <div class="book-cover__author">Shubham Sanjay Banne</div>
+                      <div class="book-cover__rule"></div>
+                      <div class="book-cover__stats">
+                        <span>19 Chapters</span>
+                        <span>·</span>
+                        <span>7 Appendices</span>
+                        <span>·</span>
+                        <span>60+ AI Prompts</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="book__face book__face--back book__cover-inner">
+                    <span class="book__cover-emblem">⬡</span>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="book3d-stage__shadow"></div>
             <div class="book3d-stage__glow"></div>
+            <div class="book3d-stage__motes"><i></i><i></i><i></i><i></i><i></i><i></i></div>
           </div>
         </div>
       </div>

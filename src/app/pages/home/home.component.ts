@@ -9,7 +9,7 @@ import { BtnComponent } from '../../shared/components/btn/btn.component';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { HairlineRuleComponent } from '../../shared/components/hairline-rule/hairline-rule.component';
 import { ThreeBackdropComponent } from '../../shared/components/three-backdrop/three-backdrop.component';
-import { ScrollRevealDirective, TiltDirective, ParallaxDirective, MagneticDirective } from '../../shared/motion';
+import { ScrollRevealDirective, TiltDirective, ParallaxDirective, MagneticDirective, BookOpenDirective } from '../../shared/motion';
 import { Testimonial, BlogPost } from '../../core/models/content.models';
 
 @Component({
@@ -18,7 +18,7 @@ import { Testimonial, BlogPost } from '../../core/models/content.models';
   imports: [
     CommonModule, RouterModule, BlueprintGridComponent, BtnComponent, CardComponent,
     HairlineRuleComponent, ThreeBackdropComponent, ScrollRevealDirective, TiltDirective,
-    ParallaxDirective, MagneticDirective,
+    ParallaxDirective, MagneticDirective, BookOpenDirective,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
@@ -31,6 +31,9 @@ export class HomeComponent implements OnInit {
   siteConfig: SiteConfig | null = null;
   testimonials: Testimonial[]   = [];
   featuredPosts: BlogPost[]     = [];
+
+  /** Turning leaves for the cinematic 3D book (count drives the page flutter). */
+  bookPages = new Array(10);
 
   phases = [
     { num: 1, title: 'Foundations', chapters: '1–4',  desc: 'The patent system, patentability, subject-matter eligibility, and the anatomy of a patent document.' },

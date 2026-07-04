@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule, DatePipe, TitleCasePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { BtnComponent } from '../../shared/components/btn/btn.component';
 import { HairlineRuleComponent } from '../../shared/components/hairline-rule/hairline-rule.component';
@@ -9,13 +9,13 @@ import { AuthService } from '../../core/services/auth.service';
 @Component({
   selector: 'pa-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, BtnComponent, HairlineRuleComponent, DatePipe, TitleCasePipe],
+  imports: [CommonModule, RouterModule, BtnComponent, HairlineRuleComponent],
   template: `
     <section class="dash-hero section section--dark">
       <div class="container">
         <span class="eyebrow">Dashboard</span>
         <h1>Reader workspace.</h1>
-        <p>Manage your profile, subscription, and premium companion access for The Patent Architect.</p>
+        <p>Manage your profile and premium companion access for The Patent Architect.</p>
       </div>
     </section>
 
@@ -36,19 +36,18 @@ import { AuthService } from '../../core/services/auth.service';
             </article>
 
             <article class="panel">
-              <span class="panel__label">Subscription</span>
-              <h2>{{profile.subscription.tier | titlecase}}</h2>
-              <p>Status: {{profile.subscription.status | titlecase}}</p>
-              @if (profile.subscription.currentPeriodEnd) {
-                <p>Renews through {{profile.subscription.currentPeriodEnd.toDate() | date:'mediumDate'}}</p>
+              <span class="panel__label">Access</span>
+              <h2>{{auth.isSubscribed() ? 'Full Access' : 'Free'}}</h2>
+              <p>{{auth.isSubscribed() ? 'Lifetime premium access is active on your account.' : 'One-time payment unlocks every premium resource, forever.'}}</p>
+              @if (!auth.isSubscribed()) {
+                <pa-btn variant="primary" routerLink="/get-access" [fullWidth]="true">Get Full Access</pa-btn>
               }
-              <pa-btn variant="primary" routerLink="/subscription" [fullWidth]="true">Manage Subscription</pa-btn>
             </article>
 
             <article class="panel">
               <span class="panel__label">Premium Companion</span>
               <h2>{{auth.isSubscribed() ? 'Unlocked' : 'Locked'}}</h2>
-              <p>{{auth.isSubscribed() ? 'Premium materials are available.' : 'Subscribe to unlock premium resources.'}}</p>
+              <p>{{auth.isSubscribed() ? 'Premium materials are available.' : 'Get full access to unlock premium resources.'}}</p>
               <pa-btn [variant]="auth.isSubscribed() ? 'outline' : 'primary'" routerLink="/premium" [fullWidth]="true">
                 {{auth.isSubscribed() ? 'Open Premium' : 'View Paywall'}}
               </pa-btn>

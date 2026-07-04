@@ -117,10 +117,31 @@ service cloud.firestore {
     // Storage: Webhook events for audit trail and deduplication
     // Fields: event, subscriptionId, uid, processed, processedAt
     // Security: Audit-only, no user access
-    
+
     match /razorpayEvents/{eventId} {
       /// Deny all access: Service-account only (Worker)
       allow read, write: if false;
+    }
+
+    // ─── Access Requests collection ──────────────────────────────────────
+    // Storage: accessRequests/{uid} — a buyer's manual one-time-payment claim.
+    // Fields: uid, email, name, amount, method, reference, note, status,
+    //         createdAt, reviewedAt
+    // Security: A user may create/update ONLY their own request and ONLY with
+    //   status == 'pending'. They can never self-approve — access is granted by
+    //   an admin editing users/{uid}.subscription in the Firebase console.
+
+    match /accessRequests/{uid} {
+      /// Allow read: user can view their own request status
+      allow read: if isOwner(uid);
+
+      /// Allow create/update: only your own doc, only as a pending claim
+      allow create, update: if isOwner(uid)
+        && request.resource.data.uid == uid
+        && request.resource.data.status == 'pending';
+
+      /// Deny delete: audit trail is admin/console-only
+      allow delete: if false;
     }
 
     // ─── Catch-all ───────────────────────────────────────────────────────

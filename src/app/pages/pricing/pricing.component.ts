@@ -6,7 +6,6 @@ import { HairlineRuleComponent } from '../../shared/components/hairline-rule/hai
 import { SeoService } from '../../core/services/seo.service';
 import { AuthService } from '../../core/services/auth.service';
 import { SubscriptionService } from '../../core/services/subscription.service';
-import { PricingPlan, SubscriptionTier } from '../../core/models/subscription.models';
 
 @Component({
   selector: 'pa-pricing',
@@ -16,8 +15,8 @@ import { PricingPlan, SubscriptionTier } from '../../core/models/subscription.mo
     <section class="pricing-hero section section--dark">
       <div class="container">
         <span class="eyebrow">Premium Companion</span>
-        <h1>Choose your reader access.</h1>
-        <p>Keep the public book companion open for every QR scan, and unlock deeper practitioner resources when you need them.</p>
+        <h1>Buy once. Stay current forever.</h1>
+        <p>Keep the public book companion open for every QR scan, and unlock every practitioner resource with a single one-time payment — no subscription, no renewals.</p>
       </div>
     </section>
 
@@ -26,35 +25,35 @@ import { PricingPlan, SubscriptionTier } from '../../core/models/subscription.mo
     <section class="pricing section section--dark">
       <div class="container">
         <div class="pricing__grid">
-          @for (plan of plans; track plan.tier) {
-            <article class="plan" [class.plan--featured]="plan.tier === 'premium'">
-              @if (plan.tier === 'premium') {
-                <span class="plan__badge">Best for practitioners</span>
+          <article class="plan">
+            <h2>Free</h2>
+            <p class="plan__description">Public book information, public companion QR routes, and launch updates.</p>
+            <div class="plan__price">
+              <span>₹0</span>
+            </div>
+            <ul class="plan__features">
+              <li>Public companion hub</li>
+              <li>Fee schedules</li>
+              <li>Errata and public updates</li>
+            </ul>
+            <pa-btn variant="ghost" routerLink="/companion" [fullWidth]="true">Open Companion</pa-btn>
+          </article>
+
+          <article class="plan plan--featured">
+            <span class="plan__badge">One-time · Lifetime</span>
+            <h2>{{product.name}}</h2>
+            <p class="plan__description">{{product.description}}</p>
+            <div class="plan__price">
+              <span>₹{{product.priceInr}}</span>
+              <small>one-time</small>
+            </div>
+            <ul class="plan__features">
+              @for (feature of product.features; track feature) {
+                <li>{{feature}}</li>
               }
-              <h2>{{plan.name}}</h2>
-              <p class="plan__description">{{plan.description}}</p>
-              <div class="plan__price">
-                <span>₹{{plan.price}}</span>
-                <small>/{{plan.interval}}</small>
-              </div>
-              <ul class="plan__features">
-                @for (feature of plan.features; track feature) {
-                  <li>{{feature}}</li>
-                }
-              </ul>
-              @if (plan.tier === 'free') {
-                <pa-btn variant="ghost" routerLink="/companion" [fullWidth]="true">Open Companion</pa-btn>
-              } @else {
-                <pa-btn
-                  [variant]="plan.tier === 'premium' ? 'primary' : 'outline'"
-                  [fullWidth]="true"
-                  (clicked)="selectPlan(plan.tier)"
-                >
-                  Start {{plan.name}}
-                </pa-btn>
-              }
-            </article>
-          }
+            </ul>
+            <pa-btn variant="primary" [fullWidth]="true" (clicked)="getAccess()">Get Full Access</pa-btn>
+          </article>
         </div>
       </div>
     </section>
@@ -73,7 +72,7 @@ import { PricingPlan, SubscriptionTier } from '../../core/models/subscription.mo
     .pricing__grid {
       display: grid;
       gap: var(--space-5);
-      @include bp(md) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      @include bp(md) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     .plan {
@@ -158,22 +157,17 @@ export class PricingComponent implements OnInit {
   private auth = inject(AuthService);
   private subscriptions = inject(SubscriptionService);
 
-  readonly plans: PricingPlan[] = this.subscriptions.plans;
+  readonly product = this.subscriptions.product;
 
   ngOnInit(): void {
     this.seo.update({
       title: 'Pricing',
-      description: 'Subscription plans for The Patent Architect premium companion resources.',
+      description: 'One-time Full Access to The Patent Architect premium companion resources.',
     });
   }
 
-  selectPlan(tier: SubscriptionTier): void {
-    if (tier === 'free') {
-      void this.router.navigate(['/companion']);
-      return;
-    }
-
-    const path = this.auth.isAuthenticated() ? '/subscription' : '/register';
-    void this.router.navigate([path], { queryParams: { plan: tier } });
+  getAccess(): void {
+    const path = this.auth.isAuthenticated() ? '/get-access' : '/register';
+    void this.router.navigate([path]);
   }
 }

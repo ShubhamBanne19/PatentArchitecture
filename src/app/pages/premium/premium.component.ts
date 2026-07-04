@@ -8,6 +8,7 @@ import { HairlineRuleComponent } from '../../shared/components/hairline-rule/hai
 import { SeoService } from '../../core/services/seo.service';
 import { AuthService } from '../../core/services/auth.service';
 import { PremiumContentService } from '../../core/services/premium-content.service';
+import { SubscriptionService } from '../../core/services/subscription.service';
 import { PremiumContent } from '../../core/models/subscription.models';
 
 @Component({
@@ -31,12 +32,15 @@ import { PremiumContent } from '../../core/models/subscription.models';
           <p class="premium__loading">Checking access...</p>
         } @else if (!auth.isSubscribed()) {
           <div class="paywall">
-            <span class="paywall__label">Subscription Required</span>
+            <span class="paywall__label">Full Access Required</span>
             <h2>Unlock premium companion material.</h2>
-            <p>Your public QR routes remain available. Premium files and full subscriber updates require an active Basic or Premium plan.</p>
+            <p>Your public QR routes remain available. Premium files and full subscriber updates require a one-time Full Access purchase.</p>
+            @if (subscriptions.myRequest()?.status === 'pending') {
+              <p class="paywall__pending">Your payment is under review — access is granted within 24 hours.</p>
+            }
             <div class="paywall__actions">
-              <pa-btn variant="primary" routerLink="/pricing">View Pricing</pa-btn>
-              <pa-btn variant="outline" routerLink="/subscription">Manage Subscription</pa-btn>
+              <pa-btn variant="primary" routerLink="/get-access">Get Access</pa-btn>
+              <pa-btn variant="outline" routerLink="/pricing">View Pricing</pa-btn>
             </div>
           </div>
         } @else if (loading()) {
@@ -101,6 +105,15 @@ import { PremiumContent } from '../../core/models/subscription.models';
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+    }
+
+    .paywall__pending {
+      margin-top: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--border-radius);
+      color: var(--color-gold);
+      background: rgba(201,169,97,0.12);
+      border: 1px solid rgba(201,169,97,0.24);
     }
 
     .paywall__actions {
@@ -173,6 +186,7 @@ import { PremiumContent } from '../../core/models/subscription.models';
 export class PremiumComponent implements OnInit, OnDestroy {
   readonly auth = inject(AuthService);
   readonly premium = inject(PremiumContentService);
+  readonly subscriptions = inject(SubscriptionService);
   private route = inject(ActivatedRoute);
   private seo = inject(SeoService);
   private authSub?: RxSubscription;

@@ -74,11 +74,13 @@ export const routes: Routes = [
     title: 'Dashboard | The Patent Architect',
   },
   {
-    path: 'subscription',
+    path: 'get-access',
     canActivate: [authGuard],
     loadComponent: () => import('./pages/subscription/subscription.component').then(m => m.SubscriptionComponent),
-    title: 'My Subscription | The Patent Architect',
+    title: 'Get Full Access | The Patent Architect',
   },
+  // Back-compat: old subscription link now points at the one-time access page.
+  { path: 'subscription', redirectTo: 'get-access' },
   {
     path: 'profile',
     canActivate: [authGuard],

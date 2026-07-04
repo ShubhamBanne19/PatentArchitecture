@@ -57,10 +57,16 @@ This guide covers deploying the Patent Architect Angular SPA with Firebase Hosti
 1. Go to Firebase Console → Project Settings → General
 2. Scroll to "Your apps" and click your web app
 3. Copy the Firebase config object
-4. Update [src/environments/environment.ts](src/environments/environment.ts):
+4. Copy the config template to a gitignored local file:
+
+   ```bash
+   cp src/environments/firebase.config.example.ts src/environments/firebase.config.ts
+   ```
+
+5. Edit [src/environments/firebase.config.ts](src/environments/firebase.config.ts) with your real values:
 
    ```typescript
-   const firebaseConfig: FirebaseOptions = {
+   export const firebaseConfig: FirebaseOptions = {
      apiKey: "YOUR_FIREBASE_API_KEY",
      authDomain: "YOUR_FIREBASE_AUTH_DOMAIN",
      projectId: "YOUR_FIREBASE_PROJECT_ID",
@@ -70,7 +76,26 @@ This guide covers deploying the Patent Architect Angular SPA with Firebase Hosti
    };
    ```
 
-5. Update [src/environments/environment.prod.ts](src/environments/environment.prod.ts) with the same credentials
+   Both `environment.ts` and `environment.prod.ts` import from this single file, so
+   you only fill it in once. `firebase.config.ts` is gitignored — your keys never
+   get committed.
+
+### 1.3.1 Lock down the Web API key (do this — the key is public in the browser)
+
+The web `apiKey` ships in the browser bundle and is not a secret. Restrict it so it
+can only be used from your domains:
+
+1. [Google Cloud Console](https://console.cloud.google.com/apis/credentials) → your
+   Firebase project → **APIs & Services → Credentials**
+2. Click the auto-created **"Browser key (auto created by Firebase)"**
+3. **Application restrictions → HTTP referrers**, add:
+   - `http://localhost:4200/*`
+   - `https://YOUR_PROJECT.web.app/*` and `https://YOUR_PROJECT.firebaseapp.com/*`
+   - your custom domain if any
+4. **API restrictions → Restrict key** → allow only: *Identity Toolkit API*,
+   *Token Service API*, *Cloud Firestore API* (+ any others your app uses)
+5. In Firebase Console → **Authentication → Settings → Authorized domains**, ensure
+   `localhost` and your production domain are listed.
 
 ### 1.4 Deploy Firestore Rules
 

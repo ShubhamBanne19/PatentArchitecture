@@ -10,7 +10,6 @@ export type PaymentMethod = 'upi' | 'bank';
 export interface UserSubscription {
   tier: SubscriptionTier;
   status: SubscriptionStatus;
-  razorpaySubscriptionId?: string | null;
   currentPeriodEnd?: Timestamp | null;
   updatedAt?: Timestamp | null;
 }
@@ -21,7 +20,6 @@ export interface AppUser {
   name: string;
   role: UserRole;
   subscription: UserSubscription;
-  razorpayCustomerId?: string | null;
   createdAt?: Timestamp | null;
   lastLoginAt?: Timestamp | null;
 }
@@ -35,15 +33,6 @@ export interface PremiumContent {
   bodyMarkdown: string;
   published: boolean;
   updatedAt?: Timestamp | null;
-}
-
-export interface PricingPlan {
-  tier: SubscriptionTier;
-  name: string;
-  price: number;
-  interval: 'month';
-  description: string;
-  features: string[];
 }
 
 /** One-time "Full Access" product shown on the pricing / get-access pages. */

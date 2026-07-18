@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { CommonModule, DatePipe, TitleCasePipe } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
-import { Subscription as RxSubscription } from 'rxjs';
+import { Subscription as RxSubscription, combineLatest, distinctUntilChanged, map } from 'rxjs';
 import { BtnComponent } from '../../shared/components/btn/btn.component';
 import { HairlineRuleComponent } from '../../shared/components/hairline-rule/hairline-rule.component';
 import { SeoService } from '../../core/services/seo.service';
@@ -189,8 +189,7 @@ export class PremiumComponent implements OnInit, OnDestroy {
   readonly subscriptions = inject(SubscriptionService);
   private route = inject(ActivatedRoute);
   private seo = inject(SeoService);
-  private authSub?: RxSubscription;
-  private routeSub?: RxSubscription;
+  private loadSub?: RxSubscription;
 
   readonly loading = signal(false);
   readonly error = signal('');
@@ -200,19 +199,28 @@ export class PremiumComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.seo.update({ title: 'Premium Companion', description: 'Subscriber resources for The Patent Architect.' });
 
-    this.routeSub = this.route.paramMap.subscribe(params => {
-      this.selectedId.set(params.get('id'));
-      void this.loadContent();
-    });
-
-    this.authSub = this.auth.user$.subscribe(() => {
+    // Single keyed stream: reload only when the route id or the user's access
+    // actually changes. user$ re-emits on every profile snapshot (including
+    // the lastLoginAt server-timestamp echo right after sign-in), and each
+    // reload is a billed Firestore list query. Tier/status stay in the key so
+    // an admin grant still unlocks the library live.
+    this.loadSub = combineLatest([this.route.paramMap, this.auth.user$]).pipe(
+      map(([params, user]) => ({
+        id: params.get('id'),
+        uid: user?.uid ?? null,
+        tier: user?.subscription?.tier ?? null,
+        status: user?.subscription?.status ?? null,
+      })),
+      distinctUntilChanged((a, b) =>
+        a.id === b.id && a.uid === b.uid && a.tier === b.tier && a.status === b.status)
+    ).subscribe(key => {
+      this.selectedId.set(key.id);
       void this.loadContent();
     });
   }
 
   ngOnDestroy(): void {
-    this.authSub?.unsubscribe();
-    this.routeSub?.unsubscribe();
+    this.loadSub?.unsubscribe();
   }
 
   private async loadContent(): Promise<void> {
@@ -230,7 +238,7 @@ export class PremiumComponent implements OnInit, OnDestroy {
         this.selectedContent.set(await this.premium.getContent(id));
       } else {
         this.selectedContent.set(null);
-        await this.premium.loadPublishedContent();
+        await this.premium.loadPublishedContent(this.auth.profile()?.subscription?.tier);
       }
     } catch (error) {
       this.error.set(error instanceof Error ? error.message : 'Premium content could not be loaded.');

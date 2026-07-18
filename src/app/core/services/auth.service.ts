@@ -28,6 +28,9 @@ export class AuthService {
   private readySubject = new BehaviorSubject(false);
   private userSubject = new BehaviorSubject<AppUser | null>(null);
   private unsubscribeProfile?: () => void;
+  /** In-flight register(): the auth listener waits for it so profile creation
+   *  (with the chosen display name) isn't raced by ensureUserProfile. */
+  private pendingRegistration?: Promise<void>;
 
   readonly ready$: Observable<boolean> = this.readySubject.asObservable();
   readonly user$: Observable<AppUser | null> = this.userSubject.asObservable();
@@ -37,11 +40,23 @@ export class AuthService {
   readonly loading = signal(true);
   readonly isAuthenticated = computed(() => !!this.firebaseUser());
   readonly isSubscribed = computed(() => {
+    // Must mirror hasActiveSubscription()/canReadPremium() in firestore.rules
+    // exactly: the rules only recognise the literal tiers 'basic'|'premium',
+    // so accepting anything else here would show a subscribed UI whose
+    // Firestore reads are then denied.
     const subscription = this.profile()?.subscription;
-    return subscription?.status === 'active' && subscription.tier !== 'free';
+    return subscription?.status === 'active'
+      && (subscription.tier === 'basic' || subscription.tier === 'premium');
   });
 
   constructor() {
+    if (!this.firebase.isBrowser) {
+      // Prerender/SSR renders the signed-out state; auth resolves on the client.
+      this.loading.set(false);
+      this.readySubject.next(true);
+      return;
+    }
+
     onAuthStateChanged(this.firebase.auth, async user => {
       this.loading.set(true);
       this.readySubject.next(false);
@@ -56,27 +71,38 @@ export class AuthService {
         return;
       }
 
+      await this.pendingRegistration?.catch(() => undefined);
       await this.ensureUserProfile(user);
       this.watchUserProfile(user.uid);
     });
   }
 
   async register(name: string, email: string, password: string): Promise<void> {
-    const credential = await createUserWithEmailAndPassword(this.firebase.auth, email, password);
-    await updateProfile(credential.user, { displayName: name });
-    await this.createUserProfile(credential.user, name);
+    // Tracked so the onAuthStateChanged callback (which fires as soon as the
+    // account exists, before the display name and profile doc are written)
+    // waits instead of creating a second, name-less profile in parallel.
+    this.pendingRegistration = (async () => {
+      const credential = await createUserWithEmailAndPassword(this.firebase.auth, email, password);
+      await updateProfile(credential.user, { displayName: name });
+      await this.createUserProfile(credential.user, name);
+    })();
+
+    try {
+      await this.pendingRegistration;
+    } finally {
+      this.pendingRegistration = undefined;
+    }
   }
 
   async signInWithEmail(email: string, password: string): Promise<void> {
-    const credential = await signInWithEmailAndPassword(this.firebase.auth, email, password);
-    await this.ensureUserProfile(credential.user);
+    // Profile upkeep happens in the onAuthStateChanged listener.
+    await signInWithEmailAndPassword(this.firebase.auth, email, password);
   }
 
   async signInWithGoogle(): Promise<void> {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
-    const credential = await signInWithPopup(this.firebase.auth, provider);
-    await this.ensureUserProfile(credential.user);
+    await signInWithPopup(this.firebase.auth, provider);
   }
 
   async resetPassword(email: string): Promise<void> {
@@ -135,10 +161,8 @@ export class AuthService {
       subscription: {
         tier: 'free',
         status: 'free',
-        razorpaySubscriptionId: null,
         currentPeriodEnd: null,
       },
-      razorpayCustomerId: null,
     };
 
     await setDoc(ref, {

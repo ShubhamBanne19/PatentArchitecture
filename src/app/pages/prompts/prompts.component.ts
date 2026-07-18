@@ -28,7 +28,9 @@ export class PromptsComponent implements OnInit {
   private seo     = inject(SeoService);
   private route   = inject(ActivatedRoute);
 
-  allPrompts: Prompt[]   = [];
+  // Must be a signal: filteredPrompts() only recomputes off signal reads, so a
+  // plain array here left the library empty until a filter was touched.
+  allPrompts = signal<Prompt[]>([]);
   searchQuery = signal('');
   activeCategory = signal<string>('all');
   activeJurisdiction = signal<string>('all');
@@ -51,7 +53,7 @@ export class PromptsComponent implements OnInit {
   jurisdictions = ['all', 'ANY', 'IN', 'US', 'EP', 'PCT'];
 
   filteredPrompts = computed(() => {
-    let list = this.allPrompts;
+    let list = this.allPrompts();
     const q = this.searchQuery().toLowerCase().trim();
     const cat = this.activeCategory();
     const j = this.activeJurisdiction();
@@ -80,7 +82,7 @@ export class PromptsComponent implements OnInit {
     });
 
     this.content.getPrompts().subscribe(prompts => {
-      this.allPrompts = prompts;
+      this.allPrompts.set(prompts);
       this.loading = false;
 
       // handle deep-link from chapter companion ?id=

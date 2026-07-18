@@ -32,9 +32,12 @@ export class ChapterCompanionComponent implements OnInit {
   notFound = false;
 
   ngOnInit(): void {
-    this.route.params.pipe(
-      switchMap(params => {
-        const id = params['id'];
+    // The chapter id comes from the last URL segment, not a route param: the
+    // printed QR routes are static paths (companion/chapter-06) with no :id,
+    // while runtime navigation uses companion/:id. The segment covers both.
+    this.route.url.pipe(
+      switchMap(segments => {
+        const id = segments[segments.length - 1]?.path ?? '';
         return forkJoin({
           chapter: this.content.getChapter(id),
           prompts: this.content.getPromptsByChapter(id),

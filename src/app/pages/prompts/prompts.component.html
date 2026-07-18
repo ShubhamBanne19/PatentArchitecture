@@ -9,7 +9,7 @@
         <span class="text-gold">Every Stage of Patent Work</span>
       </h1>
       <p class="prompts-hero__desc">
-        {{ allPrompts.length }} prompts covering drafting, prosecution, claims
+        {{ allPrompts().length }} prompts covering drafting, prosecution, claims
         analysis, prior-art research, FTO, and strategy. All tested, annotated,
         and continuously updated. Copy, adapt, and use - no signup required.
       </p>
@@ -76,10 +76,10 @@
     </div>
 
     <div class="prompts-filters__count">
-      @if (filteredPrompts().length === allPrompts.length) {
-        Showing all {{ allPrompts.length }} prompts
+      @if (filteredPrompts().length === allPrompts().length) {
+        Showing all {{ allPrompts().length }} prompts
       } @else {
-        {{ filteredPrompts().length }} of {{ allPrompts.length }} prompts
+        {{ filteredPrompts().length }} of {{ allPrompts().length }} prompts
       }
     </div>
   </div>

@@ -1,4 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideClientHydration } from '@angular/platform-browser';
 import {
   provideRouter,
   withPreloading,
@@ -21,6 +22,9 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions({ skipInitialTransition: true })
     ),
     provideHttpClient(withFetch()),
+    // Reuse prerendered HTML on first paint instead of re-rendering from
+    // scratch (also caches prerender-time HTTP responses in the page).
+    provideClientHydration(),
     importProvidersFrom(
       MarkdownModule.forRoot()
     ),

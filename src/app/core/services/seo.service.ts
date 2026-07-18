@@ -1,6 +1,8 @@
 import { Injectable, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { SITE_BASE_URL } from '../config/site.config';
 
 export interface SeoConfig {
   title?: string;
@@ -15,7 +17,7 @@ export interface SeoConfig {
 }
 
 const BASE_TITLE = 'The Patent Architect';
-const BASE_URL   = 'https://shubhambanne.github.io/patent-architect';
+const BASE_URL   = SITE_BASE_URL;
 const DEFAULT_OG  = `${BASE_URL}/assets/images/og-default.jpg`;
 const DEFAULT_DESC = 'The definitive practitioner\'s guide to patent drafting, prosecution & AI-augmented IP strategy across India, USA & the world - with a living companion website that stays current forever.';
 
@@ -24,6 +26,9 @@ export class SeoService {
   private titleSvc = inject(Title);
   private metaSvc  = inject(Meta);
   private router   = inject(Router);
+  // Injected (not the global) so canonical/JSON-LD tags also land in
+  // prerendered HTML, where no global `document` exists.
+  private doc      = inject(DOCUMENT);
 
   update(config: SeoConfig): void {
     const pageTitle  = config.title ? `${config.title} | ${BASE_TITLE}` : BASE_TITLE;
@@ -60,20 +65,20 @@ export class SeoService {
     });
 
     // Canonical link
-    let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    let link = this.doc.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!link) {
-      link = document.createElement('link');
+      link = this.doc.createElement('link');
       link.setAttribute('rel', 'canonical');
-      document.head.appendChild(link);
+      this.doc.head.appendChild(link);
     }
     link.setAttribute('href', canonical);
   }
 
   addBookStructuredData(): void {
-    const existing = document.getElementById('book-jsonld');
+    const existing = this.doc.getElementById('book-jsonld');
     if (existing) return;
 
-    const script = document.createElement('script');
+    const script = this.doc.createElement('script');
     script.id   = 'book-jsonld';
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify({
@@ -106,14 +111,14 @@ export class SeoService {
         { '@type': 'Thing', name: 'USPTO Patent Practice' },
       ],
     });
-    document.head.appendChild(script);
+    this.doc.head.appendChild(script);
   }
 
   addOrganizationStructuredData(): void {
-    const existing = document.getElementById('org-jsonld');
+    const existing = this.doc.getElementById('org-jsonld');
     if (existing) return;
 
-    const script = document.createElement('script');
+    const script = this.doc.createElement('script');
     script.id   = 'org-jsonld';
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify({
@@ -128,6 +133,6 @@ export class SeoService {
         'query-input': 'required name=search_term_string',
       },
     });
-    document.head.appendChild(script);
+    this.doc.head.appendChild(script);
   }
 }

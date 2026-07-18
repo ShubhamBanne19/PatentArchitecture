@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title>The Patent Architect - Buy Once. Stay Current Forever.</title>
-    <!-- base href is overridden at build time with --base-href for GitHub Pages -->
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#1B1F3B" />
@@ -23,7 +22,7 @@
       property="og:description"
       content="The definitive practitioner's guide to patent drafting, prosecution & AI-augmented IP strategy."
     />
-    <meta property="og:image" content="https://shubhambanne.github.io/patent-architect/assets/images/og-default.jpg" />
+    <meta property="og:image" content="https://patent-architect.web.app/assets/images/og-default.jpg" />
 
     <!-- Twitter Card defaults -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -32,7 +31,7 @@
       name="twitter:description"
       content="The definitive practitioner's guide to patent drafting, prosecution & AI-augmented IP strategy."
     />
-    <meta name="twitter:image" content="https://shubhambanne.github.io/patent-architect/assets/images/og-default.jpg" />
+    <meta name="twitter:image" content="https://patent-architect.web.app/assets/images/og-default.jpg" />
 
     <!-- Icons -->
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -42,31 +41,10 @@
       href="assets/images/apple-touch-icon.png"
     />
 
-    <!-- Preconnect for Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Skip link for accessibility -->
-    <!-- SPA GitHub Pages redirect handler - must be first script in head -->
-    <script>
-      // Receives the redirected path from 404.html and restores it using history.replaceState
-      (function (l) {
-        if (l.search[1] === "/") {
-          var decoded = l.search
-            .slice(1)
-            .split("&")
-            .map(function (s) {
-              return s.replace(/~and~/g, "&");
-            })
-            .join("?");
-          window.history.replaceState(
-            null,
-            null,
-            l.pathname.slice(0, -1) + decoded + l.hash,
-          );
-        }
-      })(window.location);
-    </script>
+    <!-- Fonts are self-hosted (@fontsource packages in angular.json "styles"):
+         same-origin, render-blocking with the app styles, so the display serif
+         is ready before the brand intro's first frame — and no Google Fonts
+         request for EU privacy purposes. -->
 
     <style>
       .skip-link {

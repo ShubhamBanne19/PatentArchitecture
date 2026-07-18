@@ -22,7 +22,7 @@ import { BtnComponent } from '../../shared/components/btn/btn.component';
           <h2>How we use it</h2>
           <p>Email addresses submitted via the newsletter form are used to send you updates about The Patent Architect. Contact form submissions are used solely to respond to your message. We do not sell, rent, or share your data with third parties for marketing purposes.</p>
           <h2>Third-party services</h2>
-          <p>This site uses <strong>Formspree</strong> to process form submissions. Formspree's privacy policy governs how they handle data in transit. This site is hosted on <strong>GitHub Pages</strong>, which may record server-level access logs.</p>
+          <p>This site uses <strong>Formspree</strong> to process form submissions. Formspree's privacy policy governs how they handle data in transit. This site is hosted on <strong>Firebase Hosting</strong> (Google), which may record server-level access logs. Authentication and subscriber content are provided by <strong>Firebase Authentication</strong> and <strong>Cloud Firestore</strong>; if you create an account, your email, display name, and subscription status are stored there.</p>
           <h2>Your rights</h2>
           <p>You may request deletion of any data we hold about you by emailing us via the <a routerLink="/contact">contact page</a>. We will respond within 30 days.</p>
           <h2>Contact</h2>

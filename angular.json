@@ -22,28 +22,45 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/patent-architect",
-            "index": "src/index.html",
-            "main": "src/main.ts",
+            "index": {
+              "input": "src/index.html",
+              "output": "index.csr.html"
+            },
+            "browser": "src/main.ts",
+            "server": "src/main.server.ts",
+            "prerender": {
+              "discoverRoutes": false,
+              "routesFile": "prerender-routes.txt"
+            },
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/404.html",
               "src/sitemap.xml",
               "src/robots.txt",
-              "src/.nojekyll",
               {
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "node_modules/@fontsource/cormorant-garamond/400.css",
+              "node_modules/@fontsource/cormorant-garamond/400-italic.css",
+              "node_modules/@fontsource/cormorant-garamond/500.css",
+              "node_modules/@fontsource/cormorant-garamond/600.css",
+              "node_modules/@fontsource/cormorant-garamond/600-italic.css",
+              "node_modules/@fontsource/cormorant-garamond/700.css",
+              "node_modules/@fontsource/inter/300.css",
+              "node_modules/@fontsource/inter/400.css",
+              "node_modules/@fontsource/inter/500.css",
+              "node_modules/@fontsource/inter/600.css",
+              "src/styles.scss"
+            ],
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": ["src"]
@@ -59,16 +76,14 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "24kb",
+                  "maximumWarning": "32kb",
                   "maximumError": "48kb"
                 }
               ],
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -80,10 +95,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "patent-arch:build:production"
+              "buildTarget": "patent-arch:build:production"
             },
             "development": {
-              "browserTarget": "patent-arch:build:development"
+              "buildTarget": "patent-arch:build:development"
             }
           },
           "defaultConfiguration": "development"

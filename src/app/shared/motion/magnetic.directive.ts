@@ -28,10 +28,12 @@ export class MagneticDirective implements OnInit, OnDestroy {
   private el = inject(ElementRef<HTMLElement>);
   private zone = inject(NgZone);
   private rafId = 0;
+  private enabled = false;
   private detach: Array<() => void> = [];
 
   ngOnInit(): void {
-    if (prefersReducedMotion() || isTouchDevice()) return;
+    if (typeof window === 'undefined' || prefersReducedMotion() || isTouchDevice()) return;
+    this.enabled = true;
     const node = this.el.nativeElement;
     node.style.display = node.style.display || 'inline-block';
     node.style.willChange = 'transform';
@@ -64,6 +66,7 @@ export class MagneticDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (!this.enabled) return;
     cancelAnimationFrame(this.rafId);
     this.detach.forEach(fn => fn());
   }

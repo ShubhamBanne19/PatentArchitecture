@@ -1,7 +1,10 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://shubhambanne.github.io/patent-architect/sitemap.xml
-
-# Disallow internal build artifacts
+# Keep subscriber-only file downloads out of the index
 Disallow: /assets/downloads/
+# Auth-gated app pages have no SEO value
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /get-access
+
+Sitemap: https://patent-architect.web.app/sitemap.xml

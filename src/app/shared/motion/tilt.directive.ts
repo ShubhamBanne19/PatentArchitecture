@@ -40,7 +40,7 @@ export class TiltDirective implements OnInit, OnDestroy {
   private removeListeners: Array<() => void> = [];
 
   ngOnInit(): void {
-    if (prefersReducedMotion() || isTouchDevice()) return;
+    if (typeof window === 'undefined' || prefersReducedMotion() || isTouchDevice()) return;
     this.enabled = true;
 
     const node = this.el.nativeElement;

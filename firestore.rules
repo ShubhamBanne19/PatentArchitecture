@@ -51,10 +51,11 @@ service cloud.firestore {
     }
 
     // ─── Users collection ────────────────────────────────────────────────
-    // Storage: user/{uid} documents with profile, subscription, and Razorpay ID
+    // Storage: users/{uid} documents with profile and subscription state
     // Security: Users can only read/write their own profiles
-    // Server-side fields: subscription, razorpayCustomerId (updated by Worker only)
-    
+    // Server-side fields: subscription (granted via tools/grant-access.mjs /
+    // admin console only — see MANUAL_ACCESS.md)
+
     match /users/{uid} {
       /// Allow create: New user registration via auth service
       /// Enforces initial state: tier=free, status=free, role=user
@@ -64,7 +65,7 @@ service cloud.firestore {
         && request.resource.data.subscription.tier == 'free'
         && request.resource.data.subscription.status == 'free'
         && request.resource.data.keys().hasOnly([
-          'uid', 'email', 'name', 'role', 'subscription', 'razorpayCustomerId',
+          'uid', 'email', 'name', 'role', 'subscription',
           'createdAt', 'lastLoginAt'
         ]);
 
@@ -72,12 +73,11 @@ service cloud.firestore {
       allow read: if isOwner(uid);
 
       /// Allow update: User can update non-system fields
-      /// Forbidden updates: role, subscription (updated by Worker via webhook), razorpayCustomerId
+      /// Forbidden updates: role, subscription (admin grant path only)
       allow update: if isOwner(uid)
         && !request.resource.data.diff(resource.data).affectedKeys().hasAny([
           'role',
-          'subscription',
-          'razorpayCustomerId'
+          'subscription'
         ]);
 
       /// Deny delete: Users cannot delete their own accounts (admin-only)
@@ -97,30 +97,6 @@ service cloud.firestore {
 
       /// Deny all writes: Content managed by admin only
       allow write: if false;
-    }
-
-    // ─── Subscriptions collection ────────────────────────────────────────
-    // Storage: Tracking subscription state, managed by Worker webhooks
-    // Fields: uid, tier, status, provider, planId, razorpayCustomerId,
-    //         razorpayStatus, currentStart, currentEnd, createdAt, updatedAt
-    // Security: Readable by subscription owner only, writable by Worker only
-    
-    match /subscriptions/{subscriptionId} {
-      /// Allow read: Owner can view their subscription records
-      allow read: if signedIn() && resource.data.uid == request.auth.uid;
-
-      /// Deny all writes: Webhook-only updates (via Worker credentials)
-      allow write: if false;
-    }
-
-    // ─── Razorpay Events collection ──────────────────────────────────────
-    // Storage: Webhook events for audit trail and deduplication
-    // Fields: event, subscriptionId, uid, processed, processedAt
-    // Security: Audit-only, no user access
-
-    match /razorpayEvents/{eventId} {
-      /// Deny all access: Service-account only (Worker)
-      allow read, write: if false;
     }
 
     // ─── Access Requests collection ──────────────────────────────────────

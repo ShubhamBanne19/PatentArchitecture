@@ -16,7 +16,7 @@ import { AuthService } from '../../../core/services/auth.service';
         <div class="auth__panel">
           <span class="eyebrow">Create Account</span>
           <h1>Start your premium companion.</h1>
-          <p>Create a reader account before opening Razorpay checkout.</p>
+          <p>Create a reader account to request Full Access and unlock the premium companion.</p>
 
           @if (error()) {
             <p class="auth__alert">{{error()}}</p>

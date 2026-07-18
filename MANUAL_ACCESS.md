@@ -36,18 +36,43 @@ premium content (premium readers can read both `basic` and `premium` content).
 
 ## Granting access (per request)
 
+**Use the grant script** — the app and firestore.rules only recognise the literal
+values `tier: "basic" | "premium"` and `status: "active"`; one typo in a console
+edit silently locks a paying customer out. The script can only write valid values
+and updates both documents in one go.
+
+One-time script setup (see the header of [tools/grant-access.mjs](tools/grant-access.mjs)):
+
+```bash
+npm install --no-save firebase-admin
+set GOOGLE_APPLICATION_CREDENTIALS=C:\path\to\serviceAccount.json
+```
+
+Per request:
+
 1. Firebase Console → **Firestore Database** → collection **`accessRequests`**.
-2. Open a document with `status: "pending"`. Note its **`reference`** and **`amount`**.
-3. **Verify the payment** — match `reference` against your UPI/bank statement for `amount`.
-4. If valid, grant access. The doc id **is the user's uid**. Open **`users/{uid}`** and set:
-   - `subscription.status` → `active`
-   - `subscription.tier` → `premium`
-   *(leave `subscription.currentPeriodEnd` as null — access is lifetime.)*
-5. Back in **`accessRequests/{uid}`**, set:
-   - `status` → `approved`
-   - `reviewedAt` → current timestamp
+   Open a document with `status: "pending"`. Note its **`reference`**, **`amount`**,
+   and **`email`**. (Or run `node tools/grant-access.mjs status <email>`.)
+2. **Verify the payment** — match `reference` against your UPI/bank statement for `amount`.
+3. If valid:
+   ```bash
+   node tools/grant-access.mjs grant buyer@example.com
+   ```
+   This sets `users/{uid}.subscription` to `{ tier: "premium", status: "active" }` and
+   marks `accessRequests/{uid}` as `approved` with a `reviewedAt` timestamp.
 
 The buyer's app updates automatically (it live-watches their profile).
+
+<details>
+<summary>Manual console fallback (only if you can't run the script)</summary>
+
+The accessRequests doc id **is the user's uid**. Open **`users/{uid}`** and set
+`subscription.status` → `active`, `subscription.tier` → `premium` (exact lowercase
+spelling — anything else is treated as not subscribed). Leave `currentPeriodEnd`
+null (lifetime). Then in **`accessRequests/{uid}`** set `status` → `approved` and
+`reviewedAt` → now.
+
+</details>
 
 ## Rejecting a request
 
@@ -56,8 +81,12 @@ the user doc. The user sees a "couldn't verify" notice on `/get-access` and can 
 
 ## Revoking access (refund / chargeback)
 
-Open **`users/{uid}`** and set `subscription.status` → `free` and `subscription.tier` → `free`.
-Premium locks again immediately.
+```bash
+node tools/grant-access.mjs revoke buyer@example.com
+```
+
+(Console fallback: in **`users/{uid}`** set `subscription.status` → `free` and
+`subscription.tier` → `free`.) Premium locks again immediately.
 
 ## Notes & guardrails
 
@@ -65,6 +94,7 @@ Premium locks again immediately.
   block clients from writing `users/{uid}.subscription`, and only allow them to write their own
   `accessRequests/{uid}` with `status: "pending"`. All grants happen via the console (which
   bypasses rules with admin privileges).
-- The Firestore console is the only "admin" surface for now. A self-serve admin approval page
-  is a planned Phase-2 enhancement.
-- The old Razorpay Worker (`worker/`) is unused by this model and can be ignored or removed later.
+- The grant script (plus the Firestore console as fallback) is the only "admin" surface for
+  now. A self-serve admin approval page is a planned Phase-2 enhancement.
+- The old Razorpay Worker has been removed from the repo. If a `worker/wrangler.toml` file
+  still exists locally it may contain old Razorpay keys — rotate/delete it.

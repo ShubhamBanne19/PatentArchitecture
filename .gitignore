@@ -41,13 +41,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Local deployment secrets
-worker/wrangler.toml
-worker/.dev.vars
-
-# Firebase web config — real values kept out of source control
-# (copy src/environments/firebase.config.example.ts to firebase.config.ts)
-/src/environments/firebase.config.ts
+# Leftover local secrets from the removed Razorpay worker
+worker/
 
 # Firebase CLI deploy cache
 .firebase/

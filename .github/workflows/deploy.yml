@@ -1,17 +1,19 @@
 # ─── THE PATENT ARCHITECT - Firebase Hosting Deployment ───────────────────────
-# Builds the Angular SPA on Firebase Hosting (Spark/Free plan) with QR companion
-# routes and Razorpay subscription backend.
+# Builds the Angular app (prerendered public routes + CSR fallback) and deploys
+# it to Firebase Hosting (Spark/Free plan). Access sales are manual — see
+# MANUAL_ACCESS.md.
 #
 # IMPORTANT - QR codes:
 #   Once the book is printed, the /companion/chapter-NN routes are permanent.
 #   Never remove those routes from app.routes.ts or change Firebase Hosting config.
 #
 # Setup:
-#   1. Install Firebase CLI: npm install -g firebase-tools
-#   2. Authenticate: firebase login:ci --no-localhost (get token for secrets)
-#   3. Create repo secrets:
-#      - FIREBASE_CI_TOKEN: from step 2
-#   4. Update firebase.json with your Firebase project ID
+#   1. Create a service account for deploys:
+#      Firebase Console -> Project Settings -> Service accounts -> Generate key,
+#      or run: firebase init hosting:github (generates it for you)
+#   2. Create repo secret:
+#      - FIREBASE_SERVICE_ACCOUNT: the full JSON of the service-account key
+#   3. Update firebase.json with your Firebase project ID
 # ─────────────────────────────────────────────────────────────────────────────
 
 name: Build and Deploy to Firebase Hosting

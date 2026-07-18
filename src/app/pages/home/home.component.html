@@ -1,7 +1,13 @@
+<!-- ─── BRAND-LAUNCH INTRO (once per session; skipped on reduced motion) ──────── -->
+@if (showIntro) {
+  <pa-brand-intro (closed)="onIntroClosed()"></pa-brand-intro>
+}
+
 <!-- ─── HERO ──────────────────────────────────────────────────────────────────── -->
 <pa-blueprint-grid opacity="0.05">
-  <section class="hero section section--dark">
+  <section class="hero section section--dark" [class.hero--ignite]="heroIgnite">
     <pa-three-backdrop></pa-three-backdrop>
+    <div class="hero__grain" aria-hidden="true"></div>
     <div class="container">
       <div class="hero__inner">
         <div class="hero__content">
@@ -61,11 +67,23 @@
         </div>
 
         <!-- Book cover mockup (true 3D object: front, back, spine, page block) -->
-        <div class="hero__visual" aria-hidden="true" paReveal="scale" paRevealDelay="300">
-          <div class="book3d-stage">
+        <div class="hero__visual" paReveal="scale" paRevealDelay="300">
+          <div class="book3d-stage"
+               #bookStage
+               aria-hidden="true"
+               [class.is-armed]="bookArmed"
+               [class.is-open]="bookOpen"
+               [class.is-presenting]="bookPresenting"
+               [class.is-opening]="bookOpening"
+               [class.is-sealing]="bookSealing"
+               [class.has-opened]="hasOpened"
+               (pointerenter)="onEngage()"
+               (pointerleave)="onRelease()"
+               (click)="onTap()">
             <div class="book3d-stage__orbit"></div>
+            <div class="book3d-stage__rays"></div>
             <div class="book3d-tilt" paTilt [paTiltMax]="6" [paTiltScale]="1.01">
-              <div class="book" paBookOpen>
+              <div class="book" [class.is-open]="bookOpen">
                 <!-- Back board (behind the right page, gives the book mass) -->
                 <div class="book__board"></div>
 
@@ -134,11 +152,43 @@
                     <span class="book__cover-emblem">⬡</span>
                   </div>
                 </div>
+
+                <!-- Golden seal: stamped over the cover as the book closes, the
+                     way a granted patent is sealed. (Inside the book so it sits
+                     flat on the closed cover.) -->
+                <div class="book__seal"><span>⬡</span></div>
               </div>
             </div>
             <div class="book3d-stage__shadow"></div>
             <div class="book3d-stage__glow"></div>
             <div class="book3d-stage__motes"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+            <!-- Handwritten dedication: flashes over the gutter for a beat as the
+                 book opens — a secret only the attentive catch. Rendered as a flat
+                 2D overlay (not inside the book's 3D space) so the angled open
+                 pages can't clip it. -->
+            <div class="book__dedication">
+              <span class="book__dedication-hand">For every idea<br />that deserved protecting.</span>
+            </div>
+          </div>
+
+          <!-- Living-canon caption slot: invites a touch while closed, then
+               testifies that this copy is current *today* once opened. -->
+          <div class="hero__living" aria-hidden="true">
+            <p class="hero__hint" *ngIf="!hasOpened">
+              <span class="hero__hint-mark">⌖</span> {{ isTouch ? 'Tap to open' : 'Hover to open' }}
+            </p>
+            <ng-container *ngIf="hasOpened">
+              <p class="hero__current">
+                <span class="hero__live-dot"></span> Current as of {{ todayDisplay }}
+              </p>
+              <p class="hero__welcome" *ngIf="returning">
+                Welcome back — {{ daysSince }} day{{ daysSince === 1 ? '' : 's' }} on, nothing's gone stale.
+              </p>
+              <p class="hero__welcome" *ngIf="!returning">
+                Buy it once. This copy stays current forever.
+              </p>
+            </ng-container>
           </div>
         </div>
       </div>

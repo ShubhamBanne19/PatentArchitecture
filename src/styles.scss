@@ -2,8 +2,9 @@
 @use 'styles/tokens' as *;
 @use 'styles/mixins' as *;
 
-// Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap');
+// Fonts are self-hosted: @fontsource packages listed in angular.json "styles"
+// compile into this same render-blocking bundle, so the brand intro's serif is
+// ready on the first frame with no third-party request.
 
 // ── RESET ─────────────────────────────────────────────────────────────────────
 *, *::before, *::after {

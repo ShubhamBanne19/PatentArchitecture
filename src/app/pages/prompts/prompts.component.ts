@@ -76,8 +76,8 @@ export class PromptsComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.update({
-      title: 'AI Prompt Library',
-      description: 'The Patent Architect AI Prompt Library - 60+ tested, annotated prompts for every stage of the patent lifecycle, from drafting to prosecution to FTO.',
+      title: 'Master Prompt Library',
+      description: 'The Patent Architect Master Prompt Library - 60+ tested, annotated prompts for every stage of the patent lifecycle, from drafting to prosecution to FTO.',
       keywords: 'AI patent prompts, patent drafting AI, LLM patent, ChatGPT patent, Claude patent',
     });
 

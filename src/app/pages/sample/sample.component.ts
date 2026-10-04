@@ -21,7 +21,7 @@ import { BlueprintGridComponent } from '../../shared/components/blueprint-grid/b
               <h1>Read Before You Buy</h1>
               <pa-rule></pa-rule>
               <p class="sample-hero__desc">
-                Download a free sample chapter and the first 15 prompts from the AI Prompt Library.
+                Download a free sample chapter and the first 15 prompts from the Master Prompt Library.
                 No email required for the sample chapter. Enter your email to receive the full
                 15-prompt lead magnet PDF.
               </p>

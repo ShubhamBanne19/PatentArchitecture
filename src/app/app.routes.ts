@@ -111,11 +111,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/blog/post/blog-post.component').then(m => m.BlogPostComponent),
   },
 
-  // ── AI Prompt Library ─────────────────────────────────────────────────────
+  // ── Master Prompt Library ─────────────────────────────────────────────────────
   {
     path: 'prompts',
     loadComponent: () => import('./pages/prompts/prompts.component').then(m => m.PromptsComponent),
-    title: 'AI Prompt Library | The Patent Architect',
+    title: 'Master Prompt Library | The Patent Architect',
   },
 
   // ── Companion Hub (non-chapter routes) ───────────────────────────────────

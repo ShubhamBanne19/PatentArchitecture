@@ -400,7 +400,7 @@ export class HeaderComponent implements OnInit {
       children: [
         { label: 'Companion Hub', path: '/companion' },
         { label: 'Fee Schedules', path: '/companion/fees' },
-        { label: 'AI Prompt Library', path: '/prompts' },
+        { label: 'Master Prompt Library', path: '/prompts' },
         { label: 'Premium Companion', path: '/premium' },
       ]
     },

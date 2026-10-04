@@ -44,7 +44,7 @@ import { HairlineRuleComponent } from '../hairline-rule/hairline-rule.component'
               <ul class="site-footer__links">
                 <li><a routerLink="/companion">Companion Hub</a></li>
                 <li><a routerLink="/companion/fees">Fee Schedules</a></li>
-                <li><a routerLink="/prompts">AI Prompt Library</a></li>
+                <li><a routerLink="/prompts">Master Prompt Library</a></li>
                 <li><a routerLink="/companion/errata">Errata & Updates</a></li>
                 <li><a routerLink="/premium">Premium Companion</a></li>
               </ul>

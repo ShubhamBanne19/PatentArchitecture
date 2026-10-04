@@ -6,13 +6,13 @@
     "phaseTitle": "THE ARCHITECTURE OF INNOVATION",
     "title": "What a Patent Actually Is (And What It Isn’t)",
     "subtitle": "Why Patents Exist and How the System Works",
-    "summary": "A rigorous first-principles examination of why patent systems exist, the quid-pro-quo theory of disclosure, and how the major national and international frameworks relate. Traces the evolution from the Statute of Monopolies to the modern TRIPS-WTO architecture.",
+    "summary": "A first-principles explanation of what a patent is - a right to exclude others, not to make or launch your invention. Confusing the two destroys strategy. Covers the statutory definitions, the duration of the exclusion, and the Apple v Samsung patent wars.",
     "keyTopics": [
-      "Quid-pro-quo disclosure theory",
-      "TRIPS Agreement and WTO",
-      "India Patents Act 1970 as amended",
-      "Paris Convention priority",
-      "Global patent system architecture"
+      "The right to exclude, not the right to make",
+      "Statutory definitions and the duration of the exclusion",
+      "The three things a patent cannot do",
+      "Patents versus other IP",
+      "Apple v Samsung and the smartphone patent wars"
     ],
     "figures": [
       {
@@ -48,13 +48,13 @@
     "phaseTitle": "THE ARCHITECTURE OF INNOVATION",
     "title": "The Global IP Chessboard: India, USA & PCT Decoded",
     "subtitle": "The Three Pillars of a Valid Patent",
-    "summary": "A deep-dive into patentability criteria under Indian, US and European law. Examines absolute vs relative novelty, the person-skilled-in-the-art standard, and how inventive step is assessed with worked examples from real prosecution histories.",
+    "summary": "A global patent strategy is a campaign, not a local skirmish. Covers the territorial principle, the IPO's four offices, the USPTO and the America Invents Act, the PCT timeline, the Paris Convention priority year, and the Ranbaxy-Pfizer Lipitor battle.",
     "keyTopics": [
-      "Absolute novelty under Indian law",
-      "Inventive step vs non-obviousness",
-      "TSM test and Graham v. John Deere",
-      "Industrial applicability vs utility",
-      "Anticipation by prior use"
+      "The territorial principle of patent rights",
+      "The Indian Patent Office's four offices",
+      "The USPTO and the America Invents Act",
+      "The PCT timeline and national-phase deadlines",
+      "The Paris Convention priority year"
     ],
     "figures": [
       {
@@ -79,13 +79,13 @@
     "phaseTitle": "THE ARCHITECTURE OF INNOVATION",
     "title": "The Economics of Innovation: When to Patent, When Not To",
     "subtitle": "Navigating Section 3, Alice/Mayo, and EPO Exclusions",
-    "summary": "Maps the excluded subject-matter landscape - Section 3(d), 3(k) and 3(m) under Indian law, Alice-Mayo under US law, and the EPO technical-character requirement. Includes practical claim-drafting strategies to overcome eligibility rejections.",
+    "summary": "The patent decision is an economic one - filing without a commercialization thesis is a tax, not an investment. Covers the Patent Value Pyramid, the four business cases, the startup provisional strategy, and Qualcomm's licensing machine.",
     "keyTopics": [
-      "Section 3(d) pharmaceutical exclusion (Novartis case)",
-      "Section 3(k) software & business methods",
-      "Alice/Mayo framework (US)",
-      "EPO technical character doctrine",
-      "Claim drafting strategies for software inventions"
+      "The Patent Value Pyramid",
+      "The four business cases for a patent",
+      "The startup provisional filing strategy",
+      "The patent ROI framework",
+      "Qualcomm's licensing business model"
     ],
     "figures": [],
     "errata": [],
@@ -102,13 +102,13 @@
     "phaseTitle": "THE ARCHITECTURE OF INNOVATION",
     "title": "Patentability: The Four Threshold Questions",
     "subtitle": "Understanding Every Section of a Patent Application",
-    "summary": "Comprehensive walkthrough of every section of a patent application - title, field, background, summary, detailed description, claims, abstract - with annotated examples drawn from real Indian and US patents.",
+    "summary": "Every invention must pass four sequential gates - subject matter, novelty, inventive step and industrial application - before prosecution begins. Covers the person skilled in the art, the Graham v John Deere secondary considerations, and Novartis v Union of India.",
     "keyTopics": [
-      "Complete patent application structure",
-      "Provisional vs complete specifications",
-      "Written description and enablement",
-      "Best-mode requirement",
-      "Claim hierarchy: independent and dependent"
+      "The four-gate patentability framework",
+      "Novelty and anticipation",
+      "Inventive step and non-obviousness",
+      "The Graham v John Deere secondary considerations",
+      "The person skilled in the art (PSITA)"
     ],
     "figures": [],
     "errata": [],

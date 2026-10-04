@@ -1,0 +1,22 @@
+rules_version = '2';
+
+// The app does not use Firebase Storage today (no `firebase/storage` import
+// anywhere in src/). This ruleset exists so the project's default bucket —
+// which Firebase provisions automatically — is deny-by-default and version
+// controlled instead of relying on whatever was last set (or never set) in
+// the console. If/when the app adds uploads, replace the catch-all below
+// with scoped rules, e.g.:
+//
+//   match /users/{uid}/{allPaths=**} {
+//     allow read: if request.auth != null && request.auth.uid == uid;
+//     allow write: if request.auth != null && request.auth.uid == uid
+//       && request.resource.size < 5 * 1024 * 1024
+//       && request.resource.contentType.matches('image/.*');
+//   }
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

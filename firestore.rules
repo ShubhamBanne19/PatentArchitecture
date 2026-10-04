@@ -36,9 +36,16 @@ service cloud.firestore {
 
     /// Check if user has active subscription
     function hasActiveSubscription() {
-      return signedIn() 
+      return signedIn()
         && profileExists()
         && userStatus() == 'active';
+    }
+
+    /// Bounded, non-empty string (defends against field-type spoofing and
+    /// unbounded-size abuse from clients that bypass the app's JS and call
+    /// the SDK/REST API directly)
+    function isBoundedString(v, maxLen) {
+      return v is string && v.size() > 0 && v.size() <= maxLen;
     }
 
     /// Check if user can read premium content at given access level
@@ -58,12 +65,19 @@ service cloud.firestore {
 
     match /users/{uid} {
       /// Allow create: New user registration via auth service
-      /// Enforces initial state: tier=free, status=free, role=user
+      /// Enforces initial state: tier=free, status=free, role=user, and that
+      /// every field is the right type/size and timestamps are server-set
+      /// (not client-spoofed via a direct SDK/REST call).
       allow create: if isOwner(uid)
         && request.resource.data.uid == uid
         && request.resource.data.role == 'user'
         && request.resource.data.subscription.tier == 'free'
         && request.resource.data.subscription.status == 'free'
+        && request.resource.data.subscription.keys().hasOnly(['tier', 'status', 'currentPeriodEnd'])
+        && isBoundedString(request.resource.data.email, 320)
+        && isBoundedString(request.resource.data.name, 200)
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.lastLoginAt == request.time
         && request.resource.data.keys().hasOnly([
           'uid', 'email', 'name', 'role', 'subscription',
           'createdAt', 'lastLoginAt'
@@ -72,13 +86,18 @@ service cloud.firestore {
       /// Allow read: User can read their own profile
       allow read: if isOwner(uid);
 
-      /// Allow update: User can update non-system fields
-      /// Forbidden updates: role, subscription (admin grant path only)
+      /// Allow update: User can only touch name/email/lastLoginAt, with valid
+      /// types/sizes and a server-set timestamp. Everything else — role,
+      /// subscription, uid, createdAt, or any new field — is rejected by the
+      /// hasOnly() allowlist (positive allowlist, not just a role/subscription
+      /// blocklist, so field-pollution can't slip in via new keys either).
       allow update: if isOwner(uid)
-        && !request.resource.data.diff(resource.data).affectedKeys().hasAny([
-          'role',
-          'subscription'
-        ]);
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name', 'email', 'lastLoginAt'])
+        && request.resource.data.role == resource.data.role
+        && request.resource.data.subscription == resource.data.subscription
+        && isBoundedString(request.resource.data.email, 320)
+        && isBoundedString(request.resource.data.name, 200)
+        && request.resource.data.lastLoginAt == request.time;
 
       /// Deny delete: Users cannot delete their own accounts (admin-only)
       allow delete: if false;
@@ -111,10 +130,29 @@ service cloud.firestore {
       /// Allow read: user can view their own request status
       allow read: if isOwner(uid);
 
-      /// Allow create/update: only your own doc, only as a pending claim
+      /// Allow create/update: only your own doc, only as a pending claim, with
+      /// bounded/typed fields. reviewedAt may never move away from its current
+      /// value — it's admin/console-only, set exclusively by
+      /// tools/grant-access.mjs via the Admin SDK (which bypasses these rules
+      /// entirely), so a resubmission can't clobber an admin's approve/reject
+      /// by resetting status back to 'pending' with reviewedAt wiped to null.
       allow create, update: if isOwner(uid)
         && request.resource.data.uid == uid
-        && request.resource.data.status == 'pending';
+        && request.resource.data.status == 'pending'
+        && request.resource.data.method in ['upi', 'bank']
+        && isBoundedString(request.resource.data.email, 320)
+        && isBoundedString(request.resource.data.name, 200)
+        && isBoundedString(request.resource.data.reference, 200)
+        && request.resource.data.amount is number
+        && request.resource.data.amount > 0
+        && request.resource.data.amount <= 10000000
+        && (request.resource.data.note == null || isBoundedString(request.resource.data.note, 2000))
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.reviewedAt == (resource != null ? resource.data.reviewedAt : null)
+        && request.resource.data.keys().hasOnly([
+          'uid', 'email', 'name', 'amount', 'method', 'reference', 'note',
+          'status', 'createdAt', 'reviewedAt'
+        ]);
 
       /// Deny delete: audit trail is admin/console-only
       allow delete: if false;

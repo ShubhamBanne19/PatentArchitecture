@@ -215,13 +215,13 @@
     "phaseTitle": "THE ENGINEERING OF A PATENT",
     "title": "The Invention Disclosure Document: Mining the Inventor’s Mind",
     "subtitle": "Navigating the Indian Patent Office End-to-End",
-    "summary": "Complete guide to Indian patent prosecution - filing, publication, examination request, examination report, hearings, grant, and post-grant opposition. Includes current official fees and strategic timelines.",
+    "summary": "A poor invention disclosure is the original sin of bad patent prosecution, producing thin specifications and narrow claims. Covers the seven information categories and the inventor interview protocol.",
     "keyTopics": [
-      "India filing procedures and official forms",
-      "Publication and examination request strategy",
-      "First examination report (FER) response",
-      "Hearing at the IPO",
-      "Post-grant opposition strategy"
+      "Why inventors are poor disclosers",
+      "The seven information categories of an IDD",
+      "The 20 Questions inventor interview protocol",
+      "Best mode and the legal foundation of the IDD",
+      "The IDD document template"
     ],
     "figures": [
       {
@@ -255,13 +255,13 @@
     "phaseTitle": "THE ENGINEERING OF A PATENT",
     "title": "The Claim Architecture: From Broad to Narrow, Independent to Dependent",
     "subtitle": "Mastering the US Patent Prosecution Lifecycle",
-    "summary": "End-to-end USPTO prosecution - from filing to allowance or appeal. Covers responding to §102/§103/§112 rejections, the AFCP 2.0 program, after-final practice, the PTAB appeal process, and continuation strategy.",
+    "summary": "Claims are not sentences - they are legal property boundaries, like a system of interlocking fences. Covers the all elements rule, the claim-type toolkit, the inverted-pyramid three-tier cascade, Markush groups, and claim differentiation.",
     "keyTopics": [
-      "Responding to §102 and §103 rejections",
-      "§112(b) indefiniteness rejections",
-      "AFCP 2.0 after-final practice",
-      "PTAB ex parte appeal",
-      "Continuation / CIP / divisional strategy"
+      "The all elements rule and doctrine of equivalents",
+      "Claim types and multi-type coverage",
+      "The inverted-pyramid three-tier claim cascade",
+      "Markush groups and the claim language toolkit",
+      "Claim differentiation and means-plus-function claims"
     ],
     "figures": [
       {
@@ -288,13 +288,13 @@
     "phaseTitle": "THE ENGINEERING OF A PATENT",
     "title": "Specification Drafting: Building the Enablement Cathedral",
     "subtitle": "Using the PCT System Strategically",
-    "summary": "Comprehensive PCT guide - Chapter I and Chapter II procedures, choosing receiving offices, international search and preliminary examination, optimizing the national phase entry decision, and using PCT delays strategically.",
+    "summary": "The specification is a legal instrument, not a technical document - every word is tested against the claims in litigation. Covers the Wands enablement factors, the written-description possession test, and the specification architecture.",
     "keyTopics": [
-      "PCT Chapter I and Chapter II",
-      "Selecting receiving offices",
-      "International Search Report and Written Opinion",
-      "Demand for International Preliminary Examination",
-      "National phase entry decisions and timing"
+      "The specification as a legal instrument",
+      "Enablement and the Wands factors",
+      "Written description and the possession test (Ariad)",
+      "The complete specification architecture",
+      "Prosecution history as the silent claim shaper"
     ],
     "figures": [
       {
@@ -320,13 +320,13 @@
     "phaseTitle": "THE ENGINEERING OF A PATENT",
     "title": "Software, AI & Algorithm Patents: Drafting in the Grey Zone",
     "subtitle": "Filing and Prosecuting Before the European Patent Office",
-    "summary": "Guide to EPO prosecution under the EPC - filing strategy, the search and examination phases, opposition proceedings, and the validation country decision. Covers the Unitary Patent and Unified Patent Court.",
+    "summary": "Software and AI drafting applies fundamental patent principles where the invention is hardest to see and eligibility most hostile. Covers the EPO technical-effect doctrine, the Six-Dimensional Technical Claim Framework, and the AI Patent Stack.",
     "keyTopics": [
-      "EPC filing requirements and procedures",
-      "EPO examination and search phases",
-      "EPO opposition proceedings",
-      "Unitary Patent and UPC",
-      "Validation country strategy"
+      "The EPO technical-effect doctrine",
+      "The Six-Dimensional Technical Claim Framework",
+      "The AI Patent Stack and its four layers",
+      "Blockchain and distributed-ledger patents",
+      "The software patent specification elements"
     ],
     "figures": [
       {
@@ -352,13 +352,13 @@
     "phaseTitle": "THE ENGINEERING OF A PATENT",
     "title": "Pharmaceutical & Biotech Patent Drafting: The Life Sciences Playbook",
     "subtitle": "The Craft of the Office Action Response",
-    "summary": "Structured framework for responding to office actions across all jurisdictions - when to amend vs argue, claim differentiation strategies, the art of the examiner interview, and building prosecution history with appeal in mind.",
+    "summary": "Pharmaceutical and biotech drafting is a chess match against patent offices, generic manufacturers, and regulators. Covers the NCE claim architecture, Markush groups, selection inventions, the Section 3(d) enhanced-efficacy data strategy, and the Gleevec lifecycle.",
     "keyTopics": [
-      "Amendment vs argument strategies",
-      "Claim differentiation principles",
-      "Examiner interview tactics",
-      "Building prosecution history for litigation",
-      "After-final amendment options"
+      "The NCE claim architecture",
+      "Markush group architecture",
+      "Selection inventions",
+      "The Section 3(d) enhanced-efficacy data strategy",
+      "Antibody claims and biosimilar patents"
     ],
     "figures": [],
     "errata": [],
@@ -375,13 +375,13 @@
     "phaseTitle": "THE ENGINEERING OF A PATENT",
     "title": "Indian Patent Forms & Procedural Compliance: The Bureaucracy Decoded",
     "subtitle": "A Practitioner's Honest Assessment of AI for IP Work",
-    "summary": "A rigorous, practitioner-focused survey of AI tools in the IP landscape - prior-art search engines, claim drafting assistants, prosecution analytics, and LLM-based drafting. Covers capabilities, limitations, and ethical obligations.",
+    "summary": "The Indian Patents Act's procedural requirements are substantive obligations, not administrative formalities. No drafting excellence protects against a missed form deadline. Covers the form matrix, the 31-month RFE deadline, and the Form 27 working statement.",
     "keyTopics": [
-      "AI prior-art search tools (Google Patents AI, Lens.org, Patsnap)",
-      "LLM-assisted claim drafting",
-      "Prosecution analytics tools",
-      "Ethical obligations and unauthorized practice risks",
-      "Hallucination risk and verification discipline"
+      "The complete Indian form matrix",
+      "The 31-month request-for-examination deadline",
+      "The Form 27 working statement",
+      "Pre-grant and post-grant opposition",
+      "The prosecution docketing SOP"
     ],
     "figures": [],
     "errata": [],

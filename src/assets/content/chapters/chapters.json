@@ -125,13 +125,13 @@
     "phaseTitle": "THE PSYCHOLOGY OF PROSECUTION",
     "title": "Inside the Examiner’s Mind: How Rejections Are Built",
     "subtitle": "Designing a Multi-Layered Claim Portfolio",
-    "summary": "The pivot of the book. Introduces the fortress metaphor for claim architecture - independent claims as outer walls, dependent claims as fallback positions, method/system/CRM triplets, omnibus claims, and claim-set stress testing.",
+    "summary": "Every Office Action is a structured legal argument built from a finite toolkit of rejection types. Covers the MPEP examination hierarchy, the examiner's prior art search, the three primary rejection types - novelty, obviousness and eligibility - and the examiner interview.",
     "keyTopics": [
-      "Independent vs dependent claim architecture",
-      "Method, system, CRM claim triplets",
-      "Claim-set stress testing",
-      "Jepson claims and open/closed transitional phrases",
-      "Means-plus-function claiming"
+      "The MPEP examination hierarchy",
+      "The examiner's seven-database search stack",
+      "The three primary rejection types",
+      "Obviousness and the motivation to combine",
+      "The examiner interview"
     ],
     "figures": [],
     "errata": [],
@@ -148,13 +148,13 @@
     "phaseTitle": "THE PSYCHOLOGY OF PROSECUTION",
     "title": "The Section 3 Exclusions: India’s Unique Minefield",
     "subtitle": "A Practitioner's Step-by-Step Process",
-    "summary": "A systematic drafting methodology - from the initial invention disclosure meeting through claim mapping, specification writing, and internal review - with checklists and templates practitioners can adopt immediately.",
+    "summary": "Section 3 of the Indian Patents Act creates exclusions with no parallel in US or European law - from 3(d) evergreening and Novartis to the 3(k) software exclusion and the 2017 CRI Guidelines.",
     "keyTopics": [
-      "Invention disclosure interview techniques",
-      "Claim mapping process",
-      "Specification writing order",
-      "Internal review checklist",
-      "Filing-ready quality gate"
+      "The architecture of Section 3",
+      "Section 3(d) and the evergreening prohibition (Novartis)",
+      "Section 3(k) and the 2017 CRI Guidelines",
+      "Section 3(i) surgical, therapeutic and diagnostic methods",
+      "The Section 3 compliance protocol"
     ],
     "figures": [],
     "errata": [],
@@ -171,13 +171,13 @@
     "phaseTitle": "THE PSYCHOLOGY OF PROSECUTION",
     "title": "Alice, Mayo & Abstract Ideas: The US Eligibility Labyrinth",
     "subtitle": "Writing Specifications That Hold Up in Prosecution and Litigation",
-    "summary": "Deep-dives into specification writing - using drawings effectively, creating an enabling disclosure, avoiding written-description pitfalls, and building support for the broadest possible claims across all embodiments.",
+    "summary": "The Alice/Mayo framework has invalidated more valuable patents than any prior-art rejection in US history. Covers the § 101 two-step test, the 2019 Revised Guidance, and six claim drafting strategies to survive it.",
     "keyTopics": [
-      "Drawing requirements and best practices",
-      "Enablement across all embodiments",
-      "Written description support",
-      "Prophetic examples",
-      "Definitions and special definitions"
+      "The Alice/Mayo two-step test",
+      "The USPTO 2019 Revised Guidance",
+      "Six claim drafting strategies to survive § 101",
+      "The Mayo and Myriad frameworks for life sciences",
+      "Finjan's § 101-resilient portfolio"
     ],
     "figures": [],
     "errata": [],
@@ -193,13 +193,13 @@
     "phaseTitle": "THE PSYCHOLOGY OF PROSECUTION",
     "title": "Prior Art Mastery: Searching Like a Principal Examiner",
     "subtitle": "Drafting to Survive the Examination Gauntlet",
-    "summary": "A detailed look at how patent examiners work - their incentive structures, search patterns, art-unit tendencies, and typical grounds for rejection - and how to draft claims that are both broad and examination-resilient.",
+    "summary": "The inventor who searches before drafting controls the scope they can claim. Covers the Prior Art Pyramid, the seven-database professional search stack, the prior art map, FTO vs patentability searches, and the Amazon One-Click patent.",
     "keyTopics": [
-      "Examiner incentive structures and art-unit culture",
-      "Common rejection strategies (102, 103, 112)",
-      "Prosecution-history estoppel and drafting choices",
-      "Claim language to avoid",
-      "Designing for IPR/PGR resilience"
+      "The Prior Art Pyramid",
+      "The seven-database professional search stack",
+      "Building a prior art map by claim charting",
+      "FTO vs patentability search",
+      "Documenting the search as a legal shield"
     ],
     "figures": [],
     "errata": [],

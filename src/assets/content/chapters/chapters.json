@@ -398,13 +398,13 @@
     "phaseTitle": "THE AI-AUGMENTED DRAFTER",
     "title": "LLMs in the Patent Workflow: Architecture of the AI-Assisted Practice",
     "subtitle": "Tested Prompts for Every Stage of the Patent Lifecycle",
-    "summary": "The core of the AI companion. Provides the full structured prompt library with 60+ tested prompts covering drafting, prosecution, prior-art research, claims analysis, FTO, and strategy - with usage notes and worked examples.",
+    "summary": "Large language models do not make patent practitioners redundant - they make the gap between a mediocre practitioner and an excellent one visible. Covers how LLMs actually work, the taxonomy of AI tasks, the five integration points, and prompt engineering.",
     "keyTopics": [
-      "Prompt engineering for patent work",
-      "Drafting prompts (claims, specification, abstract)",
-      "Prosecution prompts (OA responses, claim amendments)",
-      "Research and FTO prompts",
-      "Strategy and portfolio prompts"
+      "How LLMs actually work: tokens, context windows and cutoffs",
+      "The taxonomy of AI tasks in patent practice",
+      "The five integration points of an AI-assisted practice",
+      "Prompt engineering for patent practitioners",
+      "Ethics and professional responsibility in LLM use"
     ],
     "figures": [],
     "errata": [],
@@ -424,13 +424,13 @@
     "phaseTitle": "THE AI-AUGMENTED DRAFTER",
     "title": "Hallucination Management: The Quality Control Protocol for AI-Assisted Drafting",
     "subtitle": "From Single Patent to Strategic Portfolio",
-    "summary": "Strategic framework for building and managing a patent portfolio - landscape analysis, white-space identification, portfolio pruning, licensing strategy, patent assertion, and the build-buy-license decision framework.",
+    "summary": "Hallucination is not a software bug - it is a structural property of how LLMs generate text. Covers the eight hallucination types and the four-layer quality control protocol.",
     "keyTopics": [
-      "Patent landscape analysis",
-      "White-space identification",
-      "Portfolio pruning and maintenance decisions",
-      "Licensing strategy and royalty structures",
-      "Build-buy-license-partner decision framework"
+      "Why LLMs hallucinate",
+      "The eight hallucination types in patent practice",
+      "The risk classification matrix",
+      "The four-layer quality control protocol",
+      "Citation and statutory-text verification"
     ],
     "figures": [],
     "errata": [],
@@ -447,13 +447,13 @@
     "phaseTitle": "THE AI-AUGMENTED DRAFTER",
     "title": "Freedom-to-Operate Analysis: The Risk Assessment That Precedes Every Commercial Launch",
     "subtitle": "Why India's Patent Filing Lags Its Innovation Output",
-    "summary": "The book's policy chapter. Examines the statistical gap between India's startup growth and its patent filings, the structural causes, global comparators, and a framework for what practitioners, policymakers, and institutions can do.",
+    "summary": "Freedom-to-operate analysis is the most commercially consequential legal exercise most companies never commission until after they have built the product and raised the capital. Covers claim construction, three FTO conclusions, and options for a blocking patent.",
     "keyTopics": [
-      "India startup vs patent filing statistics",
-      "Structural barriers to IP adoption",
-      "Global comparators (China, South Korea, Germany)",
-      "Policy recommendations",
-      "The practitioner's role in building IP culture"
+      "Patentability vs freedom-to-operate",
+      "Infringement and the Indian FTO landscape (Section 107A)",
+      "The FTO search protocol",
+      "Claim construction and the three FTO conclusions",
+      "Options analysis for a blocking patent"
     ],
     "figures": [
       {
@@ -479,13 +479,13 @@
     "phaseTitle": "THE AI-AUGMENTED DRAFTER",
     "title": "Patent Monetization and Licensing Strategy: Turning Legal Rights Into Commercial Value",
     "subtitle": "Patents in M&A, Investment, and Licensing Transactions",
-    "summary": "Practical guide to IP due diligence - for M&A, investment rounds, and licensing deals. Covers patent valuation methodologies, freedom-to-operate analyses, IP representations and warranties, and deal structuring.",
+    "summary": "A patent portfolio that is not monetised is a cost centre dressed as an asset. Covers the five valuation methodologies, the Georgia-Pacific factors, the SSPPU principle, and the licensing spectrum.",
     "keyTopics": [
-      "IP due diligence checklist for M&A",
-      "Patent valuation methodologies",
-      "Freedom-to-operate analysis",
-      "IP reps and warranties",
-      "Licensing deal structuring"
+      "The five patent valuation methodologies",
+      "The Georgia-Pacific factors and the SSPPU principle",
+      "The licensing spectrum",
+      "Field-of-use licensing and cross-licences",
+      "The Indian licensing market and compulsory licensing"
     ],
     "figures": [],
     "errata": [],
@@ -502,13 +502,13 @@
     "phaseTitle": "THE AI-AUGMENTED DRAFTER",
     "title": "Inter Partes Review and Patent Invalidation Strategy: Taking the Fight to the Patent Itself",
     "subtitle": "Where Patent Law is Heading",
-    "summary": "Forward-looking capstone chapter - AI inventorship debates (DABUS and beyond), patents for quantum computing, biotechnology, and advanced materials, the evolving role of the patent agent in an AI-augmented world.",
+    "summary": "Patent invalidation is not the last resort of a cornered defendant - it is a proactive strategic weapon. Covers the four invalidation forums, Inter Partes Review and its estoppel, and EPO opposition.",
     "keyTopics": [
-      "AI inventorship: DABUS and legal developments",
-      "Patents for AI-generated inventions",
-      "Quantum computing and biotech patent trends",
-      "The future role of the patent practitioner",
-      "Building a future-proof IP practice"
+      "The four invalidation forums",
+      "Inter Partes Review and its estoppel",
+      "Indian invalidation: Section 25(2) and Section 64",
+      "EPO opposition and multi-country invalidity",
+      "Invalidity as licensing leverage"
     ],
     "figures": [
       {

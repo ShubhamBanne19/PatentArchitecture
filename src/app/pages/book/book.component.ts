@@ -152,10 +152,10 @@ export class BookComponent implements OnInit {
   ];
 
   phases = [
-    { num: 1, title: 'Foundations of the Patent System', description: 'First principles - why patents exist, what can and cannot be patented, and the anatomy of a patent application.' },
-    { num: 2, title: 'The Art of Claims Drafting', description: 'The fortress metaphor, claim architecture, specification writing, and drafting for examination resilience.' },
-    { num: 3, title: 'Prosecution Mastery', description: 'End-to-end prosecution before India IPO, USPTO, PCT, and EPO - with current procedures, timelines, and strategic frameworks.' },
-    { num: 4, title: 'AI-Augmented IP Strategy', description: 'AI tools for patent work, the prompt library, portfolio strategy, India\'s Innovation Paradox, and the future of the profession.' },
+    { num: 1, title: 'The Architecture of Innovation', description: 'What a patent really is, the global IP chessboard, the economics of when to patent, and the four patentability gates.' },
+    { num: 2, title: 'The Psychology of Prosecution', description: 'Inside the examiner\'s mind, India\'s Section 3 exclusions, the Alice/Mayo eligibility labyrinth, and prior-art mastery.' },
+    { num: 3, title: 'The Engineering of a Patent', description: 'The invention disclosure, claim architecture, specification drafting, software/AI and pharmaceutical patents, and Indian procedural compliance.' },
+    { num: 4, title: 'The AI-Augmented Drafter', description: 'LLMs in the patent workflow, hallucination management, freedom-to-operate analysis, monetization and licensing, and patent invalidation.' },
   ];
 
   appendices = [

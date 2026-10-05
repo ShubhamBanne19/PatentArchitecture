@@ -81,10 +81,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private openedAt     = 0;
 
   phases = [
-    { num: 1, title: 'Foundations', chapters: '1–4',  desc: 'The patent system, patentability, subject-matter eligibility, and the anatomy of a patent document.' },
-    { num: 2, title: 'Claims Drafting', chapters: '5–8', desc: 'The fortress metaphor, drafting methodology, specification writing, and examiner psychology.' },
-    { num: 3, title: 'Prosecution Mastery', chapters: '9–13', desc: 'India IPO, USPTO, PCT, EPO, and the art of responding to examination across all jurisdictions.' },
-    { num: 4, title: 'AI-Augmented Strategy', chapters: '14–19', desc: 'AI tools, the prompt library, portfolio strategy, India\'s Innovation Paradox, and the future of patents.' },
+    { num: 1, title: 'The Architecture of Innovation', chapters: '1–4',  desc: 'What a patent really is, the global IP chessboard, the economics of when to patent, and the four patentability gates.' },
+    { num: 2, title: 'The Psychology of Prosecution', chapters: '5–8', desc: 'Inside the examiner\'s mind, India\'s Section 3 exclusions, the Alice/Mayo eligibility labyrinth, and prior-art mastery.' },
+    { num: 3, title: 'The Engineering of a Patent', chapters: '9–14', desc: 'The invention disclosure, claim architecture, specification drafting, software/AI and pharmaceutical patents, and Indian procedural compliance.' },
+    { num: 4, title: 'The AI-Augmented Drafter', chapters: '15–19', desc: 'LLMs in the patent workflow, hallucination management, freedom-to-operate, monetization and licensing, and patent invalidation.' },
   ];
 
   reasons = [

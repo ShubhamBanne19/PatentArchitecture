@@ -36,6 +36,8 @@ export interface ErrataEntry {
   description: string;
   correction: string;
   dateAdded: string;
+  status?: 'open' | 'resolved';
+  resolvedNote?: string;
 }
 
 export interface ReadingLink {
